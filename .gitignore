@@ -1,2 +1,5 @@
 __pycache__/
 traducciones_src.json
+generador/**/*.jpg
+generador/**/*.webp
+generador/**/*.png
