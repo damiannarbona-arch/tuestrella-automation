@@ -5,10 +5,10 @@
       "settings": {
         "media_position": "right",
         "media_width": "wide",
-        "media_height": "auto",
+        "media_height": "50svh",
         "section_width": "full-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 24,
+        "padding-block-end": 24
       },
       "blocks": {
         "media": {
@@ -17,7 +17,7 @@
           "settings": {
             "media_type": "image",
             "image": "shopify://shop_images/banner-salon-luna.webp",
-            "image_position": "cover",
+            "image_position": "contain ",
             "link": "shopify://collections/all"
           }
         },
