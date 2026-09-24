@@ -1,63 +1,71 @@
 {
   "sections": {
     "hero_kivoa": {
-      "type": "hero",
+      "type": "media-with-content",
       "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/ambientacion-clasico.webp",
-        "section_height": "large",
+        "media_position": "right",
+        "media_width": "wide",
+        "media_height": "auto",
         "section_width": "full-width",
-        "content_direction": "column",
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 20,
-        "toggle_overlay": true,
-        "overlay_color": "#00000073",
-        "overlay_style": "gradient",
-        "gradient_direction": "to top",
-        "padding-block-start": 80,
-        "padding-block-end": 64
+        "padding-block-start": 0,
+        "padding-block-end": 0
       },
       "blocks": {
-        "h": {
-          "type": "text",
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
           "settings": {
-            "text": "<h1>Su recuerdo, para siempre en tu pared</h1>",
-            "type_preset": "h1",
-            "alignment": "left",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "text_color": "#ffffff"
+            "media_type": "image",
+            "image": "shopify://shop_images/ambientacion-clasico.webp",
+            "image_position": "cover",
+            "link": "shopify://collections/all"
           }
         },
-        "p": {
-          "type": "text",
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
           "settings": {
-            "text": "<p>Convertimos tus fotos en un retrato ilustrado único de tu mascota, con su nombre y su fecha. Enmarcado y listo para colgar.</p>",
-            "type_preset": "paragraph",
-            "alignment": "left",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "text_color": "#ffffff"
-          }
-        },
-        "b": {
-          "type": "button",
-          "settings": {
-            "label": "Crear su retrato",
-            "link": "shopify://collections/all",
-            "style_class": "button-custom",
-            "custom_button_background": "#ffffff",
-            "custom_button_text": "#1f1f1f",
-            "custom_button_border": "#ffffff"
-          }
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 20
+          },
+          "blocks": {
+            "h": {
+              "type": "text",
+              "settings": {
+                "text": "<h1>Su recuerdo, para siempre en tu pared</h1>",
+                "type_preset": "h1",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "normal"
+              }
+            },
+            "p": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Convertimos tus fotos en un retrato ilustrado único de tu mascota, con su nombre y su fecha. Enmarcado y listo para colgar.</p>",
+                "type_preset": "paragraph",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "narrow"
+              }
+            },
+            "b": {
+              "type": "button",
+              "settings": {
+                "label": "Crear su retrato",
+                "link": "shopify://collections/all",
+                "style_class": "button"
+              }
+            }
+          },
+          "block_order": [
+            "h",
+            "p",
+            "b"
+          ]
         }
-      },
-      "block_order": [
-        "h",
-        "p",
-        "b"
-      ]
+      }
     },
     "marquee_confianza": {
       "type": "marquee",
@@ -167,9 +175,9 @@
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
+        "horizontal_alignment": "center",
         "vertical_alignment": "center",
-        "gap": 48,
+        "gap": 64,
         "section_width": "page-width",
         "padding-block-start": 72,
         "padding-block-end": 72
@@ -181,7 +189,7 @@
             "content_direction": "column",
             "gap": 16,
             "width": "custom",
-            "custom_width": 45,
+            "custom_width": 40,
             "width_mobile": "fill"
           },
           "blocks": {
@@ -229,8 +237,14 @@
             "after_text": "Su retrato",
             "text_background": true,
             "text_corner_radius": 20,
-            "image_ratio": "portrait",
-            "width": "fill"
+            "image_ratio": "adapt",
+            "width": "custom",
+            "before_image": "shopify://shop_images/antes-foto-luna-recorte.jpg",
+            "after_image": "shopify://shop_images/despues-retrato-luna.webp",
+            "custom_width": 34,
+            "width_mobile": "custom",
+            "custom_width_mobile": 85,
+            "border_radius": 16
           }
         }
       },
@@ -302,7 +316,7 @@
               "type": "_product-list-button",
               "name": "t:names.product_list_button",
               "settings": {
-                "label": "View all",
+                "label": "Ver todos",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
