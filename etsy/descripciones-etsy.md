@@ -29,7 +29,8 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ IMPORTANTE
 • Ilustración creada a partir de tus fotos con herramientas digitales, incluida inteligencia artificial, revisada y ajustada a mano una a una.
-• Nada se imprime sin tu aprobación. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
+• Las imágenes del anuncio son ejemplos del estilo: la composición y los colores se mantienen, pero la ilustración de tu mascota es única. Las fotos secundarias se incluyen tal cual, sin modificar.
+• Nada se imprime sin tu aprobación: la vista previa que apruebas es exactamente lo que imprimimos. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
 • Artículo personalizado: no admite devoluciones por desistimiento (art. 16.c Directiva 2011/83/UE). Si llega dañado, defectuoso o no coincide con la vista previa aprobada, lo reimprimimos o te devolvemos el dinero.
 • Los colores pueden variar ligeramente según tu pantalla.
 
@@ -60,7 +61,8 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ GOOD TO KNOW
 • Illustration created from your photos using digital tools, including artificial intelligence, reviewed and fine-tuned by hand one by one.
-• Nothing is printed without your approval. You can cancel for a full refund before approving the proof.
+• Listing images are examples of the style: composition and colors stay the same, but your pet's illustration is unique. Extra photos are included exactly as sent, unedited.
+• Nothing is printed without your approval: the proof you approve is exactly what we print. You can cancel for a full refund before approving the proof.
 • Personalized item: no returns for change of mind. If it arrives damaged, defective or doesn't match the approved proof, we'll reprint it or refund you.
 • Colors may vary slightly depending on your screen.
 
@@ -95,7 +97,8 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ IMPORTANTE
 • Ilustración creada a partir de tus fotos con herramientas digitales, incluida inteligencia artificial, revisada y ajustada a mano una a una.
-• Nada se imprime sin tu aprobación. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
+• Las imágenes del anuncio son ejemplos del estilo: la composición y los colores se mantienen, pero la ilustración de tu mascota es única. Las fotos secundarias se incluyen tal cual, sin modificar.
+• Nada se imprime sin tu aprobación: la vista previa que apruebas es exactamente lo que imprimimos. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
 • Artículo personalizado: no admite devoluciones por desistimiento (art. 16.c Directiva 2011/83/UE). Si llega dañado, defectuoso o no coincide con la vista previa aprobada, lo reimprimimos o te devolvemos el dinero.
 • Los colores pueden variar ligeramente según tu pantalla.
 
@@ -126,7 +129,8 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ GOOD TO KNOW
 • Illustration created from your photos using digital tools, including artificial intelligence, reviewed and fine-tuned by hand one by one.
-• Nothing is printed without your approval. You can cancel for a full refund before approving the proof.
+• Listing images are examples of the style: composition and colors stay the same, but your pet's illustration is unique. Extra photos are included exactly as sent, unedited.
+• Nothing is printed without your approval: the proof you approve is exactly what we print. You can cancel for a full refund before approving the proof.
 • Personalized item: no returns for change of mind. If it arrives damaged, defective or doesn't match the approved proof, we'll reprint it or refund you.
 • Colors may vary slightly depending on your screen.
 
@@ -161,7 +165,8 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ IMPORTANTE
 • Ilustración creada a partir de tus fotos con herramientas digitales, incluida inteligencia artificial, revisada y ajustada a mano una a una.
-• Nada se imprime sin tu aprobación. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
+• Las imágenes del anuncio son ejemplos del estilo: la composición y los colores se mantienen, pero la ilustración de tu mascota es única. Las fotos secundarias se incluyen tal cual, sin modificar.
+• Nada se imprime sin tu aprobación: la vista previa que apruebas es exactamente lo que imprimimos. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
 • Artículo personalizado: no admite devoluciones por desistimiento (art. 16.c Directiva 2011/83/UE). Si llega dañado, defectuoso o no coincide con la vista previa aprobada, lo reimprimimos o te devolvemos el dinero.
 • Los colores pueden variar ligeramente según tu pantalla.
 
@@ -192,7 +197,8 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ GOOD TO KNOW
 • Illustration created from your photos using digital tools, including artificial intelligence, reviewed and fine-tuned by hand one by one.
-• Nothing is printed without your approval. You can cancel for a full refund before approving the proof.
+• Listing images are examples of the style: composition and colors stay the same, but your pet's illustration is unique. Extra photos are included exactly as sent, unedited.
+• Nothing is printed without your approval: the proof you approve is exactly what we print. You can cancel for a full refund before approving the proof.
 • Personalized item: no returns for change of mind. If it arrives damaged, defective or doesn't match the approved proof, we'll reprint it or refund you.
 • Colors may vary slightly depending on your screen.
 
@@ -227,7 +233,8 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ IMPORTANTE
 • Ilustración creada a partir de tus fotos con herramientas digitales, incluida inteligencia artificial, revisada y ajustada a mano una a una.
-• Nada se imprime sin tu aprobación. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
+• Las imágenes del anuncio son ejemplos del estilo: la composición y los colores se mantienen, pero la ilustración de tu mascota es única. Las fotos secundarias se incluyen tal cual, sin modificar.
+• Nada se imprime sin tu aprobación: la vista previa que apruebas es exactamente lo que imprimimos. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
 • Artículo personalizado: no admite devoluciones por desistimiento (art. 16.c Directiva 2011/83/UE). Si llega dañado, defectuoso o no coincide con la vista previa aprobada, lo reimprimimos o te devolvemos el dinero.
 • Los colores pueden variar ligeramente según tu pantalla.
 
@@ -258,7 +265,8 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ GOOD TO KNOW
 • Illustration created from your photos using digital tools, including artificial intelligence, reviewed and fine-tuned by hand one by one.
-• Nothing is printed without your approval. You can cancel for a full refund before approving the proof.
+• Listing images are examples of the style: composition and colors stay the same, but your pet's illustration is unique. Extra photos are included exactly as sent, unedited.
+• Nothing is printed without your approval: the proof you approve is exactly what we print. You can cancel for a full refund before approving the proof.
 • Personalized item: no returns for change of mind. If it arrives damaged, defective or doesn't match the approved proof, we'll reprint it or refund you.
 • Colors may vary slightly depending on your screen.
 
@@ -293,7 +301,8 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ IMPORTANTE
 • Ilustración creada a partir de tus fotos con herramientas digitales, incluida inteligencia artificial, revisada y ajustada a mano una a una.
-• Nada se imprime sin tu aprobación. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
+• Las imágenes del anuncio son ejemplos del estilo: la composición y los colores se mantienen, pero la ilustración de tu mascota es única. Las fotos secundarias se incluyen tal cual, sin modificar.
+• Nada se imprime sin tu aprobación: la vista previa que apruebas es exactamente lo que imprimimos. Puedes cancelar con reembolso íntegro antes de aprobar la vista previa.
 • Artículo personalizado: no admite devoluciones por desistimiento (art. 16.c Directiva 2011/83/UE). Si llega dañado, defectuoso o no coincide con la vista previa aprobada, lo reimprimimos o te devolvemos el dinero.
 • Los colores pueden variar ligeramente según tu pantalla.
 
@@ -324,7 +333,8 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ GOOD TO KNOW
 • Illustration created from your photos using digital tools, including artificial intelligence, reviewed and fine-tuned by hand one by one.
-• Nothing is printed without your approval. You can cancel for a full refund before approving the proof.
+• Listing images are examples of the style: composition and colors stay the same, but your pet's illustration is unique. Extra photos are included exactly as sent, unedited.
+• Nothing is printed without your approval: the proof you approve is exactly what we print. You can cancel for a full refund before approving the proof.
 • Personalized item: no returns for change of mind. If it arrives damaged, defective or doesn't match the approved proof, we'll reprint it or refund you.
 • Colors may vary slightly depending on your screen.
 
