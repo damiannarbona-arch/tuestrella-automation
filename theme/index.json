@@ -127,7 +127,7 @@
         "t3": {
           "type": "text",
           "settings": {
-            "text": "<p>Garantía legal de 3 años</p>",
+            "text": "<p>Listo para colgar, con kit incluido</p>",
             "type_preset": "paragraph",
             "width": "fit-content",
             "wrap": "nowrap"
@@ -737,7 +737,7 @@
                 "t": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Sí. Te enviamos una vista previa digital por correo y no imprimimos nada hasta que nos das el visto bueno.</p>",
+                    "text": "<p>Sí. En un máximo de 48 horas laborables te enviamos una vista previa digital por correo. Incluye hasta 2 rondas de cambios y no imprimimos nada hasta que nos das el visto bueno.</p>",
                     "type_preset": "rte",
                     "alignment": "left",
                     "width": "100%",
@@ -758,7 +758,7 @@
                 "t": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Entre 2 y 4 días laborables de producción, más 4 a 8 días de envío a España peninsular y la Unión Europea. Recibirás el número de seguimiento por correo.</p>",
+                    "text": "<p>Entre 2 y 4 días laborables de producción desde que apruebas la vista previa, más 4 a 8 días de envío a España peninsular y la Unión Europea. Recibirás el número de seguimiento por correo.</p>",
                     "type_preset": "rte",
                     "alignment": "left",
                     "width": "100%",
