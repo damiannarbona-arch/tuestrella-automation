@@ -33,7 +33,8 @@ Tendencias con impacto en conversión (no decorativas):
 1. **Slider antes/después arrastrable** (foto real → retrato). Es *el* banner que describes, y para este nicho es la prueba de producto más convincente. Horizon lo trae de serie (bloque `comparison-slider`). En Craft necesitarías una app.
 2. **Hero de vídeo corto** (6–10 s, en bucle y sin sonido): alguien desembala el cuadro y lo cuelga. El bloque `video` de Horizon lo soporta.
 3. **Reseñas con foto**: Judge.me (plan gratuito). Importa las reseñas de Etsy y añade las estrellas del bloque `review` de Horizon y el marcado estructurado para Google. **Nunca reseñas inventadas**: son ilegales en la UE (Directiva Ómnibus) y Shopify y Google penalizan.
-4. **Marquee de confianza**: "Envío con seguimiento · Garantía de 3 años · Hecho a mano para ti · Pago seguro". Bloque `marquee` de Horizon.
+4. **Marquee de confianza**: "Envío con seguimiento · Garantía de 3 años · Diseñado y revisado uno a uno · Pago seguro". Bloque `marquee` de Horizon.
+   ⚠️ No usar "hecho a mano" ni "pintado a mano": con diseños IA sería publicidad engañosa (y en Etsy, motivo de retirada).
 5. **"Cómo funciona" en 3 pasos** (sube fotos → te enviamos vista previa → lo recibes listo para colgar).
 6. **FAQ en acordeón** en la ficha: calidad de la foto, plazos, vista previa, marcos.
 7. Sticky add-to-cart en móvil (Horizon lo trae).
