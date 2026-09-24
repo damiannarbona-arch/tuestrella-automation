@@ -13,7 +13,7 @@
 | SEO title/description | Vacíos | Rellenar |
 | Apps | Printful **y** Gelato, Easify Options, Uploadfly | Dejar un único POD; desinstalar el otro |
 | Políticas | Solo privacidad | ✅ Hecho hoy (ver §2) |
-| Email/teléfono personales publicados | daminarby@gmail.com, móvil | Crear hola@kivoa.es (reenvío gratuito desde el dominio) |
+| Email/teléfono personales publicados | daminarby@gmail.com, móvil | ✅ contacto@kivoa.es operativo (pendiente: cambiarlo en Configuración → General y en la política de privacidad) |
 
 ## 2. Legal — hecho hoy
 
