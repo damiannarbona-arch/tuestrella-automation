@@ -16,7 +16,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
-            "image": "shopify://shop_images/ambientacion-clasico.webp",
+            "image": "shopify://shop_images/banner-salon-luna.webp",
             "image_position": "cover",
             "link": "shopify://collections/all"
           }
