@@ -16,7 +16,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
-            "image": "shopify://shop_images/banner-salon-luna.webp",
+            "image": "shopify://shop_images/banner-salon-luna-2x1.webp",
             "image_position": "contain ",
             "link": "shopify://collections/all"
           }
