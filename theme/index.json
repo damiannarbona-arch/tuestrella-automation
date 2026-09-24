@@ -1,0 +1,848 @@
+{
+  "sections": {
+    "hero_kivoa": {
+      "type": "hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/ambientacion-clasico.webp",
+        "section_height": "large",
+        "section_width": "full-width",
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 20,
+        "toggle_overlay": true,
+        "overlay_color": "#00000073",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "padding-block-start": 80,
+        "padding-block-end": 64
+      },
+      "blocks": {
+        "h": {
+          "type": "text",
+          "settings": {
+            "text": "<h1>Su recuerdo, para siempre en tu pared</h1>",
+            "type_preset": "h1",
+            "alignment": "left",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "text_color": "#ffffff"
+          }
+        },
+        "p": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Convertimos tus fotos en un retrato ilustrado único de tu mascota, con su nombre y su fecha. Enmarcado y listo para colgar.</p>",
+            "type_preset": "paragraph",
+            "alignment": "left",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "text_color": "#ffffff"
+          }
+        },
+        "b": {
+          "type": "button",
+          "settings": {
+            "label": "Crear su retrato",
+            "link": "shopify://collections/all",
+            "style_class": "button-custom",
+            "custom_button_background": "#ffffff",
+            "custom_button_text": "#1f1f1f",
+            "custom_button_border": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "p",
+        "b"
+      ]
+    },
+    "marquee_confianza": {
+      "type": "marquee",
+      "settings": {
+        "movement_direction": "normal",
+        "padding-block-start": 16,
+        "padding-block-end": 16,
+        "gap_between_elements": 24
+      },
+      "blocks": {
+        "t0": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Retrato único a partir de tus fotos</p>",
+            "type_preset": "paragraph",
+            "width": "fit-content",
+            "wrap": "nowrap"
+          }
+        },
+        "i0": {
+          "type": "icon",
+          "settings": {
+            "icon": "paw_print",
+            "width": 16
+          }
+        },
+        "t1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Vista previa antes de imprimir</p>",
+            "type_preset": "paragraph",
+            "width": "fit-content",
+            "wrap": "nowrap"
+          }
+        },
+        "i1": {
+          "type": "icon",
+          "settings": {
+            "icon": "paw_print",
+            "width": 16
+          }
+        },
+        "t2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Envío con seguimiento a España y Europa</p>",
+            "type_preset": "paragraph",
+            "width": "fit-content",
+            "wrap": "nowrap"
+          }
+        },
+        "i2": {
+          "type": "icon",
+          "settings": {
+            "icon": "paw_print",
+            "width": 16
+          }
+        },
+        "t3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Garantía legal de 3 años</p>",
+            "type_preset": "paragraph",
+            "width": "fit-content",
+            "wrap": "nowrap"
+          }
+        },
+        "i3": {
+          "type": "icon",
+          "settings": {
+            "icon": "paw_print",
+            "width": 16
+          }
+        },
+        "t4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pago 100 % seguro</p>",
+            "type_preset": "paragraph",
+            "width": "fit-content",
+            "wrap": "nowrap"
+          }
+        },
+        "i4": {
+          "type": "icon",
+          "settings": {
+            "icon": "paw_print",
+            "width": 16
+          }
+        }
+      },
+      "block_order": [
+        "t0",
+        "i0",
+        "t1",
+        "i1",
+        "t2",
+        "i2",
+        "t3",
+        "i3",
+        "t4",
+        "i4"
+      ]
+    },
+    "antes_despues": {
+      "type": "section",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "center",
+        "gap": 48,
+        "section_width": "page-width",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      },
+      "blocks": {
+        "col": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "gap": 16,
+            "width": "custom",
+            "custom_width": 45,
+            "width_mobile": "fill"
+          },
+          "blocks": {
+            "h": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>De tu foto a su retrato</h2>",
+                "type_preset": "h2",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "normal"
+              }
+            },
+            "p": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Arrastra el control y mira la diferencia. Nos basta una buena foto de tu compañero: nosotros creamos la ilustración, elegimos los colores de su estilo y añadimos su nombre, sus rasgos y esa fecha que no quieres olvidar.</p><p>Antes de imprimir te enviamos una vista previa para que la apruebes.</p>",
+                "type_preset": "rte",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "normal"
+              }
+            },
+            "b": {
+              "type": "button",
+              "settings": {
+                "label": "Ver estilos",
+                "link": "shopify://collections/all",
+                "style_class": "button-secondary"
+              }
+            }
+          },
+          "block_order": [
+            "h",
+            "p",
+            "b"
+          ]
+        },
+        "slider": {
+          "type": "comparison-slider",
+          "settings": {
+            "slider_style": "horizontal",
+            "show_text": true,
+            "before_text": "Tu foto",
+            "after_text": "Su retrato",
+            "text_background": true,
+            "text_corner_radius": 20,
+            "image_ratio": "portrait",
+            "width": "fill"
+          }
+        }
+      },
+      "block_order": [
+        "col",
+        "slider"
+      ]
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>Elige su estilo</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.product_list",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 6,
+        "columns": 3,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "como_funciona": {
+      "type": "section",
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      },
+      "blocks": {
+        "h": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Cómo funciona</h2>",
+            "type_preset": "h2",
+            "alignment": "center",
+            "width": "fit-content",
+            "max_width": "normal"
+          }
+        },
+        "row": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "gap": 20,
+            "width": "fill"
+          },
+          "blocks": {
+            "p1": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "gap": 8,
+                "width": "fill",
+                "padding-block-start": 24,
+                "padding-block-end": 24,
+                "padding-inline-start": 24,
+                "padding-inline-end": 24,
+                "border": "solid",
+                "border_width": 1,
+                "border_opacity": 15,
+                "border_radius": 16
+              },
+              "blocks": {
+                "n": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>01</p>",
+                    "type_preset": "h2",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                },
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Elige estilo y sube tus fotos</h3>",
+                    "type_preset": "h4",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                },
+                "d": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Una foto principal nítida y hasta 3 secundarias. Añade su nombre, sus rasgos, una frase y una fecha.</p>",
+                    "type_preset": "paragraph",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "n",
+                "t",
+                "d"
+              ]
+            },
+            "p2": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "gap": 8,
+                "width": "fill",
+                "padding-block-start": 24,
+                "padding-block-end": 24,
+                "padding-inline-start": 24,
+                "padding-inline-end": 24,
+                "border": "solid",
+                "border_width": 1,
+                "border_opacity": 15,
+                "border_radius": 16
+              },
+              "blocks": {
+                "n": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>02</p>",
+                    "type_preset": "h2",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                },
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Creamos su retrato</h3>",
+                    "type_preset": "h4",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                },
+                "d": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Diseñamos la ilustración y te enviamos una vista previa. Nada se imprime sin tu aprobación.</p>",
+                    "type_preset": "paragraph",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "n",
+                "t",
+                "d"
+              ]
+            },
+            "p3": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "gap": 8,
+                "width": "fill",
+                "padding-block-start": 24,
+                "padding-block-end": 24,
+                "padding-inline-start": 24,
+                "padding-inline-end": 24,
+                "border": "solid",
+                "border_width": 1,
+                "border_opacity": 15,
+                "border_radius": 16
+              },
+              "blocks": {
+                "n": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>03</p>",
+                    "type_preset": "h2",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                },
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Lo recibes listo para colgar</h3>",
+                    "type_preset": "h4",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                },
+                "d": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Impreso en papel de alta calidad, enmarcado y con kit de montaje. Envío con seguimiento.</p>",
+                    "type_preset": "paragraph",
+                    "alignment": "left",
+                    "width": "fit-content",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "n",
+                "t",
+                "d"
+              ]
+            }
+          },
+          "block_order": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      },
+      "block_order": [
+        "h",
+        "row"
+      ]
+    },
+    "video_kivoa": {
+      "type": "section",
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      },
+      "blocks": {
+        "h": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Así llega a casa</h2>",
+            "type_preset": "h2",
+            "alignment": "center",
+            "width": "fit-content",
+            "max_width": "normal"
+          }
+        },
+        "v": {
+          "type": "video",
+          "settings": {
+            "source": "uploaded",
+            "video_autoplay": true,
+            "video_loop": true,
+            "aspect_ratio": "16/9",
+            "border_radius": 16,
+            "alt": "Desembalaje de un retrato de mascota Kivoa"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "v"
+      ]
+    },
+    "faq_kivoa": {
+      "type": "section",
+      "settings": {
+        "content_direction": "column",
+        "gap": 24,
+        "section_width": "page-width",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      },
+      "blocks": {
+        "h": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Preguntas frecuentes</h2>",
+            "type_preset": "h2",
+            "alignment": "left",
+            "width": "fit-content",
+            "max_width": "normal"
+          }
+        },
+        "acc": {
+          "type": "accordion",
+          "settings": {
+            "icon": "plus",
+            "dividers": true,
+            "type_preset": "h5"
+          },
+          "blocks": {
+            "r0": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Qué foto necesito?"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Una foto nítida, con buena luz, en la que se vea bien la cara de tu mascota. Si alguna no sirve, te escribimos antes de empezar para pedirte otra.</p>",
+                    "type_preset": "rte",
+                    "alignment": "left",
+                    "width": "100%",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "r1": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Veré el retrato antes de que se imprima?"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Sí. Te enviamos una vista previa digital por correo y no imprimimos nada hasta que nos das el visto bueno.</p>",
+                    "type_preset": "rte",
+                    "alignment": "left",
+                    "width": "100%",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "r2": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Cuánto tarda en llegar?"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Entre 2 y 4 días laborables de producción, más 4 a 8 días de envío a España peninsular y la Unión Europea. Recibirás el número de seguimiento por correo.</p>",
+                    "type_preset": "rte",
+                    "alignment": "left",
+                    "width": "100%",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "r3": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Cómo se crean los retratos?"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Diseñamos cada retrato con herramientas digitales, incluida inteligencia artificial, a partir de tus fotos, y lo revisamos y ajustamos uno a uno antes de imprimirlo.</p>",
+                    "type_preset": "rte",
+                    "alignment": "left",
+                    "width": "100%",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "r4": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Puedo devolverlo?"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Al ser un producto personalizado no aplica el derecho de desistimiento. Pero si llega dañado, con un defecto o no coincide con lo que pediste, lo reimprimimos o te devolvemos el dinero. Tienes 3 años de garantía legal.</p>",
+                    "type_preset": "rte",
+                    "alignment": "left",
+                    "width": "100%",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "r5": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Qué marcos y tamaños hay?"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Tres tamaños (20×25, 30×40 y 50×70 cm) y tres acabados de marco de madera: blanco, negro o natural. Todos incluyen metacrilato irrompible y kit de montaje.</p>",
+                    "type_preset": "rte",
+                    "alignment": "left",
+                    "width": "100%",
+                    "max_width": "normal"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            }
+          },
+          "block_order": [
+            "r0",
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5"
+          ]
+        }
+      },
+      "block_order": [
+        "h",
+        "acc"
+      ]
+    }
+  },
+  "order": [
+    "hero_kivoa",
+    "marquee_confianza",
+    "antes_despues",
+    "product_list_fa6P9H",
+    "como_funciona",
+    "video_kivoa",
+    "faq_kivoa"
+  ]
+}
