@@ -409,11 +409,20 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_card": {
+              "type": "review",
+              "settings": {
+                "stars_style": "shaded",
+                "show_number": true,
+                "type_preset": "paragraph"
+              }
             }
           },
           "block_order": [
             "product_card_gallery_677WP3",
             "product_title_YXxMTj",
+            "review_card",
             "price_JQzVV4"
           ]
         }
@@ -641,44 +650,6 @@
         "row"
       ]
     },
-    "video_kivoa": {
-      "type": "section",
-      "settings": {
-        "content_direction": "column",
-        "horizontal_alignment_flex_direction_column": "center",
-        "gap": 24,
-        "section_width": "page-width",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      },
-      "blocks": {
-        "h": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Así llega a casa</h2>",
-            "type_preset": "h2",
-            "alignment": "center",
-            "width": "fit-content",
-            "max_width": "normal"
-          }
-        },
-        "v": {
-          "type": "video",
-          "settings": {
-            "source": "uploaded",
-            "video_autoplay": true,
-            "video_loop": true,
-            "aspect_ratio": "16/9",
-            "border_radius": 16,
-            "alt": "Desembalaje de un retrato de mascota Kivoa"
-          }
-        }
-      },
-      "block_order": [
-        "h",
-        "v"
-      ]
-    },
     "faq_kivoa": {
       "type": "section",
       "settings": {
@@ -856,7 +827,6 @@
     "antes_despues",
     "product_list_fa6P9H",
     "como_funciona",
-    "video_kivoa",
     "faq_kivoa"
   ]
 }

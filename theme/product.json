@@ -144,10 +144,19 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "review_stars": {
+                  "type": "review",
+                  "settings": {
+                    "stars_style": "shaded",
+                    "show_number": true,
+                    "type_preset": "paragraph"
+                  }
                 }
               },
               "block_order": [
                 "text_xrnftG",
+                "review_stars",
                 "price_tVjtKg"
               ]
             },
