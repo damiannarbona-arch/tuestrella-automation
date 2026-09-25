@@ -40,11 +40,18 @@
 10. **No produzcas nada sin un "Apruebo" por escrito** en los mensajes de Etsy. Esa aprobación es tu protección ante reclamaciones.
 11. Si no responde: el **día 7** mandas el recordatorio (plantilla en `plantillas/correos-vista-previa.md`). Si sigue sin responder, produces la última versión enviada y se lo avisas por mensaje.
 
-### Producción
-12. En **Gelato → pedido retenido → Edit design / Replace file**: sube el **archivo de impresión definitivo** en la variante correcta. Comprueba en la vista previa de Gelato que no recorta el nombre, la fecha ni las huellas.
-13. Comprueba **tamaño, marco y dirección**. Después, **Approve / Submit**. Gelato te cobra la producción y el envío.
-14. Gelato sincroniza el **número de seguimiento** con Etsy automáticamente y el pedido pasa a "Enviado". Si en 5 días laborables no aparece, revísalo en Gelato.
-
+### Producción (Gelato no permite cambiar el diseño de un pedido: se hace con pedido manual)
+12. En **Gelato → Pedidos**, el pedido llega como *Pending approval* con el diseño de muestra. **Cancélalo** ("Cancel order"): no se cobra nada.
+13. **Gelato → Pedidos → Crear pedido** (pedido manual):
+    - Producto: *Classic Semi-Glossy Paper Wooden Mounted Framed Poster* · tamaño y marco **del pedido**.
+    - Sube el **archivo final** con la proporción exacta (20×25 → 2362×2953 · 30×40 → 3543×4724 · 50×70 → 5906×8268 px).
+    - Dirección del cliente: cópiala **exacta** del pedido de Shopify/Etsy (con el número y el piso).
+    - Referencia: el número de pedido de Shopify/Etsy (ej. `#1001`), para cruzarlos después.
+    - Revisa la vista previa (nada recortado) → **Pagar / Enviar a producción**.
+14. Cuando Gelato envíe (2–4 días laborables), copia el **número de seguimiento** y:
+    - **Shopify:** pedido → **Marcar como preparado** → pega transportista y seguimiento → el cliente recibe el aviso.
+    - **Etsy:** pedido → **Marcar como enviado** → pega el seguimiento.
+    (En un pedido manual el seguimiento no se sincroniza solo.)
 ### Después de la entrega
 15. **2–3 días después de la entrega**, mensaje de seguimiento:
     > ¡Hola, [nombre]! ¿Ha llegado bien el retrato de [mascota]? Esperamos que os encante. Si te apetece, una reseña en Etsy nos ayuda muchísimo a seguir creando. ¡Gracias! 🐾
