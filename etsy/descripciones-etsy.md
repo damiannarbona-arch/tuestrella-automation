@@ -37,7 +37,7 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 Porque hay huellas que dejan flores en el camino.
 ```
 
-### English (Rosa Style)
+### English (Rose Style)
 ```
 Gentle and tender, with a romantic touch of roses in the background. Perfect if your pet was that soft presence that filled everything with love.
 
