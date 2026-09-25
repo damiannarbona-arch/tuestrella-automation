@@ -42,6 +42,23 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 Because some paw prints leave flowers along the way.
 ```
 
+**Tags** (13 · una a una, pulsando Añadir)
+```
+custom pet portrait
+dog portrait
+cat portrait
+pet memorial gift
+pet loss gift
+floral pet portrait
+portrait from photo
+framed pet portrait
+dog memorial
+personalized dog
+rainbow bridge
+dog mom gift
+pet portrait roses
+```
+
 ---
 
 ## Lavanda (Lavender)
@@ -81,6 +98,23 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 • Colors may vary slightly depending on your screen.
 
 Small gestures, a huge paw print.
+```
+
+**Tags** (13 · una a una, pulsando Añadir)
+```
+custom pet portrait
+cat portrait
+dog portrait
+cat memorial gift
+pet loss gift
+lavender portrait
+portrait from photo
+framed pet portrait
+cat mom gift
+personalized cat
+rainbow bridge
+pet sympathy gift
+pastel pet portrait
 ```
 
 ---
@@ -124,6 +158,23 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 The compass always pointed to you.
 ```
 
+**Tags** (13 · una a una, pulsando Añadir)
+```
+custom dog portrait
+adventure dog
+hiking dog gift
+mountain dog art
+dog memorial gift
+pet loss gift
+portrait from photo
+framed dog portrait
+dog dad gift
+personalized dog
+outdoor dog gift
+rainbow bridge
+custom pet portrait
+```
+
 ---
 
 ## Caballos (Horse)
@@ -165,6 +216,23 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 Thank you for so many trails ridden together.
 ```
 
+**Tags** (13 · una a una, pulsando Añadir)
+```
+horse portrait
+horse memorial gift
+equestrian gift
+horse lover gift
+horse portrait art
+horse from photo
+framed horse print
+personalized horse
+horse owner gift
+pony portrait
+barn decor
+horse loss gift
+equine art
+```
+
 ---
 
 ## Clásico (Classic)
@@ -204,4 +272,21 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 • Colors may vary slightly depending on your screen.
 
 A memory with no expiry date, to stay with you forever.
+```
+
+**Tags** (13 · una a una, pulsando Añadir)
+```
+custom pet portrait
+dog portrait
+cat portrait
+classic portrait
+pet memorial gift
+pet loss gift
+portrait from photo
+framed pet portrait
+dog mom gift
+personalized pet
+christmas pet gift
+rainbow bridge
+pet lover gift
 ```
