@@ -23,7 +23,7 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ CÓMO FUNCIONA
 1. Elige tamaño y marco, y rellena la personalización (nombre, fecha, frase, características).
-2. Después de comprar, envíanos las fotos por mensaje de Etsy: 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
+2. Sube las fotos al comprar (o envíanoslas por mensaje de Etsy): 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
 3. En 48 h laborables te enviamos la vista previa digital. Incluye 2 rondas de cambios.
 4. Tras tu aprobación: 2–4 días de producción + envío gratis con seguimiento.
 
@@ -55,7 +55,7 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ HOW IT WORKS
 1. Choose size and frame and fill in the personalization (name, date, quote, traits).
-2. After purchase, send us your photos via Etsy messages: 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
+2. Upload your photos at checkout (or send them via Etsy messages): 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
 3. Within 48 business hours you'll get a digital proof — 2 rounds of changes included.
 4. Once approved: 2–4 days of production + free tracked shipping.
 
@@ -91,7 +91,7 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ CÓMO FUNCIONA
 1. Elige tamaño y marco, y rellena la personalización (nombre, fecha, frase, características).
-2. Después de comprar, envíanos las fotos por mensaje de Etsy: 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
+2. Sube las fotos al comprar (o envíanoslas por mensaje de Etsy): 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
 3. En 48 h laborables te enviamos la vista previa digital. Incluye 2 rondas de cambios.
 4. Tras tu aprobación: 2–4 días de producción + envío gratis con seguimiento.
 
@@ -123,7 +123,7 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ HOW IT WORKS
 1. Choose size and frame and fill in the personalization (name, date, quote, traits).
-2. After purchase, send us your photos via Etsy messages: 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
+2. Upload your photos at checkout (or send them via Etsy messages): 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
 3. Within 48 business hours you'll get a digital proof — 2 rounds of changes included.
 4. Once approved: 2–4 days of production + free tracked shipping.
 
@@ -159,7 +159,7 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ CÓMO FUNCIONA
 1. Elige tamaño y marco, y rellena la personalización (nombre, fecha, frase, características).
-2. Después de comprar, envíanos las fotos por mensaje de Etsy: 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
+2. Sube las fotos al comprar (o envíanoslas por mensaje de Etsy): 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
 3. En 48 h laborables te enviamos la vista previa digital. Incluye 2 rondas de cambios.
 4. Tras tu aprobación: 2–4 días de producción + envío gratis con seguimiento.
 
@@ -191,7 +191,7 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ HOW IT WORKS
 1. Choose size and frame and fill in the personalization (name, date, quote, traits).
-2. After purchase, send us your photos via Etsy messages: 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
+2. Upload your photos at checkout (or send them via Etsy messages): 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
 3. Within 48 business hours you'll get a digital proof — 2 rounds of changes included.
 4. Once approved: 2–4 days of production + free tracked shipping.
 
@@ -227,7 +227,7 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ CÓMO FUNCIONA
 1. Elige tamaño y marco, y rellena la personalización (nombre, fecha, frase, características).
-2. Después de comprar, envíanos las fotos por mensaje de Etsy: 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
+2. Sube las fotos al comprar (o envíanoslas por mensaje de Etsy): 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
 3. En 48 h laborables te enviamos la vista previa digital. Incluye 2 rondas de cambios.
 4. Tras tu aprobación: 2–4 días de producción + envío gratis con seguimiento.
 
@@ -259,7 +259,7 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ HOW IT WORKS
 1. Choose size and frame and fill in the personalization (name, date, quote, traits).
-2. After purchase, send us your photos via Etsy messages: 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
+2. Upload your photos at checkout (or send them via Etsy messages): 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
 3. Within 48 business hours you'll get a digital proof — 2 rounds of changes included.
 4. Once approved: 2–4 days of production + free tracked shipping.
 
@@ -295,7 +295,7 @@ Un homenaje único a quien fue mucho más que una mascota. Envíanos sus fotos f
 
 ★ CÓMO FUNCIONA
 1. Elige tamaño y marco, y rellena la personalización (nombre, fecha, frase, características).
-2. Después de comprar, envíanos las fotos por mensaje de Etsy: 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
+2. Sube las fotos al comprar (o envíanoslas por mensaje de Etsy): 1 foto principal nítida, con buena luz y la cara bien visible, y hasta 3 extra.
 3. En 48 h laborables te enviamos la vista previa digital. Incluye 2 rondas de cambios.
 4. Tras tu aprobación: 2–4 días de producción + envío gratis con seguimiento.
 
@@ -327,7 +327,7 @@ A one-of-a-kind tribute to someone who was so much more than a pet. Send us thei
 
 ★ HOW IT WORKS
 1. Choose size and frame and fill in the personalization (name, date, quote, traits).
-2. After purchase, send us your photos via Etsy messages: 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
+2. Upload your photos at checkout (or send them via Etsy messages): 1 sharp, well-lit main photo with the face clearly visible, plus up to 3 extra.
 3. Within 48 business hours you'll get a digital proof — 2 rounds of changes included.
 4. Once approved: 2–4 days of production + free tracked shipping.
 
