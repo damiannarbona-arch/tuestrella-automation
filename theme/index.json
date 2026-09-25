@@ -819,6 +819,147 @@
         "h",
         "acc"
       ]
+    },
+    "vista_previa_kivoa": {
+      "type": "section",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "gap": 64,
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      },
+      "blocks": {
+        "img": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kivoa-vista-previa.jpg",
+            "image_ratio": "adapt",
+            "width": "custom",
+            "custom_width": 56,
+            "width_mobile": "fill",
+            "border_radius": 16
+          }
+        },
+        "col": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "gap": 16,
+            "width": "custom",
+            "custom_width": 38,
+            "width_mobile": "fill"
+          },
+          "blocks": {
+            "h": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Nada se imprime sin tu OK</h2>",
+                "type_preset": "h2",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "normal"
+              }
+            },
+            "p": {
+              "type": "text",
+              "settings": {
+                "text": "<p>En 48 h laborables te enviamos la vista previa de su retrato por mensaje. Si quieres cambiar algo, tienes <strong>2 rondas de cambios incluidas</strong>.</p><p>Solo cuando nos das el visto bueno lo imprimimos y enmarcamos.</p>",
+                "type_preset": "rte",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "normal"
+              }
+            }
+          },
+          "block_order": [
+            "h",
+            "p"
+          ]
+        }
+      },
+      "block_order": [
+        "img",
+        "col"
+      ]
+    },
+    "guia_fotos_kivoa": {
+      "type": "section",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "gap": 64,
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      },
+      "blocks": {
+        "col": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "gap": 16,
+            "width": "custom",
+            "custom_width": 38,
+            "width_mobile": "fill"
+          },
+          "blocks": {
+            "h": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>¿Qué foto nos envías?</h2>",
+                "type_preset": "h2",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "normal"
+              }
+            },
+            "p": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Cuanto mejor la foto, mejor el retrato. Busca una <strong>nítida, con buena luz y la cara bien visible</strong>.</p><p>Mejor la foto original del móvil que una captura de WhatsApp. Puedes añadir hasta 3 fotos más para los recuerdos.</p>",
+                "type_preset": "rte",
+                "alignment": "left",
+                "width": "fit-content",
+                "max_width": "normal"
+              }
+            },
+            "b": {
+              "type": "button",
+              "settings": {
+                "label": "Crear su retrato",
+                "link": "shopify://collections/all",
+                "style_class": "button"
+              }
+            }
+          },
+          "block_order": [
+            "h",
+            "p",
+            "b"
+          ]
+        },
+        "img": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kivoa-que-foto-enviar.jpg",
+            "image_ratio": "adapt",
+            "width": "custom",
+            "custom_width": 56,
+            "width_mobile": "fill",
+            "border_radius": 16
+          }
+        }
+      },
+      "block_order": [
+        "col",
+        "img"
+      ]
     }
   },
   "order": [
@@ -827,6 +968,8 @@
     "antes_despues",
     "product_list_fa6P9H",
     "como_funciona",
+    "vista_previa_kivoa",
+    "guia_fotos_kivoa",
     "faq_kivoa"
   ]
 }
