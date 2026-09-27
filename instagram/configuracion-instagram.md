@@ -74,6 +74,8 @@ Se ve a 110 px en un círculo: **logotipo "Kivoa" o un retrato de mascota con mu
 
 ## 5. Meta Business + Shopify (etiquetas de producto)
 
+> Paso a paso detallado: `facebook-business.md`.
+
 1. Crear una **página de Facebook** "Kivoa" (mínima: foto, portada = banner de Etsy, enlace a kivoa.es). Es requisito de Meta para el catálogo.
 2. *business.facebook.com* → crear la cartera comercial **Kivoa** → añadir página e Instagram.
 3. *Seguridad de la cartera → Dominios* → **verificar kivoa.es** (metaetiqueta en el tema o registro TXT en el DNS). Sin esto, Meta suele rechazar la tienda.
