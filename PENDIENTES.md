@@ -18,6 +18,7 @@
 - [ ] **Pedido de muestra** 20×25 a tu casa (Gelato, papel semibrillante) → comprobar calidad y hacer fotos reales para los anuncios.
 - [ ] ChatGPT: **fondo vacío del Estilo Rosa** + **retrato de Penny sobre fondo blanco** → montar el generador.
 - [ ] Web: los 4 clics de Judge.me (incrustación + badge + widget + sincronización de metafields).
+- [ ] **Instagram**: configurar según `instagram/configuracion-instagram.md` (cuenta Empresa, bio, 2FA, Meta Business + canal de Shopify, 9 primeras publicaciones).
 - [ ] Shopify: pegar las políticas en Configuración → Políticas · cambiar el email a contacto@kivoa.es en Configuración → General.
 
 ## 🟡 3. Cuando se pueda
