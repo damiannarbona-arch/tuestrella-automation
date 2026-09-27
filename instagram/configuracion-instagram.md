@@ -1,5 +1,7 @@
 # Kivoa · Configuración de Instagram (27/09/2026)
 
+> Versión en inglés de todos los textos públicos (perfil, 9 publicaciones, destacadas, respuestas de DM, hashtags): `instagram-en.md`.
+
 Objetivo del canal: **generar confianza y tráfico cualificado a kivoa.es y a Etsy**. No perseguimos seguidores: medimos clics y ventas (§9).
 
 ---
