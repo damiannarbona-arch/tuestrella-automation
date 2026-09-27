@@ -62,6 +62,8 @@ Proof in 48h · Nothing prints without OK
 
 ## 5. Shopify + TikTok (medición)
 
+> ⏸️ **Pendiente del alta de autónomo.** Business Center y la app de Shopify piden verificación de empresa (certificado de situación censal + razón social = nombre y apellidos + NIF). No enviar el "Registro de empresas" sin esos datos. Mientras tanto, medir con los UTM del enlace de la bio.
+
 *Shopify → Tienda de apps* → **TikTok** (desarrollador: TikTok) → conectar **TikTok For Business** con la cuenta de Kivoa:
 - Crear el **Business Center** "Kivoa" y una cuenta de anuncios en **EUR / Madrid** (sin gasto hasta que crees campañas).
 - Activar el **píxel de TikTok** con compartición de datos **máxima** (eventos del servidor). Sin píxel no sabremos qué vídeo trae ventas ni podremos anunciar bien después.
