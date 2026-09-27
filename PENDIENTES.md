@@ -19,6 +19,7 @@
 - [ ] ChatGPT: **fondo vacío del Estilo Rosa** + **retrato de Penny sobre fondo blanco** → montar el generador.
 - [ ] Web: los 4 clics de Judge.me (incrustación + badge + widget + sincronización de metafields).
 - [ ] **Instagram**: configurar según `instagram/configuracion-instagram.md` (cuenta Empresa, bio, 2FA, Meta Business + canal de Shopify, 9 primeras publicaciones).
+- [ ] **TikTok**: configurar según `tiktok/configuracion-tiktok.md` (cuenta Empresa, bio, 2FA, app de TikTok en Shopify con píxel, 6 primeros vídeos).
 - [ ] Shopify: pegar las políticas en Configuración → Políticas · cambiar el email a contacto@kivoa.es en Configuración → General.
 
 ## 🟡 3. Cuando se pueda
