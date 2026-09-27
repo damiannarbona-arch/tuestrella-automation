@@ -1,5 +1,39 @@
 # Kivoa · Pendientes (actualizado 25/09/2026)
 
+## 📅 Plan del 28/09/2026
+Orden pensado por dependencias: sin estilos no hay fotos, y sin fotos no hay publicaciones.
+
+### 1. Variantes sin coste (mañana, 1.ª hora)
+Mismo producto de Gelato y mismos precios: solo cambia el diseño. Cada anuncio nuevo en Etsy = 0,20 $.
+- [ ] **Dos mascotas**: anuncio propio ("retrato dos perros / perro y gato"). Posiciona en búsquedas que ahora no cubrimos. Precio = base + 14,90 € (ver Fase 1).
+- [ ] **Nueva gama** (elegir 1, no más): Navidad (pico de ventas oct–dic; es la prioridad por fecha) · lineal minimalista · "Nuestra estrella" memorial (encaja con la marca).
+- [ ] Unificar la gama acuarela actual (Rosa, Lavanda, Aventurero, Clásico) como **"Colección Acuarela"**.
+- [ ] Limpiar: borrar duplicados de Rosa y anuncios atascados en Etsy.
+
+### 2. Imágenes y vídeo
+Regla: cada foto responde una duda distinta y la foto 1 es del estilo de ese anuncio.
+- [ ] 2–3 retratos de ejemplo con **mascotas distintas** (gato, perro negro, pelo largo), con permiso del dueño.
+- [ ] Juntar **marcos + tamaños** en una sola imagen.
+- [ ] Quitar mockups automáticos de Gelato que repiten diseño.
+- [ ] Vídeo vertical de 8–10 s: foto → retrato → cuadro colgado. Sirve para Etsy, Reels, TikTok y Pinterest.
+- [ ] Orden por anuncio: salón · antes/después · variedad de mascotas · detalle · marcos/tamaños · cómo funciona · vista previa en móvil · producto en mano · regalo.
+
+### 3. Márgenes y precios
+Ojo: los netos actuales son 8–12 € por cuadro (calculados con IVA e IRPF). Bajar el precio los deja casi a cero.
+- [ ] Rehacer los números **sin IVA ni IRPF** (situación real mientras no hay alta) y **con** ellos (situación futura), para saber el suelo real.
+- [ ] Si se baja, solo el **20×25** como producto de entrada (p. ej. Etsy 39,90 €) y mantener 30×40 y 50×70.
+- [ ] Revisar el envío a la UE en 50×70 (neto 7,74 €: el peor caso).
+- [ ] Añadir 0,20 $ de renovación por venta de Etsy a la calculadora.
+- [ ] Alternativa a bajar precio: cupón de lanzamiento 10 % durante 30 días (cumple Omnibus).
+
+### 4. Plan de publicaciones
+- [ ] **3 plataformas, no más**: Pinterest (tráfico duradero hacia Etsy/web), Instagram Reels y TikTok (el mismo vídeo en ambas).
+- [ ] Ritmo semana 1–4: **3 publicaciones/semana** (lun · mié · sáb) + Pinterest 1 pin/día programado.
+- [ ] Horas (España): Reels/TikTok 13:30 o 20:30–21:30 · Pinterest 20:00–23:00 y fines de semana.
+- [ ] Patrón semanal: lunes antes/después · miércoles proceso (vídeo del retrato creándose) · sábado emoción o regalo (memorial, Navidad).
+- [ ] Preparar 4 semanas por adelantado (12 piezas) y programar con Meta Business Suite + planificador de Pinterest (ambos gratis).
+- [ ] Medir cada domingo: visitas a Etsy por fuente, guardados en Pinterest y vistas completas del vídeo.
+
 ## ✅ Hecho
 - Web en Horizon, en español e inglés; términos con la cláusula de proceso creativo.
 - Código BIENVENIDA10 · tabla de precios · Judge.me instalado.
