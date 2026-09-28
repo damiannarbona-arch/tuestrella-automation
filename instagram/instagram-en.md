@@ -45,20 +45,44 @@ Estructura de cada texto: primera línea = gancho con palabra clave (Instagram i
 Texto alternativo en cada imagen: *Advanced settings → Write alt text*.
 
 ### #1 · Carousel · Before / After (Luna) · 📌 pin
+Imágenes: `assets/redes/publicaciones/01-antes-despues/en/01–05.jpg` (Facebook: carpeta `es/`).
 ```
-From a phone photo to a framed portrait 🐾
+From a phone photo to a portrait forever 🐾
 
-This is Luna. Her family sent us one photo, and this is what hangs on their wall now.
+This is Luna. It all started with a photo from the phone, and it became a portrait designed just for her.
 
-Every portrait is designed from your own photos. You get a digital proof within 48 hours, with 2 rounds of changes included, and nothing is printed until you approve it.
+How it works:
+1️⃣ You send us your photos
+2️⃣ You get a digital proof within 48 hours, with 2 rounds of changes included
+3️⃣ Once you approve it, we print it, frame it and ship it, ready to hang
+
+Nothing is printed without your OK.
 
 Swipe to see the whole journey →
+Order yours: link in bio 🔗
 
-Order yours: link in bio.
-
-#custompetportrait #petportrait #dogportrait #petmemorial #beforeandafter
+#custompetportrait #petportrait #petmemorial #italiangreyhound #dogportrait
 ```
-Alt text: `Before and after: a photo of a white dog next to her illustrated framed portrait hanging on a living room wall.`
+Alt text (diapositiva 1): `Before and after: a phone photo of Luna, a grey Italian greyhound in a pink striped jumper, next to her illustrated portrait framed on a living room wall.`
+
+Facebook (ES; aquí el enlace sí es clicable):
+```
+De una foto del móvil a un recuerdo para siempre 🐾
+
+Esta es Luna. Todo empezó con una foto del móvil y acabó siendo un retrato diseñado solo para ella.
+
+Así funciona:
+1️⃣ Nos envías tus fotos
+2️⃣ Recibes la vista previa en 48 horas, con 2 rondas de cambios incluidas
+3️⃣ Cuando la apruebas, lo imprimimos, lo enmarcamos y te lo enviamos listo para colgar
+
+Nada se imprime sin tu OK.
+
+Desliza para ver el proceso completo →
+Pide el tuyo: https://kivoa.es/?utm_source=facebook&utm_medium=social&utm_campaign=post01
+
+#retratomascota #regalopersonalizado #galgoitaliano
+```
 
 ### #2 · Carousel · How it works · 📌 pin
 ```
