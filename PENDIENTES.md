@@ -1,5 +1,14 @@
 # Kivoa · Pendientes (actualizado 28/09/2026)
 
+## 📅 Plan del 29/09/2026 (en este orden)
+1. [ ] **Publicar el TikTok de Miau** (y Reels, Shorts y Facebook): textos en `redes/publicacion-tiktok-miau.md`.
+2. [ ] **Casos reales nuevos** (mascotas reales): retrato ChatGPT → polaroids → fotos de ficha (antes/después, marcos) → sustituir en Aventurero, Caballos y Clásico. Vídeos nuevos si procede.
+3. [ ] **Lavanda**: fusión de marcos con la foto `il_fullxfull.8585740710_mim8.jpg` (pasármela) y decidir si baja a 6 fotos como el resto.
+4. [ ] **Marcos de Aventurero, Caballos y Clásico**: permitir `cdn.shopify.com` en la red del entorno o pasarme sus retratos en plano.
+5. [ ] **Easify**: quitar "obligatorio" al campo Características (a mano en la app). La foto principal ya es obligatoria (Uploadfly).
+6. [ ] **Web** (`web/mejoras-conversion.md`): bloque de garantías bajo el botón · plazo y fecha límite de Navidad · estrellas Judge.me · carrito (regalo + copia digital + pago seguro) · portada (hero antes/después, barra Navidad, casos reales).
+7. [ ] **Meta**: mover la página de Facebook a la cuenta personal y pedir revisión de la cartera (ver conversación del 28/09).
+
 ## 📅 Plan del 28/09/2026
 Orden pensado por dependencias: sin estilos no hay fotos, y sin fotos no hay publicaciones.
 
