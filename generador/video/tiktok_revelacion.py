@@ -1,4 +1,4 @@
-"""TikTok "revelación" (10 s, 1080×1920): gancho con la mascota → retrato tapado → revelación → reacción → comparación.
+"""TikTok "revelación" (~12 s, 1080×1920): gancho → caja tapada → revelación en la caja → detalle → reacción → pared.
 
 Uso:
   python3 generador/video/tiktok_revelacion.py CLIP_GANCHO CLIP_REACCION CASO ESTILO
@@ -21,10 +21,10 @@ ARR, ABA = 250, 1300
 
 TXT = {
     'en': {'gancho': [('My cat has no idea', 'b'), ('what I did…', 'b')], 'tapado': [('(don\'t tell him)', 'i')],
-           'ojos': [('Even his two', 'b'), ('different eyes', 'b')], 'reaccion': [('His reaction:', 'b')],
+           'rasgos': [('Every feature,', 'b'), ('just as he is', 'b')], 'reaccion': [('His reaction:', 'b')],
            'cta': [('Want one of yours?', 'b'), ('Link in bio', 'i')]},
     'es': {'gancho': [('Mi gato no sabe', 'b'), ('lo que le he hecho…', 'b')], 'tapado': [('(no se lo digáis)', 'i')],
-           'ojos': [('Hasta sus ojos', 'b'), ('de distinto color', 'b')], 'reaccion': [('Su reacción:', 'b')],
+           'rasgos': [('Con cada rasgo,', 'b'), ('tal cual es', 'b')], 'reaccion': [('Su reacción:', 'b')],
            'cta': [('¿Hacemos el de tu mascota?', 'b'), ('Enlace en el perfil', 'i')]},
 }
 
@@ -78,39 +78,35 @@ CLIPS = {'miau': {'gancho': (.49, .3), 'reaccion': (.53, .5)}}
 
 
 def montar(clip_gancho, clip_reaccion, caso, estilo):
+    """Gancho → caja tapada → revelación en la caja → detalle → reacción → cuadro en la pared.
+    Las maquetas (caja, salón) salen de generador/mockups.py con el retrato real."""
     os.makedirs(SALIDA, exist_ok=True)
     cg, cr = CLIPS.get(caso, {}).get('gancho', (.5, .3)), CLIPS.get(caso, {}).get('reaccion', (.5, .5))
     g, gfps = leer_clip(clip_gancho, cg[0])
     r, rfps = leer_clip(clip_reaccion, cr[0])
     ret = Image.open(C(caso, f'retrato-{estilo}.jpg')).convert('RGB')
-    foto = ImageOps.exif_transpose(Image.open(C(caso, 'foto-principal.jpg'))).convert('RGB')
+    caja = Image.open(C(caso, f'mockup-{estilo}-caja.jpg')).convert('RGB')
+    salon = Image.open(C(caso, f'mockup-{estilo}-salon.jpg')).convert('RGB')
     ox, oy = OJOS.get(caso, (.5, .35))
     gancho, reaccion = de_clip(g, gfps, cg[1]), de_clip(r, rfps, cr[1])
-    # retrato tapado: muy desenfocado (precalculado)
-    tapado_base = kenburns(ret, S, 0, 1.15, 1.15, (.5, .4), (.5, .4)).filter(ImageFilter.GaussianBlur(38))
+    CX = (.504, .5)  # centro de la lámina en la maqueta de la caja
+    tapada = kenburns(caja, S, 0, 1.0, 1.0, CX, CX).filter(ImageFilter.GaussianBlur(30))
 
-    def revelar(tl, x):
-        nitido = kenburns(ret, S, x, 1.15, 2.0, (.5, .4), (ox, oy))
-        k = ease(x / .22)  # el desenfoque se quita en el primer ~0,5 s
-        return nitido if k >= 1 else nitido.filter(ImageFilter.GaussianBlur(38 * (1 - k)))
-
-    def comparar(tl, x):
-        im = Image.new('RGB', S, (246, 242, 236))
-        mitad = (S[0], S[1] // 2)
-        z = 1 + .05 * ease(x)
-        im.paste(kenburns(foto, mitad, x, 1.0, z, (.52, .42), (.52, .42)), (0, 0))
-        im.paste(kenburns(ret, mitad, x, 1.35, 1.35 * z, (.5, .33), (.5, .33)), (0, S[1] // 2))
-        return im
+    def revelar(tl, x):  # el desenfoque se va en ~0,5 s y la cámara se acerca despacio
+        nitido = kenburns(caja, S, x, 1.0, 1.1, CX, (.52, .42))
+        k = ease(x / .2)
+        return nitido if k >= 1 else nitido.filter(ImageFilter.GaussianBlur(30 * (1 - k)))
 
     for lang in ('en', 'es', 'sin-texto'):
         T = TXT.get(lang)
         rot = (lambda k, y, a=.0, b=1.0: [(T[k], y, a, b)]) if T else (lambda *a, **k: [])
         render(f'tiktok-{caso}-{lang}.mp4', [
             (2.2, lambda tl, x: gancho(tl), rot('gancho', ARR, 0, 1)),
-            (1.3, lambda tl, x: tapado_base, rot('tapado', ABA, .1, 1)),
-            (2.5, revelar, rot('ojos', ARR, .3, 1)),
-            (2.0, lambda tl, x: reaccion(tl), rot('reaccion', ARR, 0, 1)),
-            (2.0, comparar, rot('cta', 880, .15, 1)),
+            (1.2, lambda tl, x: tapada, rot('tapado', ABA, .1, 1)),
+            (2.4, revelar, []),  # sin texto: el producto se ve entero
+            (1.8, lambda tl, x: kenburns(ret, S, x, 1.35, 1.75, (.6, .36), (ox - .05, oy)), rot('rasgos', ARR, .1, 1)),
+            (1.8, lambda tl, x: reaccion(tl), rot('reaccion', ARR, 0, 1)),
+            (2.4, lambda tl, x: kenburns(salon, S, x, 1.35, 1.02, (.51, .36), (.51, .42)), rot('cta', ABA, .25, 1)),
         ])
 
 
