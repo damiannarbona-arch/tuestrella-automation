@@ -77,7 +77,7 @@ def render(nombre, escenas):
 CLIPS = {'miau': {'gancho': (.49, .3), 'reaccion': (.53, .5)}}
 
 
-def montar(clip_gancho, clip_reaccion, caso, estilo):
+def montar(clip_gancho, clip_reaccion, caso, estilo, idiomas='en,es,sin-texto'):
     """Gancho → caja tapada → revelación en la caja → detalle → reacción → cuadro en la pared.
     Las maquetas (caja, salón) salen de generador/mockups.py con el retrato real."""
     os.makedirs(SALIDA, exist_ok=True)
@@ -97,7 +97,7 @@ def montar(clip_gancho, clip_reaccion, caso, estilo):
         k = ease(x / .2)
         return nitido if k >= 1 else nitido.filter(ImageFilter.GaussianBlur(30 * (1 - k)))
 
-    for lang in ('en', 'es', 'sin-texto'):
+    for lang in idiomas.split(','):
         T = TXT.get(lang)
         rot = (lambda k, y, a=.0, b=1.0: [(T[k], y, a, b)]) if T else (lambda *a, **k: [])
         render(f'tiktok-{caso}-{lang}.mp4', [
@@ -111,4 +111,4 @@ def montar(clip_gancho, clip_reaccion, caso, estilo):
 
 
 if __name__ == '__main__':
-    montar(*sys.argv[1:5])
+    montar(*sys.argv[1:6])  # 5.º argumento opcional: idiomas, p. ej. 'en,sin-texto' con el retrato en inglés
