@@ -52,6 +52,8 @@ Ojo: los netos actuales son 8–12 € por cuadro (calculados con IVA e IRPF). B
 - [ ] **Pedido de muestra** 20×25 a tu casa (Gelato, papel semibrillante) → comprobar calidad y hacer fotos reales para los anuncios.
 - [ ] ChatGPT: **fondo vacío del Estilo Rosa** + **retrato de Penny sobre fondo blanco** → montar el generador.
 - [ ] Web: los 4 clics de Judge.me (incrustación + badge + widget + sincronización de metafields).
+- [ ] **Instagram**: configurar según `instagram/configuracion-instagram.md` (cuenta Empresa, bio, 2FA, Meta Business + canal de Shopify, 9 primeras publicaciones).
+- [ ] **TikTok**: configurar según `tiktok/configuracion-tiktok.md` (cuenta Empresa, bio, 2FA, 6 primeros vídeos; la app de TikTok en Shopify y la verificación de empresa, tras el alta).
 - [ ] Shopify: pegar las políticas en Configuración → Políticas · cambiar el email a contacto@kivoa.es en Configuración → General.
 
 ## 🟡 3. Cuando se pueda
