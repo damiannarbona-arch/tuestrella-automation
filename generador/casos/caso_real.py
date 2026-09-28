@@ -146,6 +146,22 @@ def marcos(caso, nombre, estilo, salida):
     im.save(salida, quality=92)
 
 
+# 5 · Tamaños a escala (20×25, 30×40, 50×70) con el retrato del caso
+def tamanos(caso, estilo, salida):
+    im, d = lienzo()
+    titulo(d, 'Tamaños a escala', 'Sizes to scale')
+    ret = abrir(C(caso, f'retrato-{estilo}.jpg'))
+    base = 1500  # línea inferior común
+    for (x0, x1, alto), es, en in (((266, 538, 373), '20×25 cm', '8×10"'),
+                                  ((738, 1172, 598), '30×40 cm', '12×16"'),
+                                  ((1372, 2134, 1048), '50×70 cm', '20×28"')):
+        marco(im, ret, (x0, base - alto, x1, base), (196, 150, 102), True)
+        d = ImageDraw.Draw(im)
+        centrado(d, (x0 + x1) / 2, base + 75, es, F(SERIF, 58), TINTA)
+        centrado(d, (x0 + x1) / 2, base + 140, en, F(ITAL, 42), GRIS)
+    im.save(salida, quality=92)
+
+
 def kit(caso, nombre, estilo, rasgo):
     out = C(caso, 'anuncio')
     os.makedirs(out, exist_ok=True)
@@ -155,6 +171,7 @@ def kit(caso, nombre, estilo, rasgo):
     fotos_a_retrato(caso, nombre, estilo, p('2-sus-fotos'))
     detalle(caso, nombre, estilo, rasgo, p('3-detalle'))
     marcos(caso, nombre, estilo, p('4-marcos'))
+    tamanos(caso, estilo, p('5-tamanos'))
     print(out)
 
 

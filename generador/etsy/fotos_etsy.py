@@ -61,16 +61,17 @@ def check(d, cx, cy, ok, r=46):
 
 
 # ---------------------------------------------------------------- guía de fotos
-def guia_fotos():
+def guia_fotos(foto=None, caja=(380, 520, 1060, 1260), salida=None):
+    """foto: foto real de la mascota; caja: recorte de cabeza y pecho (proporción ~0,77)."""
     im, d = lienzo()
     titulo(d, 'Qué foto enviarnos', 'Which photo to send')
-    base = Image.open(A('antes-foto-luna.jpg')).convert('RGB')
-    cara = base.crop((380, 520, 1060, 1260))  # cabeza y pecho de Luna, nítida y con luz
+    base = ImageOps.exif_transpose(Image.open(foto or A('antes-foto-luna.jpg'))).convert('RGB')
+    cara = base.crop(caja)  # cabeza y pecho, nítida y con luz
     casos = [
         (cara, True, 'Nítida y con luz', 'Sharp, good light', 'La cara bien visible'),
         (cara.filter(ImageFilter.GaussianBlur(9)), False, 'Movida o borrosa', 'Blurry', 'Perdemos el detalle'),
         (ImageEnhance.Contrast(ImageEnhance.Brightness(cara).enhance(.28)).enhance(.8), False, 'Oscura', 'Too dark', 'Sin luz no hay color'),
-        (ImageOps.fit(base, cara.size, Image.LANCZOS, centering=(.5, .5)).resize((cara.width // 3, cara.height // 3)).resize(cara.size, Image.BICUBIC), False, 'Lejos o pixelada', 'Too far / low-res', 'Captura, zoom, recorte'),
+        (ImageOps.fit(base, cara.size, Image.LANCZOS, centering=(.5, .5)).resize((cara.width // 7, cara.height // 7)).resize(cara.size, Image.NEAREST), False, 'Lejos o pixelada', 'Too far / low-res', 'Captura, zoom, recorte'),
     ]
     fw, fh = 490, 640
     gap = (W - 4 * fw) / 5
@@ -91,7 +92,7 @@ def guia_fotos():
     d.line((300, 1450, W - 300, 1450), fill=LINEA, width=3)
     centrado(d, W / 2, 1545, 'Mejor la foto original del móvil que una captura de WhatsApp', F(ITAL, 54), TINTA)
     centrado(d, W / 2, 1625, 'The original phone photo beats a screenshot · up to 3 extra photos', F(ITAL, 40), GRIS)
-    im.save(A('etsy', 'foto-que-foto-enviar.jpg'), quality=92)
+    im.save(salida or A('etsy', 'foto-que-foto-enviar.jpg'), quality=92)
 
 
 # ------------------------------------------------------- vista previa en el móvil
