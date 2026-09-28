@@ -6,7 +6,7 @@ Carpeta del caso (assets/casos/<mascota>/):
   retrato-<estilo>.jpg        el retrato terminado (uno o varios estilos)
 
 Uso:
-  python3 generador/casos/caso_real.py miau Miau lavanda "ojos de distinto color"
+  python3 generador/casos/caso_real.py miau Miau lavanda x   (títulos genéricos: sin nombre de la mascota)
   → assets/casos/miau/anuncio/<estilo>-1-antes-despues.jpg … -4-marcos.jpg
 
 Recortes: FOCO[caso] = (fx, fy) de la cara en la foto principal y en el retrato (0–1).
@@ -63,7 +63,7 @@ def flecha(d, x0, x1, y):
 # 2 · De sus fotos a su retrato: demuestra que usamos TODAS las fotos del cliente
 def fotos_a_retrato(caso, nombre, estilo, salida):
     im, d = lienzo()
-    titulo(d, f'De sus fotos al retrato de {nombre}', f'From {nombre}\'s photos to the portrait')
+    titulo(d, 'De sus fotos a su retrato', 'From their photos to their portrait')
     fotos = [abrir(C(caso, 'foto-principal.jpg'))] + [abrir(C(caso, f'extra-{i}.jpg')) for i in (1, 2, 3)]
     for foto, c, a in zip(fotos, [(430, 690), (830, 740), (440, 1210), (840, 1250)], [-5, 4, 3, -4]):
         polaroid(im, foto, c, 390, a)
@@ -85,7 +85,7 @@ def fotos_a_retrato(caso, nombre, estilo, salida):
 # 3 · Detalle: la misma zona de la foto y del retrato (fidelidad)
 def detalle(caso, nombre, estilo, rasgo, salida):
     im, d = lienzo()
-    titulo(d, f'Hasta el último detalle: {rasgo}', 'True to every detail')
+    titulo(d, 'Fiel hasta el último detalle', 'True to every detail')
     foto, ret = abrir(C(caso, 'foto-principal.jpg')), abrir(C(caso, f'retrato-{estilo}.jpg'))
     ff, fr = FOCO[caso]['foto'], FOCO[caso]['retrato']
     s = 900
@@ -98,7 +98,7 @@ def detalle(caso, nombre, estilo, rasgo, salida):
         centrado(d, x + s / 2, 1490, en, F(ITAL, 42), GRIS)
     d = ImageDraw.Draw(im)
     flecha(d, 1130, 1270, 400 + s // 2)
-    centrado(d, W / 2, 1715, f'Caso real · {nombre}', F(ITAL, 40), GRIS)
+    centrado(d, W / 2, 1715, f'Caso real · estilo {estilo.capitalize()}', F(ITAL, 40), GRIS)
     im.save(salida, quality=92)
 
 
@@ -141,8 +141,8 @@ def marcos(caso, nombre, estilo, salida):
         d = ImageDraw.Draw(im)
         centrado(d, x + fw / 2, 1650, es, F(SERIF, 60), TINTA)
         centrado(d, x + fw / 2, 1720, en, F(ITAL, 40), GRIS)
-    centrado(d, W / 2, 170, f'{nombre}, en el marco que elijas', F(SERIF, 104), TINTA)
-    centrado(d, W / 2, 280, f'{nombre}, in the frame of your choice', F(ITAL, 56), GRIS)
+    centrado(d, W / 2, 170, 'En el marco que elijas', F(SERIF, 104), TINTA)
+    centrado(d, W / 2, 280, 'In the frame of your choice', F(ITAL, 56), GRIS)
     im.save(salida, quality=92)
 
 
@@ -167,7 +167,7 @@ def kit(caso, nombre, estilo, rasgo):
     os.makedirs(out, exist_ok=True)
     p = lambda n: os.path.join(out, f'{estilo}-{n}.jpg')
     antes_despues(C(caso, 'foto-principal.jpg'), C(caso, f'retrato-{estilo}.jpg'), p('1-antes-despues'),
-                  f'Caso real · {nombre} · estilo {estilo.capitalize()}')
+                  f'Caso real · estilo {estilo.capitalize()}')
     fotos_a_retrato(caso, nombre, estilo, p('2-sus-fotos'))
     detalle(caso, nombre, estilo, rasgo, p('3-detalle'))
     marcos(caso, nombre, estilo, p('4-marcos'))
