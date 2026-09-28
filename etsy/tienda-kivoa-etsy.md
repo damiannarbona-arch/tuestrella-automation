@@ -209,6 +209,16 @@ Las primeras 160 letras son lo que Google muestra: por eso el arranque es corto 
 La foto 1 es la miniatura en la búsqueda: fondo claro, cuadro grande, sin texto.
 La foto 2 (antes/después) es la que más convierte en este nicho: ya la tienes (`antes-foto-luna-recorte-v2.jpg` + `despues-retrato-luna-v2.webp`).
 
+**Fotos comunes a los 5 anuncios** (`assets/etsy/`, generadas con `generador/etsy/fotos_etsy.py`):
+`foto-marcos.jpg` · `foto-tamanos.jpg` · `foto-como-funciona.jpg` · `foto-vista-previa.jpg` · `foto-que-foto-enviar.jpg` · `foto-antes-despues-rosa.jpg` (en Lavanda/Aventurero/Clásico/Caballos, rotulada «Ejemplo real · estilo Rosa»: demuestra el proceso, no el estilo).
+
+**Antes/después propio por estilo** (sin tener otra mascota):
+1. Lavanda, Aventurero y Clásico: pasar **la misma foto de Luna** por cada estilo en ChatGPT → antes/después real y honesto. Extra: imagen «Una foto, 4 estilos» para todos los anuncios.
+2. Caballos: foto de un caballo de un conocido o de un picadero a cambio del retrato gratis (y de su reseña).
+3. Montar cada uno: `python3 generador/etsy/fotos_etsy.py antes-despues FOTO RETRATO assets/etsy/foto-antes-despues-ESTILO.jpg "Ejemplo real · estilo X"`.
+
+Orden por anuncio: 1) portada del estilo · 2) ambientación en salón · 3) antes/después · 4) marcos · 5) tamaños · 6) cómo funciona · 7) vista previa en el móvil · 8) qué foto enviar · 9–10) detalles del estilo.
+
 ---
 
 ## 7. Métricas para decidir (primeros 30 días)
