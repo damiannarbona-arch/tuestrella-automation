@@ -29,16 +29,17 @@ TXT = {
 }
 
 # cara/ojos en el retrato (fracciones) para el zoom de la revelación
-OJOS = {'miau': (.55, .33)}
+OJOS = {'miau': (.67, .37)}
 
 
-def leer_clip(ruta):
-    """Fotogramas del clip reescalados y recortados a 1080×1920."""
+def leer_clip(ruta, fx=.5):
+    """Fotogramas del clip recortados a 9:16 centrados en fx (0–1) y escalados a 1080×1920.
+    Hailuo entrega 2944×1248 aunque se pida vertical: el recorte central deja fuera su marca de agua."""
     gen = imageio_ffmpeg.read_frames(ruta, pix_fmt='rgb24')
     meta = next(gen)
     w, h = meta['size']
     fps = meta.get('fps') or 24
-    frames = [ImageOps.fit(Image.frombytes('RGB', (w, h), f), S, Image.LANCZOS) for f in gen]
+    frames = [ImageOps.fit(Image.frombytes('RGB', (w, h), f), S, Image.LANCZOS, centering=(fx, .5)) for f in gen]
     return frames, fps
 
 
@@ -72,19 +73,24 @@ def render(nombre, escenas):
     print(ruta, f'{total:.1f} s', f'{os.path.getsize(ruta) / 1e6:.1f} MB')
 
 
+# centro horizontal del gato en cada clip y segundo desde el que se usa
+CLIPS = {'miau': {'gancho': (.49, .3), 'reaccion': (.53, .5)}}
+
+
 def montar(clip_gancho, clip_reaccion, caso, estilo):
     os.makedirs(SALIDA, exist_ok=True)
-    g, gfps = leer_clip(clip_gancho)
-    r, rfps = leer_clip(clip_reaccion)
+    cg, cr = CLIPS.get(caso, {}).get('gancho', (.5, .3)), CLIPS.get(caso, {}).get('reaccion', (.5, .5))
+    g, gfps = leer_clip(clip_gancho, cg[0])
+    r, rfps = leer_clip(clip_reaccion, cr[0])
     ret = Image.open(C(caso, f'retrato-{estilo}.jpg')).convert('RGB')
     foto = ImageOps.exif_transpose(Image.open(C(caso, 'foto-principal.jpg'))).convert('RGB')
     ox, oy = OJOS.get(caso, (.5, .35))
-    gancho, reaccion = de_clip(g, gfps, .3), de_clip(r, rfps, .5)
+    gancho, reaccion = de_clip(g, gfps, cg[1]), de_clip(r, rfps, cr[1])
     # retrato tapado: muy desenfocado (precalculado)
     tapado_base = kenburns(ret, S, 0, 1.15, 1.15, (.5, .4), (.5, .4)).filter(ImageFilter.GaussianBlur(38))
 
     def revelar(tl, x):
-        nitido = kenburns(ret, S, x, 1.15, 2.4, (.5, .4), (ox, oy))
+        nitido = kenburns(ret, S, x, 1.15, 2.0, (.5, .4), (ox, oy))
         k = ease(x / .22)  # el desenfoque se quita en el primer ~0,5 s
         return nitido if k >= 1 else nitido.filter(ImageFilter.GaussianBlur(38 * (1 - k)))
 

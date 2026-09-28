@@ -88,16 +88,16 @@ def detalle(caso, nombre, estilo, rasgo, salida):
     titulo(d, f'Hasta el último detalle: {rasgo}', 'True to every detail')
     foto, ret = abrir(C(caso, 'foto-principal.jpg')), abrir(C(caso, f'retrato-{estilo}.jpg'))
     ff, fr = FOCO[caso]['foto'], FOCO[caso]['retrato']
-    s = 1000
+    s = 900
     for x, img, (fx, fy, ar), es, en in ((200, foto, ff, 'Su foto', 'Their photo'),
                                         (W - 200 - s, ret, fr, 'Su retrato', 'Their portrait')):
         c = recorte(img, s, s, fx, fy, ar)
         sombra(im, (x, 400, x + s, 400 + s), r=6)
         im.paste(c, (x, 400))
-        centrado(d, x + s / 2, 1500, es, F(SERIF, 64), TINTA)
-        centrado(d, x + s / 2, 1570, en, F(ITAL, 42), GRIS)
+        centrado(d, x + s / 2, 1420, es, F(SERIF, 64), TINTA)
+        centrado(d, x + s / 2, 1490, en, F(ITAL, 42), GRIS)
     d = ImageDraw.Draw(im)
-    flecha(d, 1230, 1370, 900)
+    flecha(d, 1130, 1270, 400 + s // 2)
     centrado(d, W / 2, 1715, f'Caso real · {nombre}', F(ITAL, 40), GRIS)
     im.save(salida, quality=92)
 
@@ -131,12 +131,13 @@ def marcos(caso, nombre, estilo, salida):
     d.rectangle((0, 1560, W, H), fill=(206, 186, 160))           # balda
     d.rectangle((0, 1560, W, 1580), fill=(226, 210, 188))
     ret = abrir(C(caso, f'retrato-{estilo}.jpg'))
-    fw, fh = 620, 800
+    fw, fh, hueco = 560, 740, 200
+    x0 = (W - 3 * fw - 2 * hueco) // 2
     for i, (col, veta, es, en) in enumerate([((250, 250, 248), False, 'Blanco', 'White'),
                                              ((196, 150, 102), True, 'Madera', 'Natural wood'),
                                              ((34, 34, 34), False, 'Negro', 'Black')]):
-        x = 150 + i * (fw + 185)
-        marco(im, ret, (x, 520, x + fw, 520 + fh), col, veta)
+        x = x0 + i * (fw + hueco)
+        marco(im, ret, (x, 560, x + fw, 560 + fh), col, veta)
         d = ImageDraw.Draw(im)
         centrado(d, x + fw / 2, 1650, es, F(SERIF, 60), TINTA)
         centrado(d, x + fw / 2, 1720, en, F(ITAL, 40), GRIS)
