@@ -59,14 +59,16 @@ def componer(diseno, salida, fotos):
     grande = base.resize((base.width * S, base.height * S), Image.LANCZOS)
     oscuro = Image.fromarray(((rgb.mean(2) < 80) * 255).astype(np.uint8)).resize(grande.size, Image.LANCZOS)
     for q, (ruta, fx, fy, zoom) in zip(quads, fotos):
-        # 2,5 px de margen hacia fuera para tapar el antialias del gris
+        # 3,5 px de margen hacia fuera para tapar el antialias del gris
         c = q.mean(0)
-        q = c + (q - c) * (1 + 2.5 / np.linalg.norm(q - c, axis=1, keepdims=True))
+        q = c + (q - c) * (1 + 3.5 / np.linalg.norm(q - c, axis=1, keepdims=True))
         Q = q * S
         w = np.linalg.norm(Q[1] - Q[0])
         h = np.linalg.norm(Q[3] - Q[0])
         foto = recorte(ImageOps.exif_transpose(Image.open(ruta)).convert('RGB'), w / h, fx, fy, zoom)
-        src = [(0, 0), (foto.width, 0), (foto.width, foto.height), (0, foto.height)]
+        # la foto se proyecta un poco más grande que el hueco: así el borde no mezcla con negro
+        m = 0.02 * foto.width
+        src = [(m, m), (foto.width - m, m), (foto.width - m, foto.height - m), (m, foto.height - m)]
         capa = foto.transform(grande.size, Image.PERSPECTIVE, perspectiva(Q, src), Image.BICUBIC)
         # máscara con antialias (dibujada a 4× y reducida) para que el borde no quede dentado
         A4 = 4
