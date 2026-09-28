@@ -1,4 +1,4 @@
-# Kivoa · Pendientes (actualizado 25/09/2026)
+# Kivoa · Pendientes (actualizado 28/09/2026)
 
 ## 📅 Plan del 28/09/2026
 Orden pensado por dependencias: sin estilos no hay fotos, y sin fotos no hay publicaciones.
@@ -15,7 +15,8 @@ Regla: cada foto responde una duda distinta y la foto 1 es del estilo de ese anu
 - [ ] 2–3 retratos de ejemplo con **mascotas distintas** (gato, perro negro, pelo largo), con permiso del dueño.
 - [ ] Juntar **marcos + tamaños** en una sola imagen.
 - [ ] Quitar mockups automáticos de Gelato que repiten diseño.
-- [ ] Vídeo vertical de 8–10 s: foto → retrato → cuadro colgado. Sirve para Etsy, Reels, TikTok y Pinterest.
+- [x] Vídeos hechos (`assets/videos/`, generador en `generador/video/videos.py`): Etsy 4:3 de 12 s (Rosa) + 3 verticales en ES y EN (antes/después, cómo funciona, marcos).
+- [ ] Subir `etsy-rosa-12s.mp4` al anuncio **Rosa** (Etsy: 1 vídeo por anuncio, 5–15 s, sin sonido). Para los otros 4 estilos, vídeo propio de cada estilo (ver `redes/plan-publicaciones.md` §6): no poner el de Rosa en otro estilo.
 - [ ] Orden por anuncio: salón · antes/después · variedad de mascotas · detalle · marcos/tamaños · cómo funciona · vista previa en móvil · producto en mano · regalo.
 
 ### 3. Márgenes y precios
@@ -26,7 +27,7 @@ Ojo: los netos actuales son 8–12 € por cuadro (calculados con IVA e IRPF). B
 - [ ] Añadir 0,20 $ de renovación por venta de Etsy a la calculadora.
 - [ ] Alternativa a bajar precio: cupón de lanzamiento 10 % durante 30 días (cumple Omnibus).
 
-### 4. Plan de publicaciones
+### 4. Plan de publicaciones → `redes/plan-publicaciones.md` (IG · TikTok · Facebook, calendario 29/09–25/10)
 - [ ] **3 plataformas, no más**: Pinterest (tráfico duradero hacia Etsy/web), Instagram Reels y TikTok (el mismo vídeo en ambas).
 - [ ] Ritmo semana 1–4: **3 publicaciones/semana** (lun · mié · sáb) + Pinterest 1 pin/día programado.
 - [ ] Horas (España): Reels/TikTok 13:30 o 20:30–21:30 · Pinterest 20:00–23:00 y fines de semana.
@@ -40,16 +41,17 @@ Ojo: los netos actuales son 8–12 € por cuadro (calculados con IVA e IRPF). B
 - Tienda de Etsy ByKivoa configurada (nombre, eslogan, banner, mensajes, políticas básicas).
 - Gelato: aprobación **manual** + tarjeta añadida.
 - Protocolo de pedido: `etsy/proceso-pedido.md`.
+- Anuncios de Etsy **activos** (resuelto el "Waiting to be published").
+- **Pedido de muestra** 20×25 hecho (27/09) → al llegar: fotos reales + vídeo de desembalaje.
 
 ## 🔴 1. Antes de poder vender (bloqueante)
 - [ ] Gelato: aprobación **Manual** también en la **otra tienda** (Shopify o Etsy, la que falte).
 - [ ] Gelato → datos de facturación con **nombre y NIF**.
-- [ ] Etsy: resolver los anuncios atascados en "Waiting to be published" (título sin "–" ni "·", tienda no cerrada, tarjeta en Etsy, avisos del panel). Borrar duplicados de Rosa.
+- [ ] Etsy: borrar duplicados de Rosa (si quedan).
 - [ ] En **cada** anuncio de Etsy: personalización activada · socio de producción Gelato · "Por encargo" · política "Artículos personalizados" · envío gratis sin Reino Unido · preparación 3–6 días · datos RSGP.
 - [ ] **Alta fiscal** (hablar con gestor): alta censal en Hacienda (036/037) + RETA (autónomos). Confirmar régimen de IVA (general o recargo de equivalencia) y cuándo darse de alta en OSS. Etsy y Shopify informan de tus ventas a Hacienda (DAC7).
 
 ## 🟠 2. Esta semana
-- [ ] **Pedido de muestra** 20×25 a tu casa (Gelato, papel semibrillante) → comprobar calidad y hacer fotos reales para los anuncios.
 - [ ] ChatGPT: **fondo vacío del Estilo Rosa** + **retrato de Penny sobre fondo blanco** → montar el generador.
 - [ ] Web: los 4 clics de Judge.me (incrustación + badge + widget + sincronización de metafields).
 - [ ] **Instagram**: configurar según `instagram/configuracion-instagram.md` (cuenta Empresa, bio, 2FA, Meta Business + canal de Shopify, 9 primeras publicaciones).
