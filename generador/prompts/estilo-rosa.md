@@ -18,6 +18,7 @@ DISEÑO (idéntico a la plantilla)
 - Izquierda: TRES marcos tipo polaroid inclinados, en la misma posición, tamaño y ángulo que en la plantilla, con borde blanco roto. IMPORTANTE: el interior de cada polaroid debe quedar VACÍO, relleno de un único color gris liso #BDBDBD, sin foto, sin dibujo, sin textura ni sombra dentro. Mantén los pequeños corazones y trazos decorativos que hay alrededor.
 - Debajo de la mascota: el nombre "[NOMBRE]" en letra caligráfica negra, igual que "Luna" en la plantilla, con el corazón y el subrayado.
 - Fila de 6 iconos en círculos de acuarela con estas palabras debajo, en este orden: "[RASGO 1]", "[RASGO 2]", "[RASGO 3]", "[RASGO 4]", "[RASGO 5]", "[RASGO 6]".
+- CADA ICONO DEBE REPRESENTAR SU PALABRA, en este orden: "[RASGO 1]" = [ICONO 1], "[RASGO 2]" = [ICONO 2], "[RASGO 3]" = [ICONO 3], "[RASGO 4]" = [ICONO 4], "[RASGO 5]" = [ICONO 5], "[RASGO 6]" = [ICONO 6]. Iconos de línea negra sencilla, como los de la plantilla. No reutilices los iconos de la plantilla si no corresponden a la palabra.
 - Abajo, centrada, la frase: "[FRASE]", en la misma letra manuscrita y con los adornos de la plantilla.
 - Huellas de acuarela en las esquinas inferiores.
 
@@ -30,6 +31,7 @@ REGLAS
 ## Si sale mal (respuestas cortas en la misma conversación)
 - Mascota poco parecida: `La mascota no se parece lo suficiente a la foto: corrige [color del pelaje / manchas / orejas / ojos] para que sea idéntica a la segunda imagen. No cambies nada más.`
 - Polaroids con dibujo: `Deja el interior de las tres polaroids en gris liso #BDBDBD, sin ninguna imagen. No cambies nada más.`
+- Iconos que no corresponden: `Cambia solo los iconos para que cada uno represente su palabra: [palabra] = [icono], … No cambies nada más.`
 - Texto con errores: `Corrige solo el texto: debe decir exactamente "[texto]". No cambies nada más.` (Si falla 2 veces, lo corrijo yo en el montaje.)
 - Diseño distinto de la plantilla: nueva conversación; no insistir más de 3 veces en la misma.
 
