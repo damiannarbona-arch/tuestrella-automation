@@ -13,25 +13,25 @@ Fuentes: Baymard (UX de ficha y checkout), guías 2026 de señales de confianza 
 ## Plan por prioridad (impacto / esfuerzo)
 
 ### 1 · Ficha de producto (esta semana)
-- [ ] **Bloque de garantías bajo "Añadir al carrito"** (bloque *Icono con texto* de Horizon), 4 iconos: *Vista previa en 48 h* · *Nada se imprime sin tu OK* · *Envío con seguimiento* · *Garantía de 3 años*. Enlace a "Envíos y devoluciones".
-- [ ] **Plazo visible**: "Vista previa en 48 h · Lo recibes en 7–10 días". En Q4 añadir **fecha límite para Navidad**.
-- [ ] **Estrellas de Judge.me bajo el título** (ya instalado). Objetivo: 5–10 reseñas **reales** (pedido de muestra, primeros clientes, importación de Etsy). Nunca inventadas.
-- [ ] **FAQ en acordeón** bajo la descripción: ¿y si no me gusta? · ¿qué foto envío? · plazos · ¿sirve para gatos/caballos? · ¿viene listo para colgar?
+- [x] **Bloque de garantías bajo "Añadir al carrito"** (bloque *Icono con texto* de Horizon), 4 iconos: *Vista previa en 48 h* · *Nada se imprime sin tu OK* · *Envío con seguimiento* · *Garantía de 3 años*. Enlace a "Envíos y devoluciones".
+- [x] **Plazo visible**: "Vista previa en 48 h · Lo recibes en 7–10 días". En Q4 añadir **fecha límite para Navidad**.
+- [x] **Estrellas de Judge.me bajo el título** (ya instalado). Objetivo: 5–10 reseñas **reales** (pedido de muestra, primeros clientes, importación de Etsy). Nunca inventadas.
+- [x] **FAQ en acordeón** bajo la descripción: ¿y si no me gusta? · ¿qué foto envío? · plazos · ¿sirve para gatos/caballos? · ¿viene listo para colgar?
 - [x] Galería corta (6 fotos + vídeo) con caso real, vista previa y guía de fotos.
 - [x] Foto principal obligatoria (Uploadfly).
 
 ### 2 · Carrito (cajón lateral)
-- [ ] **Casilla "Es un regalo"** con mensaje y sin precio en el albarán: es un regalo en la mayoría de pedidos.
+- [~] **Casilla "Es un regalo"** (activada la nota del pedido en el carrito para el mensaje; la casilla necesita app) con mensaje y sin precio en el albarán: es un regalo en la mayoría de pedidos.
 - [ ] **Venta adicional de 1 clic**: *Copia digital del retrato* (margen ~100 %, para móvil o redes) o *segundo retrato con –15 %*. Una sola sugerencia, no un catálogo.
 - [ ] **Métodos de pago y "Pago seguro"** bajo el botón de finalizar compra.
 - El envío ya es gratis: no hace falta barra de umbral. Si se crea un pack (cuadro + taza), usar la barra para "añade X y llévate el pack".
 
 ### 3 · Portada
-- [ ] **Hero con el antes/después real** (deslizador de Horizon) o **vídeo corto** (el de producto): el producto se entiende en 2 segundos.
+- [x] **Hero con el antes/después real** (deslizador de Horizon) o **vídeo corto** (el de producto): el producto se entiende en 2 segundos.
 - [ ] Titular emocional + CTA única: "Su retrato, a partir de tus fotos" → *Crear el mío*.
-- [ ] **Barra de anuncio** con fecha: "Pedidos para Navidad hasta el 10/12" (desde octubre).
+- [x] **Barra de anuncio** con fecha: "Pedidos para Navidad hasta el 10/12" (desde octubre).
 - [ ] **Sección "Casos reales"**: cuadrícula de fotos de clientes con su mascota y el cuadro (con permiso). Crece con cada pedido.
-- [ ] **Cómo funciona en 3 pasos** (ya existe) y marquesina de confianza.
+- [x] **Cómo funciona en 3 pasos** (ya existe) y marquesina de confianza.
 
 ### 4 · Técnico
 - [ ] Imágenes en WebP y <200 KB en la portada; vídeo del hero sin sonido y en bucle.
@@ -40,3 +40,7 @@ Fuentes: Baymard (UX de ficha y checkout), guías 2026 de señales de confianza 
 ## Pendientes de contenido
 - Aventurero, Caballos y Clásico: antes/después y foto de marcos cuando haya casos reales (mañana).
 - Lavanda: fusión de marcos cuando llegue `il_fullxfull.8585740710_mim8.jpg`.
+
+## Estado 29/09
+Cambios en el tema sin publicar **"Horizon · mejoras 29-09"** (id 202567123208). Vista previa: https://kivoa.es/?preview_theme_id=202567123208. Revisar y publicar desde Tienda online → Temas.
+En enero: quitar la fila y el aviso de Navidad.
