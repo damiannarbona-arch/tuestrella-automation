@@ -3,7 +3,7 @@
 Guía: redes/guia-visual.md. Mismas fuentes y colores que kivoa.es (tema Horizon).
 
 Uso:
-  python3 generador/redes/publicaciones.py            # publicación #1 en EN (Instagram) y ES (Facebook)
+  python3 generador/redes/publicaciones.py 1|2        # publicación #1 o #2, en EN (Instagram) y ES (Facebook)
 Salida: assets/redes/publicaciones/01-antes-despues/{en,es}/01.jpg …
 """
 import os
@@ -84,12 +84,12 @@ def foto_en_zona(im, foto, cx=.5, cy=.5, zoom=1.0):
     im.paste(recorte(foto, x1 - x0, y1 - y0, cx, cy, zoom), (x0, y0))
 
 
-def polaroid(im, foto, centro, ancho, angulo, texto=None):
+def polaroid(im, foto, centro, ancho, angulo, texto=None, foco=(.6, .55)):
     borde, pie_p = 22, 78 if texto else 22
     w = ancho - 2 * borde
     h = int(w * 1.18)
     p = Image.new('RGBA', (ancho, h + borde + pie_p), (255, 255, 255, 255))
-    p.paste(recorte(foto, w, h, .6, .55), (borde, borde))
+    p.paste(recorte(foto, w, h, *foco), (borde, borde))
     if texto:
         ImageDraw.Draw(p).text((ancho / 2, h + borde + pie_p / 2 + 2), texto, font=TIT_I(40), fill=TINTA, anchor='mm')
     p = p.rotate(angulo, resample=Image.BICUBIC, expand=True)
@@ -202,5 +202,138 @@ def publicacion_1():
         print(out)
 
 
+
+
+# ---------- Publicación #2 · Caso real Bizcocho (4 fotos del móvil → 1 retrato) ----------
+
+T2 = {
+    'en': {
+        'serie': 'Real case · 02',
+        'p': ('They sent us\n4 phone photos…', 'Swipe to see what we made  »'),
+        's2': ('No studio.\nNo photographer.', 1),
+        's3': ('Every feature,\njust as he is', 1), 'foto': 'His photo', 'retrato': 'His portrait',
+        's4': ('The digital proof,\nin 48 hours', 1),
+        's5': ('Framed and\nready to hang', 1),
+        's6': ('Ready to gift,\nstraight to the door', 1),
+        'cta_t': 'What about\nyours?',
+        'cta': ['1 main photo + up to 3 more', 'Digital proof in 48 hours', 'Nothing prints without your OK'],
+        'boton': 'Create yours · link in bio',
+    },
+    'es': {
+        'serie': 'Caso real · 02',
+        'p': ('Nos enviaron\n4 fotos del móvil…', 'Desliza y mira qué hicimos  »'),
+        's2': ('Sin estudio.\nSin fotógrafo.', 1),
+        's3': ('Cada rasgo,\ntal cual es', 1), 'foto': 'Su foto', 'retrato': 'Su retrato',
+        's4': ('La vista previa,\nen 48 horas', 1),
+        's5': ('Enmarcado y\nlisto para colgar', 1),
+        's6': ('Listo para regalar,\nen la puerta de casa', 1),
+        'cta_t': '¿Y el de\ntu mascota?',
+        'cta': ['1 foto principal + hasta 3 más', 'Vista previa en 48 horas', 'Nada se imprime sin tu OK'],
+        'boton': 'Crea el tuyo · enlace en la bio',
+    },
+}
+
+
+def publicacion_2():
+    C = lambda *p: A('casos', 'bizcocho', *p)
+    fotos = [abrir(C('foto-principal.jpg'))] + [abrir(C(f'extra-{i}.jpg')) for i in (1, 2, 3)]
+    total = 7
+    for lang, T in T2.items():
+        ret = abrir(C(f'retrato-clasico-{lang}.jpg'))
+        pared, caja = abrir(C(f'mockup-pared-{lang}.jpg')), abrir(C(f'mockup-clasico-{lang}-caja.jpg'))
+        out = A('redes', 'publicaciones', '02-caso-bizcocho', lang)
+        os.makedirs(out, exist_ok=True)
+        diapos = []
+
+        # 1 · Portada con intriga: las 4 fotos sobre el cuadro desenfocado
+        im = lienzo()
+        cabecera(im, T['serie'], T['p'][0], None)
+        x0, y0, x1, y1 = FOTO
+        sombra(im, FOTO, radio=22, off=(0, 12), alfa=55)
+        fondo = recorte(pared, x1 - x0, y1 - y0, .43, .42, 1.9).filter(ImageFilter.GaussianBlur(26))
+        im.paste(fondo, (x0, y0))
+        for foto, c, ang, foco in zip(fotos, [(330, 590), (760, 615), (340, 960), (750, 975)], [-6, 5, 4, -5],
+                                      [(.36, .45), (.45, .4), (.45, .4), (.5, .45)]):
+            polaroid(im, foto, c, 330, ang, foco=foco)
+        d = ImageDraw.Draw(im)  # etiqueta "desliza" sobre la foto, abajo a la derecha
+        f = TXT_B(30)
+        tw = d.textlength(T['p'][1], font=f)
+        d.rounded_rectangle((W / 2 - tw / 2 - 30, y1 - 96, W / 2 + tw / 2 + 30, y1 - 30), 33, fill=SALVIA)
+        d.text((W / 2, y1 - 62), T['p'][1], font=f, fill='white', anchor='mm')
+        diapos.append(im)
+
+        # 2 · Las 4 fotos originales en cuadrícula
+        im = lienzo()
+        cabecera(im, T['serie'], *T['s2'])
+        g = 16
+        cw, ch = (x1 - x0 - g) // 2, (y1 - y0 - g) // 2
+        sombra(im, FOTO, radio=22, off=(0, 12), alfa=45)
+        for i, (foto, (cx, cy)) in enumerate(zip(fotos, [(.36, .4), (.45, .35), (.45, .3), (.5, .4)])):
+            im.paste(recorte(foto, cw, ch, cx, cy, 1.1), (x0 + (i % 2) * (cw + g), y0 + (i // 2) * (ch + g)))
+        diapos.append(im)
+
+        # 3 · Detalle: su foto ↔ su retrato
+        im = lienzo()
+        cabecera(im, T['serie'], *T['s3'])
+        lado, alto = (x1 - x0 - 24) // 2, y1 - y0 - 96
+        yy = y0
+        for i, (img, (cx, cy, z), et) in enumerate([(fotos[0], (.355, .36, 2.0), T['foto']),
+                                                   (ret, (.575, .32, 1.8), T['retrato'])]):
+            xx = x0 + i * (lado + 24)
+            sombra(im, (xx, yy, xx + lado, yy + alto), radio=18, off=(0, 10), alfa=60)
+            im.paste(recorte(img, lado, alto, cx, cy, z), (xx, yy))
+            ImageDraw.Draw(im).text((xx + lado / 2, yy + alto + 66), et, font=TIT_I(44), fill=TINTA, anchor='ms')
+        diapos.append(im)
+
+        # 4 · El retrato sobre papel (vista previa)
+        im = lienzo()
+        cabecera(im, T['serie'], *T['s4'])
+        ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
+        h = y1 - y0 - 90
+        w = int(ret.width * h / ret.height)
+        cx = (x0 + x1) // 2
+        caja_r = (cx - w // 2, y0 + 45, cx + w // 2, y0 + 45 + h)
+        sombra(im, caja_r, radio=18, off=(0, 10), alfa=80)
+        im.paste(ret.resize((w, h), Image.LANCZOS), caja_r[:2])
+        diapos.append(im)
+
+        # 5 · En la pared (marcos reales)
+        im = lienzo()
+        cabecera(im, T['serie'], *T['s5'])
+        foto_en_zona(im, pared, cx=.52, cy=.5, zoom=1.35)
+        diapos.append(im)
+
+        # 6 · En su caja de regalo
+        im = lienzo()
+        cabecera(im, T['serie'], *T['s6'])
+        foto_en_zona(im, caja, cx=.55, cy=.5, zoom=1.0)
+        diapos.append(im)
+
+        # 7 · Llamada a la acción
+        im = lienzo()
+        d = ImageDraw.Draw(im)
+        d.text((W / 2, 118), T['serie'].upper(), font=TXT_B(26), fill=SALVIA, anchor='ms')
+        y = 250
+        for l in T['cta_t'].split('\n'):
+            d.text((W / 2, y), l, font=TIT(92), fill=TINTA, anchor='ms')
+            y += 108
+        d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+        y += 70
+        for b in T['cta']:
+            check(d, 230, y - 12)
+            d.text((276, y), b, font=TXT(42), fill=TINTA, anchor='ls')
+            y += 88
+        polaroid(im, ret, (W / 2, 950), 230, -4)
+        d = ImageDraw.Draw(im)
+        boton(d, W / 2, 1180, T['boton'])
+        diapos.append(im)
+
+        for i, im in enumerate(diapos, 1):
+            pie(im, i, total)
+            im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+        print(out)
+
+
 if __name__ == '__main__':
-    publicacion_1()
+    import sys
+    {"1": publicacion_1, "2": publicacion_2}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
