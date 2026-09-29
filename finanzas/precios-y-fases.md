@@ -1,28 +1,23 @@
 # Kivoa · Precios de lanzamiento (29/09/2026) — VIGENTES
 
-**Mismo precio en web y Etsy, los 3 marcos igual:** 20×25 **34,90 €** · 30×40 **49,90 €** · 50×70 **94,90 €**.
-Web aplicado el 29/09 (5 productos, 45 variantes). Etsy: cambiar a mano en cada anuncio.
+**Mismo precio en web y Etsy, los 3 marcos igual:** 20×25 **36,90 €** · 30×40 **49,90 €** · 50×70 **109,90 €**.
+Criterio: **25 % de margen neto en la web** (neto tras IRPF ÷ ingreso sin IVA); Etsy deja menos por sus comisiones.
+Web aplicado el 29/09 (5 productos, 45 variantes). Etsy: cambiar a mano en cada anuncio + cobrar envío a EE. UU. (8,99 € ≈ 9,99 $).
 
 Costes Gelato 24/09 (sin Gelato+, marco más caro). Comisiones: Shopify Payments 1,9 % + 0,25 € · Etsy 6,5 % transacción + 4 % + 0,30 € pago + 0,72 % tasa regulatoria + 0,18 € publicación. IRPF 20 %.
 
-| | 20×25 | | | 30×40 | | | 50×70 | | |
-|---|---|---|---|---|---|---|---|---|---|
-| | **Web ES** | **Etsy ES** | **Etsy EE. UU.** | **Web ES** | **Etsy ES** | **Etsy EE. UU.** | **Web ES** | **Etsy ES** | **Etsy EE. UU.** |
-| Precio cliente | 34,90 | 34,90 | 34,90 | 49,90 | 49,90 | 49,90 | 94,90 | 94,90 | 94,90 |
-| − IVA 21 % | 6,06 | 6,06 | 0 | 8,66 | 8,66 | 0 | 16,47 | 16,47 | 0 |
-| = Ingreso sin IVA | 28,84 | 28,84 | 34,90 | 41,24 | 41,24 | 49,90 | 78,43 | 78,43 | 94,90 |
-| − Producto Gelato | 13,32 | 13,32 | 17,70 | 20,84 | 20,84 | 28,33 | 41,39 | 41,39 | 49,80 |
-| − Envío Gelato | 6,63 | 6,63 | 11,72 | 6,63 | 6,63 | 11,72 | 19,30 | 19,30 | 25,21 |
-| − Comisiones | 0,91 | 4,40 | 4,40 | 1,20 | 6,08 | 6,08 | 2,05 | 11,13 | 11,13 |
-| = Beneficio antes IRPF | 7,98 | 4,50 | 1,08 | 12,57 | 7,69 | 3,77 | 15,69 | 6,61 | 8,76 |
-| − IRPF 20 % | 1,60 | 0,90 | 0,22 | 2,51 | 1,54 | 0,75 | 3,14 | 1,32 | 1,75 |
-| **= NETO** | **6,38** | **3,60** | **0,87** | **10,06** | **6,15** | **3,02** | **12,55** | **5,29** | **7,01** |
-| Margen s/ingreso | 22 % | 12 % | 2 % | 24 % | 15 % | 6 % | 16 % | 7 % | 7 % |
+| Neto por cuadro | 20×25 · 36,90 | 30×40 · 49,90 | 50×70 · 109,90 |
+|---|---|---|---|
+| Web España | 7,68 € (25 %) | 10,06 € (24 %) | 22,24 € (24 %) |
+| Etsy España | 4,74 € (16 %) | 6,15 € (15 %) | 13,86 € (15 %) |
+| Etsy EE. UU., envío gratis | 2,29 € (6 %) | 3,02 € (6 %) | 17,66 € (16 %) |
+| Etsy EE. UU., envío 8,99 € | 8,67 € (19 %) | 9,40 € (16 %) | 24,05 € (20 %) |
 
-Etsy EE. UU. cobrando envío 8,99 € (≈ 9,99 $): neto 7,25 / 9,40 / 13,39 €.
+Precio mínimo para 25 % por canal: Web 36,90 / 50,90 / 111,90 · Etsy ES 44,90 / 61,90 / 134,90.
 Web: envío UE 8,99 € (< 90 €) / 14,99 € y EE. UU. 12,99 € se mantienen.
 
 ---
+
 
 # Histórico · Precios y ajustes por plataforma (25/09/2026)
 
