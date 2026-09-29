@@ -1,5 +1,7 @@
 # Prompt fijo · Estilo Rosa (ChatGPT)
 
+Iconos, rasgos y frase NO los hace ChatGPT: los pone `generador/rasgos.py` en inglés y en español (1 generación → 2 retratos, iconos siempre correctos).
+
 Uso: nueva conversación en ChatGPT → adjuntar **1)** `assets/despues-retrato-luna-v2.webp` (referencia del patrón) y **2)** la foto principal de la mascota → pegar el prompt con los campos `[…]` rellenados.
 Las 3 fotos secundarias **no** se pasan a ChatGPT: las coloca después el generador (`generador/penny/componer.py`) sin alterarlas.
 
@@ -13,18 +15,17 @@ MASCOTA
 
 DISEÑO (idéntico a la plantilla)
 - Formato vertical 2:3, fondo papel color crema con textura sutil.
-- Arriba a la derecha: las fechas "[DD.MM.AAAA] — [DD.MM.AAAA]" con el pequeño corazón y los trazos debajo.
+- Arriba a la derecha: SIN fechas. Deja esa zona con el fondo de papel limpio (salvo que el cliente pida fechas: entonces "[DD.MM.AAAA] — [DD.MM.AAAA]" con el pequeño corazón).
 - Derecha: la rama vertical con una rosa rosa y hojas en acuarela.
 - Izquierda: TRES marcos tipo polaroid inclinados, en la misma posición, tamaño y ángulo que en la plantilla, con borde blanco roto. IMPORTANTE: el interior de cada polaroid debe quedar VACÍO, relleno de un único color gris liso #BDBDBD, sin foto, sin dibujo, sin textura ni sombra dentro. Mantén los pequeños corazones y trazos decorativos que hay alrededor.
 - Debajo de la mascota: el nombre "[NOMBRE]" en letra caligráfica negra, igual que "Luna" en la plantilla, con el corazón y el subrayado.
-- Fila de 6 iconos en círculos de acuarela con estas palabras debajo, en este orden: "[RASGO 1]", "[RASGO 2]", "[RASGO 3]", "[RASGO 4]", "[RASGO 5]", "[RASGO 6]".
-- CADA ICONO DEBE REPRESENTAR SU PALABRA, en este orden: "[RASGO 1]" = [ICONO 1], "[RASGO 2]" = [ICONO 2], "[RASGO 3]" = [ICONO 3], "[RASGO 4]" = [ICONO 4], "[RASGO 5]" = [ICONO 5], "[RASGO 6]" = [ICONO 6]. Iconos de línea negra sencilla, como los de la plantilla. No reutilices los iconos de la plantilla si no corresponden a la palabra.
-- Abajo, centrada, la frase: "[FRASE]", en la misma letra manuscrita y con los adornos de la plantilla.
+- Fila de 6 círculos de acuarela en colores suaves (melocotón, rosa, verde salvia, azul claro), en la misma posición y tamaño que en la plantilla. IMPORTANTE: los círculos van VACÍOS, sin ningún icono dentro, y SIN palabras debajo: deja ese espacio con el fondo de papel limpio.
+- Abajo, centrada: NO escribas ninguna frase. Deja libre el espacio de la frase y mantén debajo solo el adorno (trazo curvo con el pequeño corazón).
 - Huellas de acuarela en las esquinas inferiores.
 
 REGLAS
 - No cambies la paleta, las fuentes ni la posición de ningún elemento. No añadas elementos nuevos, marcos exteriores, marcas de agua ni texto extra.
-- Escribe los textos exactamente como te los doy, respetando tildes y la letra ñ.
+- El único texto de la imagen es el nombre. Escríbelo exactamente como te lo doy.
 - No recortes ningún elemento por los bordes: deja el mismo margen que en la plantilla.
 ```
 
@@ -36,4 +37,6 @@ REGLAS
 - Diseño distinto de la plantilla: nueva conversación; no insistir más de 3 veces en la misma.
 
 ## Después
+1. `python3 generador/polaroids.py …` (fotos en las polaroids).
+2. `python3 generador/rasgos.py RETRATO SALIDA m|f rasgo1,…,rasgo6 "Frase EN" "Frase ES"` → `-en.jpg` y `-es.jpg`.
 Descargar la imagen (PNG) y pasármela junto con las 3 fotos secundarias → montaje de polaroids, revisión de textos, escalado a la resolución de impresión y vista previa con marca de agua.

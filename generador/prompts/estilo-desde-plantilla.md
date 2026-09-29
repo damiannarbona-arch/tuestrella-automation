@@ -1,5 +1,7 @@
 # Prompt · Cualquier estilo a partir de su plantilla (Lavanda, Aventurero, Caballos, Clásico)
 
+Iconos, rasgos y frase los pone después `generador/rasgos.py` en inglés y en español (1 generación → 2 retratos). Aventurero: los letreros de madera, `generador/casos/letreros.py`.
+
 Uso: nueva conversación en ChatGPT → adjuntar **1)** la imagen del modelo del estilo (plantilla) y **2)** la foto principal de la mascota → pegar el prompt con los campos `[…]` rellenados. El Estilo Rosa tiene su prompt propio (`estilo-rosa.md`).
 
 ```
@@ -11,9 +13,8 @@ MASCOTA
 
 TEXTOS (escríbelos exactamente así, con sus tildes y la ñ)
 - Nombre: "[NOMBRE]"
-- Rasgos, en este orden: "[RASGO 1]", "[RASGO 2]", "[RASGO 3]", "[RASGO 4]", "[RASGO 5]", "[RASGO 6]"
-- CADA ICONO DEBE REPRESENTAR SU PALABRA: "[RASGO 1]" = [ICONO 1], "[RASGO 2]" = [ICONO 2], "[RASGO 3]" = [ICONO 3], "[RASGO 4]" = [ICONO 4], "[RASGO 5]" = [ICONO 5], "[RASGO 6]" = [ICONO 6]. Mismo estilo de icono que la plantilla; no reutilices los de la plantilla si no corresponden a la palabra.
-- Frase: "[FRASE]"
+- Rasgos: mantén la fila de 6 círculos de la plantilla en la misma posición y tamaño, pero VACÍOS: sin ningún icono dentro y sin palabras debajo (fondo limpio).
+- Frase: NO escribas ninguna frase; deja libre su espacio y mantén solo el adorno que la acompaña (trazo o subrayado).
 - Fechas: [FECHAS o "ninguna: elimina las fechas y deja ese espacio limpio con el mismo fondo"]
 - Si la plantilla tiene algún otro texto, elimínalo y deja el fondo limpio.
 
