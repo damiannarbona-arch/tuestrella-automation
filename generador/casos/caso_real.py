@@ -22,7 +22,11 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 C = lambda caso, *p: os.path.join(RAIZ, 'assets', 'casos', caso, *p)
 
 # cara en la foto principal / en el retrato (fracciones), y tamaño del recorte de detalle (fracción del ancho)
-FOCO = {'miau': {'foto': (.52, .44, .62), 'retrato': (.53, .30, .48)}}
+FOCO = {'miau': {'foto': (.52, .44, .62), 'retrato': (.53, .30, .48)},
+        'bizcocho': {'foto': (.355, .36, .36), 'retrato': (.575, .31, .45)},
+        'lula': {'foto': (.5, .3, .6), 'retrato': (.53, .27, .5)}}
+NOMBRE_ESTILO = {'clasico': 'Clásico', 'rosa': 'Rosa', 'lavanda': 'Lavanda', 'aventurero': 'Aventurero', 'caballos': 'Caballos'}
+est = lambda e: NOMBRE_ESTILO.get(e, e.capitalize())
 
 
 def abrir(p):
@@ -78,7 +82,7 @@ def fotos_a_retrato(caso, nombre, estilo, salida):
     d = ImageDraw.Draw(im)
     centrado(d, 650, 1580, 'La principal + hasta 3 más', F(SERIF, 58), TINTA)
     centrado(d, 650, 1650, 'Main photo + up to 3 extra', F(ITAL, 42), GRIS)
-    centrado(d, x0 + rw / 2, 1735, f'Caso real · estilo {estilo.capitalize()}', F(ITAL, 40), GRIS)
+    centrado(d, x0 + rw / 2, 1735, f'Caso real · estilo {est(estilo)}', F(ITAL, 40), GRIS)
     im.save(salida, quality=92)
 
 
@@ -98,7 +102,7 @@ def detalle(caso, nombre, estilo, rasgo, salida):
         centrado(d, x + s / 2, 1490, en, F(ITAL, 42), GRIS)
     d = ImageDraw.Draw(im)
     flecha(d, 1130, 1270, 400 + s // 2)
-    centrado(d, W / 2, 1715, f'Caso real · estilo {estilo.capitalize()}', F(ITAL, 40), GRIS)
+    centrado(d, W / 2, 1715, f'Caso real · estilo {est(estilo)}', F(ITAL, 40), GRIS)
     im.save(salida, quality=92)
 
 
@@ -167,7 +171,7 @@ def kit(caso, nombre, estilo, rasgo):
     os.makedirs(out, exist_ok=True)
     p = lambda n: os.path.join(out, f'{estilo}-{n}.jpg')
     antes_despues(C(caso, 'foto-principal.jpg'), C(caso, f'retrato-{estilo}.jpg'), p('1-antes-despues'),
-                  f'Caso real · estilo {estilo.capitalize()}')
+                  f'Caso real · estilo {est(estilo)}')
     fotos_a_retrato(caso, nombre, estilo, p('2-sus-fotos'))
     detalle(caso, nombre, estilo, rasgo, p('3-detalle'))
     marcos(caso, nombre, estilo, p('4-marcos'))
