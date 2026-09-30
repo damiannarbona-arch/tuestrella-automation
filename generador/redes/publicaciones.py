@@ -39,7 +39,7 @@ def abrir(p):
 
 def recorte(img, w, h, cx=.5, cy=.5, zoom=1.0):
     s = max(w / img.width, h / img.height) * zoom
-    cw, ch = w / s, h / s
+    cw, ch = min(w / s, img.width), min(h / s, img.height)  # el redondeo no puede salirse de la foto
     x = min(max(cx * img.width - cw / 2, 0), img.width - cw)
     y = min(max(cy * img.height - ch / 2, 0), img.height - ch)
     return img.resize((w, h), Image.LANCZOS, box=(x, y, x + cw, y + ch))
@@ -460,6 +460,98 @@ def publicacion_3():
         print(out)
 
 
+
+# ---------- Publicación #4 · Paso a paso (texto + fotos), solo EN ----------
+
+def texto_centrado(d, lineas, y, fuente, color, sep):
+    for l in lineas:
+        d.text((W / 2, y), l, font=fuente, fill=color, anchor='ms')
+        y += sep
+    return y
+
+
+def publicacion_4():
+    C = lambda f: abrir(A('casos', 'sonic', f))
+    ppal, playa, cascada, bano = C('foto-principal.jpg'), C('extra-1.jpg'), C('extra-2.jpg'), C('extra-3.jpg')
+    ret = C('retrato-aventurero-en.jpg')
+    out = A('redes', 'publicaciones', '04-paso-a-paso', 'en')
+    os.makedirs(out, exist_ok=True)
+    total, diapos = 6, []
+    x0, y0, x1, y1 = FOTO
+
+    # 1 · Solo texto: la pregunta gancho
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 300), 'STEP BY STEP', font=TXT_B(28), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['Do you know', 'how to start'], 520, TIT(104), TINTA, 124)
+    y = texto_centrado(d, ["your pet's portrait?"], y, TIT_I(104), TINTA, 124)
+    d.line((W / 2 - 60, y + 10, W / 2 + 60, y + 10), fill=ROSA, width=4)
+    f = TXT_B(32)
+    tw = d.textlength('Swipe  »', font=f)
+    d.rounded_rectangle((W / 2 - tw / 2 - 40, 1060, W / 2 + tw / 2 + 40, 1132), 36, fill=SALVIA)
+    d.text((W / 2, 1097), 'Swipe  »', font=f, fill='white', anchor='mm')
+    diapos.append(im)
+
+    # 2 · Solo texto: elegir las fotos
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 300), '01', font=TIT(120), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['Just pick the photos', 'you love the most'], 520, TIT(84), TINTA, 104)
+    y = texto_centrado(d, ['straight from your phone'], y + 10, TIT_I(64), GRIS, 80)
+    for b in ['1 main photo: their face, their look', 'Up to 3 more with their story']:
+        y += 30
+        check(d, 190, y + 40 - 12)
+        d.text((236, y + 40), b, font=TXT(40), fill=TINTA, anchor='ls')
+        y += 60
+    diapos.append(im)
+
+    # 3 · La foto principal
+    im = lienzo()
+    cabecera(im, '02 · The main photo', 'Looking straight\nat the camera', 1)
+    foto_en_zona(im, ppal, cx=.5, cy=.42, zoom=1.1)
+    diapos.append(im)
+
+    # 4 · El resto de fotos
+    im = lienzo()
+    cabecera(im, '03 · A few more, if you like', 'They go in\nthe polaroids', 1)
+    for foto, c, a, foco in zip([playa, cascada, bano], [(300, 650), (770, 610), (540, 960)], [-6, 5, -3],
+                                [(.55, .6), (.78, .72), (.6, .5)]):
+        polaroid(im, foto, c, 360, a, foco=foco)
+    diapos.append(im)
+
+    # 5 · El resultado
+    im = lienzo()
+    cabecera(im, '04 · The result', 'This could be\nyour pet', 1)
+    ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
+    h = y1 - y0 - 70
+    w = int(ret.width * h / ret.height)
+    cx = (x0 + x1) // 2
+    caja = (cx - w // 2, y0 + 35, cx + w // 2, y0 + 35 + h)
+    sombra(im, caja, radio=18, off=(0, 10), alfa=80)
+    im.paste(ret.resize((w, h), Image.LANCZOS), caja[:2])
+    diapos.append(im)
+
+    # 6 · Dónde conseguirlo
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    y = texto_centrado(d, ['Want one', 'of your pet?'], 250, TIT(92), TINTA, 108)
+    d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+    y += 60
+    for b in ['Follow us for more real cases', 'Like & save this post', 'Digital proof in 48 hours']:
+        check(d, 230, y - 12)
+        d.text((276, y), b, font=TXT(42), fill=TINTA, anchor='ls')
+        y += 88
+    polaroid(im, ret, (W / 2, 960), 230, -4, foco=(.5, .4))
+    d = ImageDraw.Draw(im)
+    boton(d, W / 2, 1180, 'Get yours · link in bio')
+    diapos.append(im)
+
+    for i, im in enumerate(diapos, 1):
+        pie(im, i, total)
+        im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+    print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
