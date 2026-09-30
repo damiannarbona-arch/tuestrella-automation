@@ -348,7 +348,7 @@ T3 = {
               ('03 · Sharpness', 'The original,\nnot a screenshot', 1, 'Original photo', 'Screenshot / zoom'),
               ('04 · Distance', 'Fill the frame\nwith their face', 1, 'Close up', 'Too far')],
         'k5': ('05 · Personality', 'Up to 3 extra photos\nwith their story', 1),
-        'k5_txt': 'Favourite pose, their look, that outfit… they go in the polaroids.',
+        'k5_txt': 'The beach, their favourite spot, that look… they go in the polaroids.',
         'cta_t': 'Not sure\nabout yours?',
         'cta': ['Send it: we check it for free', 'Digital proof in 48 hours', 'Nothing prints without your OK'],
         'boton': 'Save this guide · link in bio',
@@ -361,7 +361,7 @@ T3 = {
               ('03 · Nitidez', 'La original,\nno una captura', 1, 'Foto original', 'Captura o zoom'),
               ('04 · Distancia', 'Que su cara\nllene la foto', 1, 'De cerca', 'Demasiado lejos')],
         'k5': ('05 · Personalidad', 'Hasta 3 fotos más\ncon su historia', 1),
-        'k5_txt': 'Su postura favorita, su mirada, ese disfraz… van en las polaroids.',
+        'k5_txt': 'La playa, su rincón favorito, esa mirada… van en las polaroids.',
         'cta_t': '¿Dudas con\nla tuya?',
         'cta': ['Mándala: la revisamos gratis', 'Vista previa en 48 horas', 'Nada se imprime sin tu OK'],
         'boton': 'Guarda esta guía · enlace en la bio',
@@ -397,27 +397,23 @@ def publicacion_3():
     x0, y0, x1, y1 = FOTO
     w, h = (x1 - x0 - 24) // 2, y1 - y0 - 96
     R = lambda img, cx, cy, z=1.0: recorte(img, w, h, cx, cy, z)
-    lula, lula_lejos, lula_cerca = C('lula', 'foto-principal.jpg'), C('lula', 'extra-2.jpg'), C('lula', 'extra-4.jpg')
-    biz, biz_arriba = C('bizcocho', 'foto-principal.jpg'), C('bizcocho', 'extra-2.jpg')
-    miau = C('miau', 'foto-principal.jpg')
-    oscura = ImageEnhance.Contrast(ImageEnhance.Brightness(R(lula, .5, .35)).enhance(.3)).enhance(.8)
-    pix = R(miau, .5, .42, 1.1)
+    # un solo perro en toda la guía (Sonic)
+    son = lambda f: C('sonic', f)
+    ppal, playa, cascada, bano, captura = son('foto-principal.jpg'), son('extra-1.jpg'), son('extra-2.jpg'), son('extra-3.jpg'), son('captura.jpg')
+    oscura = ImageEnhance.Contrast(ImageEnhance.Brightness(R(ppal, .5, .4, 1.1)).enhance(.3)).enhance(.8)
+    pix = R(bano, .62, .45, 1.3)
     pix = pix.resize((w // 12, h // 12), Image.BILINEAR).resize((w, h), Image.NEAREST).filter(ImageFilter.GaussianBlur(1.5))
-    pares = [(R(lula, .5, .35), oscura), (R(biz, .36, .4, 1.2), R(biz_arriba, .45, .35, 1.0)),
-             (R(miau, .5, .42, 1.1), pix), (R(lula_cerca, .6, .3, 1.15), R(lula_lejos, .5, .45, 1.0))]
+    pares = [(R(ppal, .5, .4, 1.1), oscura), (R(playa, .55, .62, 1.7), R(captura, .5, .55, 1.0)),
+             (R(bano, .62, .45, 1.3), pix), (R(ppal, .5, .33, 1.45), R(cascada, .5, .5, 1.0))]
     total = 7
     for lang, T in T3.items():
         out = A('redes', 'publicaciones', '03-guia-fotos', lang)
         os.makedirs(out, exist_ok=True)
         diapos = []
-        # 1 · Portada: su foto → su retrato
+        # 1 · Portada: su foto, grande
         im = lienzo()
         cabecera(im, T['serie'], *T['p'])
-        ret = C('bizcocho', f'retrato-clasico-{lang}.jpg')
-        for i, (img, (cx, cy, z)) in enumerate([(biz, (.355, .38, 1.9)), (ret, (.575, .29, 2.1))]):
-            xx = x0 + i * (w + 24)
-            sombra(im, (xx, y0, xx + w, y0 + h + 96), radio=18, off=(0, 10), alfa=60)
-            im.paste(recorte(img, w, h + 96, cx, cy, z), (xx, y0))
+        foto_en_zona(im, ppal, cx=.5, cy=.4, zoom=1.15)
         d = ImageDraw.Draw(im)
         f = TXT_B(30)
         tw = d.textlength(T['p_sub'], font=f)
@@ -433,9 +429,9 @@ def publicacion_3():
         # 6 · Personalidad: 3 polaroids
         im = lienzo()
         cabecera(im, *T['k5'])
-        extras = [C('lula', 'extra-1.jpg'), C('lula', 'extra-3.jpg'), C('lula', 'extra-2.jpg')]
+        extras = [playa, cascada, bano]
         for foto, c, a, foco in zip(extras, [(300, 650), (770, 610), (540, 930)], [-6, 5, -3],
-                                    [(.5, .35), (.63, .45), (.34, .27)]):
+                                    [(.52, .6), (.78, .72), (.62, .45)]):
             polaroid(im, foto, c, 350, a, foco=foco)
         d = ImageDraw.Draw(im)
         d.text((W / 2, 1232), T['k5_txt'], font=TIT_I(32), fill=GRIS, anchor='ms')
@@ -454,7 +450,7 @@ def publicacion_3():
             check(d, 230, y - 12)
             d.text((276, y), b, font=TXT(42), fill=TINTA, anchor='ls')
             y += 88
-        polaroid(im, C('lula', f'retrato-rosa-{lang}.jpg'), (W / 2, 950), 230, -4, foco=(.5, .45))
+        polaroid(im, ppal, (W / 2, 950), 230, -4, foco=(.5, .35))
         d = ImageDraw.Draw(im)
         boton(d, W / 2, 1180, T['boton'])
         diapos.append(im)
