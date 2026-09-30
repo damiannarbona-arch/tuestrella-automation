@@ -7,7 +7,7 @@ Uso:
 Salida: assets/redes/publicaciones/01-antes-despues/{en,es}/01.jpg …
 """
 import os
-from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 A = lambda *p: os.path.join(RAIZ, 'assets', *p)
@@ -334,6 +334,136 @@ def publicacion_2():
         print(out)
 
 
+
+# ---------- Publicación #3 · Informativa: 5 claves para la foto perfecta ----------
+
+ROJO = (178, 74, 62)
+
+T3 = {
+    'en': {
+        'serie': 'Photo guide',
+        'p': ('The portrait starts\nwith your photo', 1), 'p_sub': '5 keys to the perfect one  »',
+        'k': [('01 · Light', 'Natural light,\nnear a window', 1, 'Daylight', 'Too dark'),
+              ('02 · Angle', 'At their\neye level', 1, 'Eye level', 'From above'),
+              ('03 · Sharpness', 'The original,\nnot a screenshot', 1, 'Original photo', 'Screenshot / zoom'),
+              ('04 · Distance', 'Fill the frame\nwith their face', 1, 'Close up', 'Too far')],
+        'k5': ('05 · Personality', 'Up to 3 extra photos\nwith their story', 1),
+        'k5_txt': 'Favourite pose, their look, that outfit… they go in the polaroids.',
+        'cta_t': 'Not sure\nabout yours?',
+        'cta': ['Send it: we check it for free', 'Digital proof in 48 hours', 'Nothing prints without your OK'],
+        'boton': 'Save this guide · link in bio',
+    },
+    'es': {
+        'serie': 'Guía de fotos',
+        'p': ('El retrato empieza\npor tu foto', 1), 'p_sub': '5 claves para la foto perfecta  »',
+        'k': [('01 · Luz', 'Luz natural,\ncerca de una ventana', 1, 'Luz de día', 'Demasiado oscura'),
+              ('02 · Ángulo', 'A la altura\nde sus ojos', 1, 'A su altura', 'Desde arriba'),
+              ('03 · Nitidez', 'La original,\nno una captura', 1, 'Foto original', 'Captura o zoom'),
+              ('04 · Distancia', 'Que su cara\nllene la foto', 1, 'De cerca', 'Demasiado lejos')],
+        'k5': ('05 · Personalidad', 'Hasta 3 fotos más\ncon su historia', 1),
+        'k5_txt': 'Su postura favorita, su mirada, ese disfraz… van en las polaroids.',
+        'cta_t': '¿Dudas con\nla tuya?',
+        'cta': ['Mándala: la revisamos gratis', 'Vista previa en 48 horas', 'Nada se imprime sin tu OK'],
+        'boton': 'Guarda esta guía · enlace en la bio',
+    },
+}
+
+
+def insignia(d, cx, cy, ok, r=30):
+    d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=SALVIA if ok else ROJO, outline='white', width=4)
+    if ok:
+        d.line([(cx - r * .42, cy + r * .02), (cx - r * .1, cy + r * .34), (cx + r * .45, cy - r * .3)], fill='white', width=6, joint='curve')
+    else:
+        k = r * .36
+        d.line((cx - k, cy - k, cx + k, cy + k), fill='white', width=6)
+        d.line((cx - k, cy + k, cx + k, cy - k), fill='white', width=6)
+
+
+def pareja(im, bien, mal, et_bien, et_mal):
+    """Dos fotos en la zona de imagen: ✔ a la izquierda, ✘ a la derecha, con su rótulo."""
+    x0, y0, x1, y1 = FOTO
+    w, h = (x1 - x0 - 24) // 2, y1 - y0 - 96
+    for i, (img, et, ok) in enumerate([(bien, et_bien, True), (mal, et_mal, False)]):
+        xx = x0 + i * (w + 24)
+        sombra(im, (xx, y0, xx + w, y0 + h), radio=18, off=(0, 10), alfa=60)
+        im.paste(img.resize((w, h), Image.LANCZOS) if img.size != (w, h) else img, (xx, y0))
+        d = ImageDraw.Draw(im)
+        insignia(d, xx + 50, y0 + 50, ok)
+        d.text((xx + w / 2, y0 + h + 66), et, font=TIT_I(44), fill=TINTA if ok else ROJO, anchor='ms')
+
+
+def publicacion_3():
+    C = lambda caso, f: abrir(A('casos', caso, f))
+    x0, y0, x1, y1 = FOTO
+    w, h = (x1 - x0 - 24) // 2, y1 - y0 - 96
+    R = lambda img, cx, cy, z=1.0: recorte(img, w, h, cx, cy, z)
+    lula, lula_lejos, lula_cerca = C('lula', 'foto-principal.jpg'), C('lula', 'extra-2.jpg'), C('lula', 'extra-4.jpg')
+    biz, biz_arriba = C('bizcocho', 'foto-principal.jpg'), C('bizcocho', 'extra-2.jpg')
+    miau = C('miau', 'foto-principal.jpg')
+    oscura = ImageEnhance.Contrast(ImageEnhance.Brightness(R(lula, .5, .35)).enhance(.3)).enhance(.8)
+    pix = R(miau, .5, .42, 1.1)
+    pix = pix.resize((w // 12, h // 12), Image.BILINEAR).resize((w, h), Image.NEAREST).filter(ImageFilter.GaussianBlur(1.5))
+    pares = [(R(lula, .5, .35), oscura), (R(biz, .36, .4, 1.2), R(biz_arriba, .45, .35, 1.0)),
+             (R(miau, .5, .42, 1.1), pix), (R(lula_cerca, .6, .3, 1.15), R(lula_lejos, .5, .45, 1.0))]
+    total = 7
+    for lang, T in T3.items():
+        out = A('redes', 'publicaciones', '03-guia-fotos', lang)
+        os.makedirs(out, exist_ok=True)
+        diapos = []
+        # 1 · Portada: su foto → su retrato
+        im = lienzo()
+        cabecera(im, T['serie'], *T['p'])
+        ret = C('bizcocho', f'retrato-clasico-{lang}.jpg')
+        for i, (img, (cx, cy, z)) in enumerate([(biz, (.355, .38, 1.9)), (ret, (.575, .29, 2.1))]):
+            xx = x0 + i * (w + 24)
+            sombra(im, (xx, y0, xx + w, y0 + h + 96), radio=18, off=(0, 10), alfa=60)
+            im.paste(recorte(img, w, h + 96, cx, cy, z), (xx, y0))
+        d = ImageDraw.Draw(im)
+        f = TXT_B(30)
+        tw = d.textlength(T['p_sub'], font=f)
+        d.rounded_rectangle((W / 2 - tw / 2 - 30, y1 - 96, W / 2 + tw / 2 + 30, y1 - 30), 33, fill=SALVIA)
+        d.text((W / 2, y1 - 62), T['p_sub'], font=f, fill='white', anchor='mm')
+        diapos.append(im)
+        # 2–5 · Claves con ✔ / ✘
+        for (et, tit, ac, eb, em), (b, m) in zip(T['k'], pares):
+            im = lienzo()
+            cabecera(im, et, tit, ac)
+            pareja(im, b, m, eb, em)
+            diapos.append(im)
+        # 6 · Personalidad: 3 polaroids
+        im = lienzo()
+        cabecera(im, *T['k5'])
+        extras = [C('lula', 'extra-1.jpg'), C('lula', 'extra-3.jpg'), C('lula', 'extra-2.jpg')]
+        for foto, c, a, foco in zip(extras, [(300, 650), (770, 610), (540, 930)], [-6, 5, -3],
+                                    [(.5, .35), (.63, .45), (.34, .27)]):
+            polaroid(im, foto, c, 350, a, foco=foco)
+        d = ImageDraw.Draw(im)
+        d.text((W / 2, 1232), T['k5_txt'], font=TIT_I(32), fill=GRIS, anchor='ms')
+        diapos.append(im)
+        # 7 · Llamada a la acción
+        im = lienzo()
+        d = ImageDraw.Draw(im)
+        d.text((W / 2, 118), T['serie'].upper(), font=TXT_B(26), fill=SALVIA, anchor='ms')
+        y = 250
+        for l in T['cta_t'].split('\n'):
+            d.text((W / 2, y), l, font=TIT(92), fill=TINTA, anchor='ms')
+            y += 108
+        d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+        y += 70
+        for b in T['cta']:
+            check(d, 230, y - 12)
+            d.text((276, y), b, font=TXT(42), fill=TINTA, anchor='ls')
+            y += 88
+        polaroid(im, C('lula', f'retrato-rosa-{lang}.jpg'), (W / 2, 950), 230, -4, foco=(.5, .45))
+        d = ImageDraw.Draw(im)
+        boton(d, W / 2, 1180, T['boton'])
+        diapos.append(im)
+        for i, im in enumerate(diapos, 1):
+            pie(im, i, total)
+            im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+        print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
