@@ -6,7 +6,7 @@ Uso:
   python3 generador/redes/publicaciones.py 1|2        # publicación #1 o #2, en EN (Instagram) y ES (Facebook)
 Salida: assets/redes/publicaciones/01-antes-despues/{en,es}/01.jpg …
 """
-import os
+import os, sys
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -552,6 +552,117 @@ def publicacion_4():
     print(out)
 
 
+# ---------- Publicación #5 · Avelino vs Lichi: presentación del combate (antes del reel) ----------
+
+def ficha(im, foto, foco, esquina, color, nombre, apodo, datos, zoom=1.0):
+    """Ficha de luchador: esquina, nombre + apodo, foto y 4 datos de combate."""
+    d = ImageDraw.Draw(im)
+    f = TXT_B(26)
+    tw = d.textlength(esquina.upper(), font=f)
+    d.rounded_rectangle((M, 92, M + tw + 44, 140), 24, fill=color)
+    d.text((M + 22, 117), esquina.upper(), font=f, fill='white', anchor='lm')
+    d.text((M - 3, 238), nombre, font=TIT(92), fill=TINTA, anchor='ls')
+    d.text((M, 306), apodo, font=TIT_I(54), fill=GRIS, anchor='ls')
+    caja = (M, 350, W - M, 900)
+    sombra(im, caja, radio=22, off=(0, 12), alfa=55)
+    im.paste(recorte(foto, caja[2] - caja[0], caja[3] - caja[1], *foco, zoom=zoom), caja[:2])
+    d = ImageDraw.Draw(im)
+    y = 975
+    for etiqueta, valor in datos:
+        d.text((M, y), etiqueta.upper(), font=TXT_B(26), fill=SALVIA, anchor='ls')
+        d.text((M + 330, y), valor, font=TXT(40), fill=TINTA, anchor='ls')
+        d.line((M, y + 26, W - M, y + 26), fill=ARENA, width=2)
+        y += 74
+
+
+def publicacion_5():
+    import imageio_ffmpeg
+    sys.path.insert(0, os.path.join(RAIZ, 'generador', 'video'))
+    sys.path.insert(0, os.path.join(RAIZ, 'generador'))
+    from reel_duelo import lienzo as pared_duelo  # noqa: E402
+    from reel_trapo import trapo, con_trapo  # noqa: E402
+    ave = abrir(A('casos', 'avelino', 'foto-principal.jpg'))
+    lic = abrir(A('casos', 'lichi', 'foto-principal.jpg'))
+    g = imageio_ffmpeg.read_frames(A('casos', 'lichi', 'video-pelea.mp4'))
+    meta = next(g)
+    fot = {i: Image.frombytes('RGB', meta['size'], f) for i, f in enumerate(g) if i in (36, 52, 84)}
+    out = A('redes', 'publicaciones', '05-avelino-vs-lichi', 'en')
+    os.makedirs(out, exist_ok=True)
+    total, diapos = 6, []
+
+    # 1 · Portada: cartel de combate
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 150), 'FIGHT NIGHT', font=TXT_B(30), fill=SALVIA, anchor='ms')
+    texto_centrado(d, ['Avelino vs Lichi'], 270, TIT(96), TINTA, 0)
+    texto_centrado(d, ['the fight nobody asked for'], 350, TIT_I(56), GRIS, 0)
+    polaroid(im, ave, (300, 760), 430, -7, 'Avelino', foco=(.55, .3))
+    polaroid(im, lic, (780, 760), 430, 7, 'Lichi', foco=(.5, .45))
+    d = ImageDraw.Draw(im)
+    d.ellipse((W / 2 - 72, 690, W / 2 + 72, 834), fill=ROSA)
+    d.text((W / 2, 764), 'VS', font=TIT(70), fill='white', anchor='mm')
+    f = TXT_B(32)
+    tw = d.textlength('Meet the fighters  »', font=f)
+    d.rounded_rectangle((W / 2 - tw / 2 - 40, 1130, W / 2 + tw / 2 + 40, 1202), 36, fill=SALVIA)
+    d.text((W / 2, 1167), 'Meet the fighters  »', font=f, fill='white', anchor='mm')
+    diapos.append(im)
+
+    # 2 y 3 · Fichas de los luchadores
+    im = lienzo()
+    ficha(im, ave, (.5, .3), 'In the green corner', SALVIA, 'Avelino', 'King of the house',
+          [('Rank', 'The veteran'), ('Weight class', '"Big boned"'), ('Special move', 'The 3-hour nap'),
+           ('Weakness', 'The treat bag')], zoom=1.15)
+    diapos.append(im)
+    im = lienzo()
+    ficha(im, lic, (.5, .52), 'In the pink corner', ROSA, 'Lichi', "Small, but she's the boss",
+          [('Rank', 'The rookie'), ('Weight class', 'Featherweight'), ('Special move', '3 a.m. sneak attack'),
+           ('Weakness', 'Anything that moves')], zoom=1.0)
+    diapos.append(im)
+
+    # 4 · Round 1 (fotograma real de la pelea)
+    im = lienzo()
+    cabecera(im, 'Round 1', 'The Crocs\nincident', 1)
+    # fotogramas del vídeo en polaroids pequeñas: a ese tamaño no se nota que es vídeo de móvil
+    for k, c, a, foco in [(36, (290, 640), -6, (.55, .62)), (52, (790, 640), 5, (.55, .55)), (84, (540, 1000), -2, (.45, .55))]:
+        polaroid(im, fot[k], c, 380, a, foco=foco)
+    diapos.append(im)
+
+    # 5 · El motivo: dos cuadros tapados
+    im = lienzo()
+    cabecera(im, 'The reason', 'They each got a portrait…\n…and both say theirs wins', 1)
+    rets = [abrir(A('casos', c, f'retrato-{e}-en.jpg')) for c, e in (('avelino', 'clasico'), ('lichi', 'lavanda'))]
+    pared, marcos = pared_duelo(rets, ['Avelino', 'Lichi'])
+    (a0, b0, a1, b1), (c0, d0, c1, d1) = marcos
+    cajas = [(a0 - 30, b0 - 30, a1 + 12, b1 + 70), (c0 - 12, d0 - 30, c1 + 30, d1 + 70)]
+    t0, t1 = trapo(cajas[0]), trapo(cajas[1])
+    tapada = con_trapo(con_trapo(pared, t1[0].transpose(Image.FLIP_LEFT_RIGHT), t1[1].transpose(Image.FLIP_LEFT_RIGHT),
+                                 caja=cajas[1]), *t0, caja=cajas[0])
+    x0, y0, x1, y1 = FOTO
+    cy = ((b0 + b1) / 2 + 300) / tapada.height
+    foto_en_zona(im, tapada, cx=.5, cy=cy, zoom=1.0)
+    diapos.append(im)
+
+    # 6 · Llamada: el reel de esta noche
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 250), 'THE REVEAL', font=TXT_B(28), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['Tonight we', 'unveil them'], 400, TIT(104), TINTA, 124)
+    d.line((W / 2 - 60, y - 40, W / 2 + 60, y - 40), fill=ROSA, width=4)
+    y += 50
+    for b in ['Pick your side now', 'Comment: Team Avelino or Team Lichi', 'Follow so you don\'t miss the reel']:
+        check(d, 160, y - 12)
+        d.text((206, y), b, font=TXT(42), fill=TINTA, anchor='ls')
+        y += 92
+    d = ImageDraw.Draw(im)
+    boton(d, W / 2, 1150, 'Team Avelino  or  Team Lichi?')
+    diapos.append(im)
+
+    for i, im in enumerate(diapos, 1):
+        pie(im, i, total)
+        im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+    print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
