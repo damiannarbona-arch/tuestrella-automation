@@ -41,9 +41,9 @@ CASOS = {
 }
 
 
-def trapo():
+def trapo(caja=TRAPO):
     """Tela de lino (imagen y máscara) con pliegues que se abren hacia abajo."""
-    x0, y0, x1, y1 = TRAPO
+    x0, y0, x1, y1 = caja
     w, h = x1 - x0, y1 - y0
     yy, xx = np.mgrid[0:h, 0:w].astype(float)
     u, v = xx / w, yy / h
@@ -62,10 +62,10 @@ def trapo():
     return tela, m.filter(ImageFilter.GaussianBlur(2.5))
 
 
-def con_trapo(pared, tela, m, caida=0.0):
+def con_trapo(pared, tela, m, caida=0.0, caja=TRAPO):
     """Pared con el trapo; caida 0–1: el trapo resbala hacia abajo y desaparece."""
     W, H = pared.size
-    x0, y0 = TRAPO[0], TRAPO[1]
+    x0, y0 = caja[0], caja[1]
     dy = int((caida ** 2) * (H - y0 + 200))
     out = pared.copy()
     sh = Image.new('L', (W, H), 0)
