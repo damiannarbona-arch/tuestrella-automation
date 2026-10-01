@@ -1,0 +1,102 @@
+{
+  "sections": {
+    "galeria": {
+      "type": "galeria-disenos",
+      "settings": {
+        "titulo": "Galería de diseños",
+        "texto": "<p>Todos los retratos que hemos creado a partir de las fotos del móvil de sus familias. Elige un estilo y pulsa el que más te guste para crear el de tu mascota.</p>",
+        "filtros": true,
+        "columnas": 4,
+        "boton_texto": "Crear el retrato de mi mascota",
+        "boton_enlace": "shopify://collections/all"
+      },
+      "blocks": {
+        "d1": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-avelino-clasico.jpg",
+            "nombre": "Avelino",
+            "estilo": "Clásico",
+            "producto": "retrato-mascota-personalizado-clasico"
+          }
+        },
+        "d2": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-lichi-lavanda.jpg",
+            "nombre": "Lichi",
+            "estilo": "Lavanda",
+            "producto": "retrato-mascota-personalizado-lavanda"
+          }
+        },
+        "d3": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-sonic-aventurero.jpg",
+            "nombre": "Sonic",
+            "estilo": "Aventurero",
+            "producto": "retrato-mascota-personalizado-aventurero"
+          }
+        },
+        "d4": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-lula-rosa.jpg",
+            "nombre": "Lula",
+            "estilo": "Rosa",
+            "producto": "retrato-mascota-personalizado-rosa"
+          }
+        },
+        "d5": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-bizcocho-clasico.jpg",
+            "nombre": "Bizcocho",
+            "estilo": "Clásico",
+            "producto": "retrato-mascota-personalizado-clasico"
+          }
+        },
+        "d6": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-miau-lavanda.jpg",
+            "nombre": "Miau",
+            "estilo": "Lavanda",
+            "producto": "retrato-mascota-personalizado-lavanda"
+          }
+        },
+        "d7": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-lula-aventurero.jpg",
+            "nombre": "Lula",
+            "estilo": "Aventurero",
+            "producto": "retrato-mascota-personalizado-aventurero"
+          }
+        },
+        "d8": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-miau-rosa.jpg",
+            "nombre": "Miau",
+            "estilo": "Rosa",
+            "producto": "retrato-mascota-personalizado-rosa"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d8"
+      ]
+    }
+  },
+  "order": [
+    "galeria"
+  ]
+}

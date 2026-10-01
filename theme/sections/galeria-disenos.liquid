@@ -1,0 +1,117 @@
+{%- comment -%}
+  Galería de diseños de Kivoa: rejilla de retratos (2 columnas en móvil) con filtro por estilo.
+  Cada diseño es un bloque: imagen, nombre, estilo y producto al que enlaza. Para añadir uno: Personalizar → Añadir bloque.
+{%- endcomment -%}
+{%- liquid
+  assign estilos = ''
+  for block in section.blocks
+    assign marca = '|' | append: block.settings.estilo | append: '|'
+    unless estilos contains marca
+      assign estilos = estilos | append: marca
+    endunless
+  endfor
+  assign lista_estilos = estilos | remove_first: '|' | split: '||'
+-%}
+<div class="kg" id="kg-{{ section.id }}" style="--kg-cols: {{ section.settings.columnas }};">
+  {%- if section.settings.titulo != blank -%}<h1 class="kg__titulo">{{ section.settings.titulo }}</h1>{%- endif -%}
+  {%- if section.settings.texto != blank -%}<div class="kg__texto">{{ section.settings.texto }}</div>{%- endif -%}
+
+  {%- if section.settings.filtros and lista_estilos.size > 1 -%}
+    <div class="kg__filtros" role="group" aria-label="Filtrar por estilo">
+      <button type="button" class="kg__chip is-on" data-estilo="todos">Todos</button>
+      {%- for e in lista_estilos -%}
+        {%- assign limpio = e | remove: '|' -%}
+        <button type="button" class="kg__chip" data-estilo="{{ limpio | handleize }}">{{ limpio }}</button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <ul class="kg__rejilla">
+    {%- for block in section.blocks -%}
+      <li class="kg__item" data-estilo="{{ block.settings.estilo | handleize }}" {{ block.shopify_attributes }}>
+        <a class="kg__enlace" href="{{ block.settings.producto.url | default: '/collections/all' }}">
+          <div class="kg__marco">
+            {%- if block.settings.imagen != blank -%}
+              {{ block.settings.imagen | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 25vw, 50vw', alt: block.settings.imagen.alt | default: block.settings.nombre }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag }}
+            {%- endif -%}
+          </div>
+          <p class="kg__pie"><span class="kg__nombre">{{ block.settings.nombre }}</span> · <em>{{ block.settings.estilo }}</em></p>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  {%- if section.settings.boton_texto != blank -%}
+    <p class="kg__cta"><a class="button" href="{{ section.settings.boton_enlace | default: '/collections/all' }}">{{ section.settings.boton_texto }}</a></p>
+  {%- endif -%}
+</div>
+
+<style>
+  #kg-{{ section.id }} { max-width: 1200px; margin: 0 auto; padding: 56px 16px 72px; text-align: center; }
+  #kg-{{ section.id }} .kg__titulo { margin: 0 0 12px; }
+  #kg-{{ section.id }} .kg__texto { max-width: 640px; margin: 0 auto 28px; opacity: .85; }
+  #kg-{{ section.id }} .kg__filtros { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 28px; }
+  #kg-{{ section.id }} .kg__chip { font: inherit; padding: 8px 16px; border-radius: 999px; border: 1px solid rgb(var(--color-foreground-rgb, 44 51 47) / .3); background: transparent; color: inherit; cursor: pointer; }
+  #kg-{{ section.id }} .kg__chip.is-on { background: rgb(63 81 71); border-color: rgb(63 81 71); color: #fff; }
+  #kg-{{ section.id }} .kg__rejilla { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 750px) { #kg-{{ section.id }} .kg__rejilla { gap: 24px; grid-template-columns: repeat(var(--kg-cols), minmax(0, 1fr)); } }
+  #kg-{{ section.id }} .kg__item[hidden] { display: none; }
+  #kg-{{ section.id }} .kg__enlace { display: block; color: inherit; text-decoration: none; }
+  #kg-{{ section.id }} .kg__marco { aspect-ratio: 2 / 3; overflow: hidden; border-radius: 8px; box-shadow: 0 6px 18px rgb(40 30 20 / .12); background: #f6f2ec; }
+  #kg-{{ section.id }} .kg__marco img, #kg-{{ section.id }} .kg__marco svg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+  #kg-{{ section.id }} .kg__enlace:hover img { transform: scale(1.03); }
+  #kg-{{ section.id }} .kg__pie { margin: 10px 0 0; font-size: .95rem; }
+  #kg-{{ section.id }} .kg__nombre { font-weight: 600; }
+  #kg-{{ section.id }} .kg__cta { margin-top: 36px; }
+</style>
+
+<script>
+  (() => {
+    const raiz = document.getElementById('kg-{{ section.id }}');
+    if (!raiz) return;
+    raiz.querySelectorAll('.kg__chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const e = chip.dataset.estilo;
+        raiz.querySelectorAll('.kg__chip').forEach((c) => c.classList.toggle('is-on', c === chip));
+        raiz.querySelectorAll('.kg__item').forEach((it) => { it.hidden = e !== 'todos' && it.dataset.estilo !== e; });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Galería de diseños",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Galería de diseños" },
+    { "type": "richtext", "id": "texto", "label": "Texto" },
+    { "type": "checkbox", "id": "filtros", "label": "Mostrar filtro por estilo", "default": true },
+    { "type": "range", "id": "columnas", "label": "Columnas en ordenador", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón final", "default": "Crear el retrato de mi mascota" },
+    { "type": "url", "id": "boton_enlace", "label": "Enlace del botón final" }
+  ],
+  "blocks": [
+    {
+      "type": "diseno",
+      "name": "Diseño",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Retrato" },
+        { "type": "text", "id": "nombre", "label": "Nombre de la mascota" },
+        { "type": "select", "id": "estilo", "label": "Estilo", "default": "Clásico",
+          "options": [
+            { "value": "Clásico", "label": "Clásico" },
+            { "value": "Lavanda", "label": "Lavanda" },
+            { "value": "Rosa", "label": "Rosa" },
+            { "value": "Aventurero", "label": "Aventurero" },
+            { "value": "Caballos", "label": "Caballos" }
+          ] },
+        { "type": "product", "id": "producto", "label": "Producto al que enlaza" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Galería de diseños" }]
+}
+{% endschema %}
