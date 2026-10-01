@@ -1,4 +1,16 @@
-# Kivoa · Precios de lanzamiento (29/09/2026) — VIGENTES
+# Kivoa · Precios con envío aparte (01/10/2026) — VIGENTES
+
+**Web (kivoa.es):** 20×25 **29,90 €** · 30×40 **42,90 €** · 50×70 **109,90 €** (los 3 marcos igual).
+**Envío** (Perfil general, España, UE y EE. UU.): **6,99 €** si el pedido es < 90 € · **gratis desde 90 €**.
+El cliente paga lo mismo que antes (36,89 / 49,89 / 109,90 €), así que el neto por cuadro no cambia (ver tabla de abajo).
+Motivo: "29,90 € + envío" se percibe más barato que "36,90 €" y da un "desde 29,90 €" para anuncios.
+El aviso "+ envío 6,99 € a España · gratis desde 90 €" va bajo el precio en la ficha de producto.
+Plazos reales (pedido de prueba, 4 días de domingo a jueves): producción 1–3 días laborables, envío España 2–4.
+Pendiente a mano: **Etsy** (precios y perfil de envío ES 6,99 €; EE. UU. se deja con envío gratis).
+
+---
+
+# Histórico · Precios de lanzamiento (29/09/2026)
 
 **Mismo precio en web y Etsy, los 3 marcos igual:** 20×25 **36,90 €** · 30×40 **49,90 €** · 50×70 **109,90 €**.
 Criterio: **25 % de margen neto en la web** (neto tras IRPF ÷ ingreso sin IVA); Etsy deja menos por sus comisiones.
