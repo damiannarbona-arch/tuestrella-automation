@@ -10,9 +10,10 @@
           "settings": {
             "text": "No te cobramos hasta que apruebes tu diseño · Envío con seguimiento",
             "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
+            "font_size": "0.875rem",
             "letter_spacing": "normal",
-            "case": "none"
+            "case": "none",
+            "text_color": "#FFFFFF"
           },
           "blocks": {}
         },
@@ -21,26 +22,41 @@
           "settings": {
             "text": "Pedidos para Navidad hasta el 1 de diciembre · Vista previa en 48 h",
             "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
+            "font_size": "0.875rem",
             "letter_spacing": "normal",
-            "case": "none"
+            "case": "none",
+            "text_color": "#FFFFFF"
+          },
+          "blocks": {}
+        },
+        "bienvenida": {
+          "type": "_announcement",
+          "settings": {
+            "text": "<strong>10 % de descuento en tu primer pedido</strong> con el código BIENVENIDA10",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.875rem",
+            "letter_spacing": "normal",
+            "case": "none",
+            "link": "shopify://collections/all",
+            "text_color": "#FFFFFF"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "navidad",
-        "announcement_BxgCk9"
+        "bienvenida",
+        "announcement_BxgCk9",
+        "navidad"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "background_color": "{{ settings.color_palette.background }}",
-        "divider_width": 1,
+        "background_color": "#3F5147",
+        "divider_width": 0,
         "divider_color": "{{ settings.color_palette.color2 }}",
-        "padding-block-start": 15,
-        "padding-block-end": 15
+        "padding-block-start": 10,
+        "padding-block-end": 10
       }
     },
     "header_section": {
