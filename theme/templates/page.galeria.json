@@ -82,9 +82,19 @@
             "estilo": "Rosa",
             "producto": "retrato-mascota-personalizado-rosa"
           }
+        },
+        "d9": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-ricky-clasico.jpg",
+            "nombre": "Ricky",
+            "estilo": "Clásico",
+            "producto": "retrato-mascota-personalizado-clasico"
+          }
         }
       },
       "block_order": [
+        "d9",
         "d1",
         "d2",
         "d3",

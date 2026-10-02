@@ -1,0 +1,114 @@
+{%- comment -%}
+  Casos reales de Kivoa en carrusel: tarjetas "sus fotos del móvil → su retrato" que se pasan con flechas
+  (y deslizando con el dedo en el móvil). 3 a la vista en ordenador, 2 en tableta y 1 y pico en el móvil.
+  Para añadir un caso: Personalizar → Casos reales → Añadir bloque (imagen + producto).
+{%- endcomment -%}
+<div class="kc" id="kc-{{ section.id }}">
+  {%- if section.settings.titulo != blank -%}<h2 class="kc__titulo">{{ section.settings.titulo }}</h2>{%- endif -%}
+  {%- if section.settings.texto != blank -%}<div class="kc__texto">{{ section.settings.texto }}</div>{%- endif -%}
+
+  <div class="kc__marco">
+    <button type="button" class="kc__flecha kc__flecha--prev" aria-label="Caso anterior" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <ul class="kc__pista" tabindex="0" aria-label="Casos reales">
+      {%- for block in section.blocks -%}
+        <li class="kc__item" {{ block.shopify_attributes }}>
+          <a class="kc__enlace" href="{{ block.settings.producto.url | default: '/collections/all' }}">
+            {%- if block.settings.imagen != blank -%}
+              {{ block.settings.imagen | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 85vw', alt: block.settings.imagen.alt }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag }}
+            {%- endif -%}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <button type="button" class="kc__flecha kc__flecha--next" aria-label="Caso siguiente">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  {%- if section.settings.boton_texto != blank -%}
+    <p class="kc__cta"><a class="button" href="{{ section.settings.boton_enlace | default: '/collections/all' }}">{{ section.settings.boton_texto }}</a></p>
+  {%- endif -%}
+</div>
+
+<style>
+  #kc-{{ section.id }} { max-width: 1200px; margin: 0 auto; padding: 72px 16px; text-align: center; }
+  #kc-{{ section.id }} .kc__titulo { margin: 0 0 12px; }
+  #kc-{{ section.id }} .kc__texto { max-width: 640px; margin: 0 auto 32px; opacity: .85; }
+  #kc-{{ section.id }} .kc__marco { position: relative; }
+  #kc-{{ section.id }} .kc__pista {
+    list-style: none; margin: 0; padding: 4px 2px 12px; display: grid; grid-auto-flow: column;
+    grid-auto-columns: 85%; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  #kc-{{ section.id }} .kc__pista::-webkit-scrollbar { display: none; }
+  @media (min-width: 750px) { #kc-{{ section.id }} .kc__pista { grid-auto-columns: calc((100% - 20px) / 2); gap: 20px; } }
+  @media (min-width: 990px) { #kc-{{ section.id }} .kc__pista { grid-auto-columns: calc((100% - 40px) / 3); } }
+  #kc-{{ section.id }} .kc__item { scroll-snap-align: start; }
+  #kc-{{ section.id }} .kc__enlace { display: block; border-radius: 8px; overflow: hidden; box-shadow: 0 6px 18px rgb(40 30 20 / .12); }
+  #kc-{{ section.id }} .kc__enlace img, #kc-{{ section.id }} .kc__enlace svg { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  #kc-{{ section.id }} .kc__flecha {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 48px; height: 48px;
+    border-radius: 50%; border: 0; background: rgb(63 81 71); color: #fff; display: grid; place-items: center;
+    cursor: pointer; box-shadow: 0 4px 12px rgb(0 0 0 / .18); transition: opacity .2s;
+  }
+  #kc-{{ section.id }} .kc__flecha svg { width: 22px; height: 22px; }
+  #kc-{{ section.id }} .kc__flecha[disabled] { opacity: 0; pointer-events: none; }
+  #kc-{{ section.id }} .kc__flecha--prev { left: -8px; }
+  #kc-{{ section.id }} .kc__flecha--next { right: -8px; }
+  @media (min-width: 1280px) {
+    #kc-{{ section.id }} .kc__flecha--prev { left: -64px; }
+    #kc-{{ section.id }} .kc__flecha--next { right: -64px; }
+  }
+  #kc-{{ section.id }} .kc__cta { margin-top: 32px; }
+</style>
+
+<script>
+  (() => {
+    const raiz = document.getElementById('kc-{{ section.id }}');
+    if (!raiz) return;
+    const pista = raiz.querySelector('.kc__pista');
+    const prev = raiz.querySelector('.kc__flecha--prev');
+    const next = raiz.querySelector('.kc__flecha--next');
+    const paso = () => {
+      const item = pista.querySelector('.kc__item');
+      return item ? item.getBoundingClientRect().width + parseFloat(getComputedStyle(pista).columnGap || 16) : pista.clientWidth;
+    };
+    const actualizar = () => {
+      prev.disabled = pista.scrollLeft <= 4;
+      next.disabled = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 4;
+    };
+    prev.addEventListener('click', () => pista.scrollBy({ left: -paso(), behavior: 'smooth' }));
+    next.addEventListener('click', () => pista.scrollBy({ left: paso(), behavior: 'smooth' }));
+    pista.addEventListener('scroll', () => window.requestAnimationFrame(actualizar), { passive: true });
+    window.addEventListener('resize', actualizar);
+    actualizar();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Casos reales (carrusel)",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Casos reales" },
+    { "type": "richtext", "id": "texto", "label": "Texto" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Crear el mío" },
+    { "type": "url", "id": "boton_enlace", "label": "Enlace del botón" }
+  ],
+  "blocks": [
+    {
+      "type": "caso",
+      "name": "Caso",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Tarjeta (fotos → retrato)" },
+        { "type": "product", "id": "producto", "label": "Producto al que enlaza" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Casos reales (carrusel)" }]
+}
+{% endschema %}
