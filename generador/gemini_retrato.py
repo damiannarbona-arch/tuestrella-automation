@@ -7,7 +7,7 @@ polaroids.py → rasgos.py → marca_agua.py.
 Necesita la variable de entorno GEMINI_API_KEY (Google AI Studio → Get API key).
 
 Uso:
-  python3 generador/gemini_retrato.py PLANTILLA FOTO NOMBRE [--salida DIR] [--n 2] [--modelo flash|pro] [--sin-polaroids]
+  python3 generador/gemini_retrato.py PLANTILLA FOTO NOMBRE [--salida DIR] [--n 2] [--modelo lite|flash|pro] [--sin-polaroids]
   p. ej. … assets/casos/bizcocho/oficial-clasico-es.webp assets/casos/avelino/foto-principal.jpg Avelino --sin-polaroids
 """
 import argparse, base64, io, os, sys, time
@@ -15,7 +15,8 @@ import requests
 from PIL import Image, ImageOps
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-MODELOS = {'flash': 'gemini-2.5-flash-image', 'pro': 'gemini-3-pro-image-preview'}
+# precios por imagen (AI Studio, 02/10/2026): lite 0,034 $ (sin etiqueta de pago) · flash 0,067 $ · pro 0,134 $
+MODELOS = {'lite': 'gemini-3.1-flash-lite-image', 'flash': 'gemini-3.1-flash-image', 'pro': 'gemini-3-pro-image'}
 URL = 'https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent'
 
 PROMPT = """Crea un retrato ilustrado de mascota siguiendo EXACTAMENTE el mismo diseño, composición, paleta de colores, técnica y tipografías que la PRIMERA imagen (la plantilla del estilo). La SEGUNDA imagen es la mascota que debe aparecer en el retrato. Sustituye a la mascota de la plantilla por esta y cambia solo lo que te indico; todo lo demás debe quedar igual.
