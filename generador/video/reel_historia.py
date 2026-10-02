@@ -1,8 +1,8 @@
 """Reel "su historia" (1080×1920, ~12 s): vídeo real con su costumbre ("cada tarde espera en la ventana…")
-→ ráfaga de sus fotos → cuadro tapado → cae el trapo → zoom a los letreros con sus sitios favoritos → llamada.
+→ ráfaga de sus fotos → cuadro tapado → cae el trapo → zoom a su nombre y sus rasgos → llamada.
 Sin primeros planos de los ojos: el retrato se enseña entero y se destaca la historia, no el detalle.
 
-Uso: python3 generador/video/reel_historia.py CASO ESTILO [idiomas]      p. ej. … ricky aventurero en,es
+Uso: python3 generador/video/reel_historia.py CASO ESTILO [idiomas]      p. ej. … ricky clasico en,es
 Necesita en assets/casos/<caso>/: video-ventana.mp4, fotos y retrato-<estilo>-<idioma>.jpg. La pared
 (mockup-pared-<idioma>.jpg) se crea aquí con el retrato en el marco grande de assets/mockups/pared-dos-marcos.webp.
 """
@@ -25,19 +25,19 @@ S = (1080, 1920)
 CASOS = {
     'ricky': {
         'clip': (.5, 0.0, 1.6),                    # centro x, desde (s), duración
-        'letreros': (.872, .36),                   # poste con sus sitios favoritos, en el retrato
+        'detalle': (.5, .74),                      # punto del retrato al que se acerca la cámara (nombre y rasgos)
         'rafaga': [('extra-1.jpg', (.48, .42)), ('extra-2.jpg', (.5, .45)), ('foto-principal.jpg', (.45, .38))],
         'pequeno': ('lichi', 'retrato-lavanda-{}.jpg'),   # retrato del marco pequeño de la pared
         'txt': {
             'en': {'a': [('Every evening, Ricky', 'b'), ('waits at the window…', 'b')],
                    'c': [('…so his family sent us', 'b'), ('his photos', 'b')],
                    'd': [('A surprise for him…', 'b')],
-                   'e': [('His favorite spots,', 'b'), ('in his portrait', 'b')],
+                   'e': [('His personality,', 'b'), ('in his portrait', 'b')],
                    'f': [('Want one of yours?', 'b'), ('Link in bio', 'i')]},
             'es': {'a': [('Cada tarde, Ricky', 'b'), ('espera en la ventana…', 'b')],
                    'c': [('…así que su familia', 'b'), ('nos mandó sus fotos', 'b')],
                    'd': [('Una sorpresa para él…', 'b')],
-                   'e': [('Sus sitios favoritos,', 'b'), ('en su retrato', 'b')],
+                   'e': [('Su carácter,', 'b'), ('en su retrato', 'b')],
                    'f': [('¿Hacemos el de tu mascota?', 'b'), ('Enlace en el perfil', 'i')]},
         },
     },
@@ -70,9 +70,9 @@ def montar(caso, estilo, idiomas='en,es'):
         rot = lambda k, y, a=.0, b=1.0: [(T[k], y, a, b)]
         muro, (gx0, gy0, gx1, gy1) = pared(caso, estilo, lang, cfg)
         tapada = con_trapo(muro, tela, m)
-        lx, ly = cfg['letreros']
+        lx, ly = cfg['detalle']
         cerca = (MARCO[0], MARCO[1] - 40, MARCO[2] * .92)
-        letreros = (gx0 + lx * (gx1 - gx0), gy0 + ly * (gy1 - gy0), (gx1 - gx0) * .42 * 16 / 9)
+        detalle = (gx0 + lx * (gx1 - gx0), gy0 + ly * (gy1 - gy0), (gx1 - gx0) * .97 * 16 / 9)
 
         def rafaga_fn(tl, x):
             img, foco = rafaga[min(int(x * len(rafaga)), len(rafaga) - 1)]
@@ -84,7 +84,7 @@ def montar(caso, estilo, idiomas='en,es'):
             (1.5, lambda tl, x: recorte_log(tapada, x, VISTA, MARCO), rot('d', ABA, .1)),
             (0.7, lambda tl, x: recorte_log(con_trapo(muro, tela, m, min(1, x * 1.05)), 0, MARCO, MARCO), []),
             (1.6, lambda tl, x: recorte_log(muro, x, MARCO, cerca), []),
-            (2.2, lambda tl, x: recorte_log(muro, x, cerca, letreros), rot('e', ARR, .15)),
+            (2.2, lambda tl, x: recorte_log(muro, x, cerca, detalle), rot('e', ARR, .15)),
             (2.4, lambda tl, x: recorte_log(muro, x, VISTA, (VISTA[0], VISTA[1], VISTA[2] * .95)), rot('f', ABA, .1)),
         ])
 

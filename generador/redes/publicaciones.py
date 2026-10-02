@@ -667,7 +667,7 @@ def publicacion_5():
 
 def publicacion_6():
     C = lambda f: abrir(A('casos', 'ricky', f))
-    ventana, ret = C('extra-1.jpg'), C('retrato-aventurero-en.jpg')
+    ventana, ret = C('extra-1.jpg'), C('retrato-clasico-en.jpg')
     out = A('redes', 'publicaciones', '06-ricky-ventana', 'en')
     os.makedirs(out, exist_ok=True)
     total, diapos = 6, []
@@ -709,10 +709,10 @@ def publicacion_6():
     im.paste(ret.resize((w, h), Image.LANCZOS), caja[:2])
     diapos.append(im)
 
-    # 5 · Detalle: los letreros con sus sitios favoritos
+    # 5 · Detalle: su carácter
     im = lienzo()
-    cabecera(im, 'The details', 'His favorite spots,\non the signpost', 1)
-    foto_en_zona(im, ret, cx=.8, cy=.36, zoom=2.6)
+    cabecera(im, 'The details', 'His personality,\nin six words', 1)
+    foto_en_zona(im, ret, cx=.5, cy=.73, zoom=1.0)
     diapos.append(im)
 
     # 6 · Llamada
