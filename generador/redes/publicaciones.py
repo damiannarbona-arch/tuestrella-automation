@@ -663,6 +663,90 @@ def publicacion_5():
     print(out)
 
 
+# ---------- Publicación #6 · Ricky: el reto de los ojos (historia del caso) ----------
+
+def publicacion_6():
+    C = lambda f: abrir(A('casos', 'ricky', f))
+    ppal, ret = C('foto-principal.jpg'), C('retrato-aventurero-en.jpg')
+    out = A('redes', 'publicaciones', '06-ricky-ojos', 'en')
+    os.makedirs(out, exist_ok=True)
+    total, diapos = 6, []
+
+    # 1 · Portada: sus ojos de cerca
+    im = lienzo()
+    cabecera(im, 'Meet Ricky', 'One blue eye,\none gold eye', 1)
+    foto_en_zona(im, ppal, cx=.427, cy=.375, zoom=2.3)
+    diapos.append(im)
+
+    # 2 · Solo texto: el reto
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 330), 'THE CHALLENGE', font=TXT_B(28), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['His family sent us', '4 photos of Ricky…'], 520, TIT(84), TINTA, 104)
+    y = texto_centrado(d, ['…and one request:'], y + 20, TIT_I(70), GRIS, 90)
+    y = texto_centrado(d, ['"Get both', 'eyes right"'], y + 70, TIT(104), TINTA, 124)
+    d.line((W / 2 - 60, y - 40, W / 2 + 60, y - 40), fill=ROSA, width=4)
+    diapos.append(im)
+
+    # 3 · Sus fotos
+    im = lienzo()
+    cabecera(im, 'The photos', 'Straight from\ntheir phone', 1)
+    fotos = [C('extra-1.jpg'), C('foto-principal.jpg'), C('extra-4.jpg'), C('extra-2.jpg')]
+    for foto, c, a, foco in zip(fotos, [(300, 640), (780, 620), (310, 1030), (780, 1010)], [-5, 4, 3, -4],
+                                [(.48, .42), (.45, .38), (.4, .33), (.5, .45)]):
+        polaroid(im, foto, c, 380, a, foco=foco)
+    diapos.append(im)
+
+    # 4 · El resultado
+    im = lienzo()
+    cabecera(im, 'The result', 'One blue,\none gold', 1)
+    x0, y0, x1, y1 = FOTO
+    ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
+    h = y1 - y0 - 70
+    w = int(ret.width * h / ret.height)
+    cx = (x0 + x1) // 2
+    caja = (cx - w // 2, y0 + 35, cx + w // 2, y0 + 35 + h)
+    sombra(im, caja, radio=18, off=(0, 10), alfa=80)
+    im.paste(ret.resize((w, h), Image.LANCZOS), caja[:2])
+    diapos.append(im)
+
+    # 5 · Real frente a pintado
+    im = lienzo()
+    cabecera(im, 'Real vs painted', 'Every detail,\njust as he is', 1)
+    x0, y0, x1, y1 = FOTO
+    alto = (y1 - y0 - 24) // 2
+    sombra(im, (x0, y0, x1, y0 + alto), radio=18, off=(0, 10), alfa=55)
+    im.paste(recorte(ppal, x1 - x0, alto, .427, .375, 2.4), (x0, y0))
+    sombra(im, (x0, y1 - alto, x1, y1), radio=18, off=(0, 10), alfa=55)
+    im.paste(recorte(ret, x1 - x0, alto, .51, .275, 3.6), (x0, y1 - alto))
+    d = ImageDraw.Draw(im)
+    for texto, yy in (('His photo', y0 + 20), ('His portrait', y1 - alto + 20)):
+        f = TXT_B(26)
+        tw = d.textlength(texto.upper(), font=f)
+        d.rounded_rectangle((x0 + 20, yy, x0 + 64 + tw, yy + 48), 24, fill=PAPEL)
+        d.text((x0 + 42, yy + 25), texto.upper(), font=f, fill=SALVIA, anchor='lm')
+    diapos.append(im)
+
+    # 6 · Llamada
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    y = texto_centrado(d, ['Your pet has', 'something unique too'], 250, TIT(84), TINTA, 100)
+    d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+    y += 50
+    for b in ['Send us 4 photos from your phone', 'Digital proof in 48 hours', "We don't charge you until you approve it"]:
+        check(d, 150, y - 12)
+        d.text((196, y), b, font=TXT(40), fill=TINTA, anchor='ls')
+        y += 84
+    polaroid(im, ret, (W / 2, 950), 240, -4, foco=(.5, .4))
+    boton(ImageDraw.Draw(im), W / 2, 1185, 'Get yours · link in bio')
+    diapos.append(im)
+
+    for i, im in enumerate(diapos, 1):
+        pie(im, i, total)
+        im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+    print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
