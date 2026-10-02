@@ -663,35 +663,35 @@ def publicacion_5():
     print(out)
 
 
-# ---------- Publicación #6 · Ricky: el reto de los ojos (historia del caso) ----------
+# ---------- Publicación #6 · Ricky, el guardián de la ventana (historia del caso) ----------
 
 def publicacion_6():
     C = lambda f: abrir(A('casos', 'ricky', f))
-    ppal, ret = C('foto-principal.jpg'), C('retrato-aventurero-en.jpg')
-    out = A('redes', 'publicaciones', '06-ricky-ojos', 'en')
+    ventana, ret = C('extra-1.jpg'), C('retrato-aventurero-en.jpg')
+    out = A('redes', 'publicaciones', '06-ricky-ventana', 'en')
     os.makedirs(out, exist_ok=True)
     total, diapos = 6, []
+    x0, y0, x1, y1 = FOTO
 
-    # 1 · Portada: sus ojos de cerca
+    # 1 · Portada: en su ventana
     im = lienzo()
-    cabecera(im, 'Meet Ricky', 'One blue eye,\none gold eye', 1)
-    foto_en_zona(im, ppal, cx=.427, cy=.375, zoom=2.3)
+    cabecera(im, 'Meet Ricky', 'The window\nwatcher', 1)
+    foto_en_zona(im, ventana, cx=.48, cy=.45, zoom=1.15)
     diapos.append(im)
 
-    # 2 · Solo texto: el reto
+    # 2 · Solo texto: su costumbre
     im = lienzo()
     d = ImageDraw.Draw(im)
-    d.text((W / 2, 330), 'THE CHALLENGE', font=TXT_B(28), fill=SALVIA, anchor='ms')
-    y = texto_centrado(d, ['His family sent us', '4 photos of Ricky…'], 520, TIT(84), TINTA, 104)
-    y = texto_centrado(d, ['…and one request:'], y + 20, TIT_I(70), GRIS, 90)
-    y = texto_centrado(d, ['"Get both', 'eyes right"'], y + 70, TIT(104), TINTA, 124)
-    d.line((W / 2 - 60, y - 40, W / 2 + 60, y - 40), fill=ROSA, width=4)
+    d.text((W / 2, 330), 'HIS STORY', font=TXT_B(28), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['Every evening,', 'Ricky waits', 'at the window…'], 520, TIT(92), TINTA, 112)
+    y = texto_centrado(d, ['…so his family wanted', 'a portrait that tells', 'his story'], y + 60, TIT_I(70), GRIS, 88)
+    d.line((W / 2 - 60, y + 10, W / 2 + 60, y + 10), fill=ROSA, width=4)
     diapos.append(im)
 
     # 3 · Sus fotos
     im = lienzo()
     cabecera(im, 'The photos', 'Straight from\ntheir phone', 1)
-    fotos = [C('extra-1.jpg'), C('foto-principal.jpg'), C('extra-4.jpg'), C('extra-2.jpg')]
+    fotos = [ventana, C('foto-principal.jpg'), C('extra-4.jpg'), C('extra-2.jpg')]
     for foto, c, a, foco in zip(fotos, [(300, 640), (780, 620), (310, 1030), (780, 1010)], [-5, 4, 3, -4],
                                 [(.48, .42), (.45, .38), (.4, .33), (.5, .45)]):
         polaroid(im, foto, c, 380, a, foco=foco)
@@ -699,8 +699,7 @@ def publicacion_6():
 
     # 4 · El resultado
     im = lienzo()
-    cabecera(im, 'The result', 'One blue,\none gold', 1)
-    x0, y0, x1, y1 = FOTO
+    cabecera(im, 'The result', 'His story,\nin one portrait', 1)
     ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
     h = y1 - y0 - 70
     w = int(ret.width * h / ret.height)
@@ -710,27 +709,16 @@ def publicacion_6():
     im.paste(ret.resize((w, h), Image.LANCZOS), caja[:2])
     diapos.append(im)
 
-    # 5 · Real frente a pintado
+    # 5 · Detalle: los letreros con sus sitios favoritos
     im = lienzo()
-    cabecera(im, 'Real vs painted', 'Every detail,\njust as he is', 1)
-    x0, y0, x1, y1 = FOTO
-    alto = (y1 - y0 - 24) // 2
-    sombra(im, (x0, y0, x1, y0 + alto), radio=18, off=(0, 10), alfa=55)
-    im.paste(recorte(ppal, x1 - x0, alto, .427, .375, 2.4), (x0, y0))
-    sombra(im, (x0, y1 - alto, x1, y1), radio=18, off=(0, 10), alfa=55)
-    im.paste(recorte(ret, x1 - x0, alto, .51, .275, 3.6), (x0, y1 - alto))
-    d = ImageDraw.Draw(im)
-    for texto, yy in (('His photo', y0 + 20), ('His portrait', y1 - alto + 20)):
-        f = TXT_B(26)
-        tw = d.textlength(texto.upper(), font=f)
-        d.rounded_rectangle((x0 + 20, yy, x0 + 64 + tw, yy + 48), 24, fill=PAPEL)
-        d.text((x0 + 42, yy + 25), texto.upper(), font=f, fill=SALVIA, anchor='lm')
+    cabecera(im, 'The details', 'His favorite spots,\non the signpost', 1)
+    foto_en_zona(im, ret, cx=.8, cy=.36, zoom=2.6)
     diapos.append(im)
 
     # 6 · Llamada
     im = lienzo()
     d = ImageDraw.Draw(im)
-    y = texto_centrado(d, ['Your pet has', 'something unique too'], 250, TIT(84), TINTA, 100)
+    y = texto_centrado(d, ['Every pet has', 'a story to tell'], 250, TIT(92), TINTA, 108)
     d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
     y += 50
     for b in ['Send us 4 photos from your phone', 'Digital proof in 48 hours', "We don't charge you until you approve it"]:
@@ -745,7 +733,6 @@ def publicacion_6():
         pie(im, i, total)
         im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
     print(out)
-
 
 if __name__ == '__main__':
     import sys
