@@ -388,7 +388,7 @@
                     "t": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><strong>Vista previa en 48 h</strong> · nada se imprime sin tu OK</p>",
+                        "text": "<p><strong>No te cobramos hasta que apruebes tu diseño</strong> · vista previa en 48 h</p>",
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
@@ -806,7 +806,7 @@
                     "t": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Nos dices qué cambiar y lo corregimos antes de imprimir. Nada pasa a producción sin tu aprobación.</p>",
+                        "text": "<p>Nos dices qué cambiar y lo corregimos antes de imprimir (hasta 2 rondas de cambios). Al comprar solo reservamos el importe en tu tarjeta: no te lo cobramos hasta que apruebas tu diseño y, si decides no seguir, anulamos la reserva y no pagas nada.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
