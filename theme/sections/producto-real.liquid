@@ -30,10 +30,11 @@
 </div>
 
 <style>
-  #kpr-{{ section.id }} { max-width: 1200px; margin: 0 auto; padding: 72px 16px; display: grid; gap: 32px; align-items: center; }
-  @media (min-width: 750px) { #kpr-{{ section.id }} { grid-template-columns: 1fr 1fr; gap: 64px; } }
+  #kpr-{{ section.id }} { max-width: 1200px; margin: 0 auto; padding: 48px 16px; display: grid; gap: 24px; align-items: center; }
+  @media (min-width: 750px) { #kpr-{{ section.id }} { grid-template-columns: 1fr 1fr; gap: 64px; padding: 72px 16px; } }
   #kpr-{{ section.id }} .kpr__foto { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 28px rgb(40 30 20 / .14); }
-  #kpr-{{ section.id }} .kpr__foto img, #kpr-{{ section.id }} .kpr__foto svg { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 62%; }
+  #kpr-{{ section.id }} .kpr__foto img, #kpr-{{ section.id }} .kpr__foto svg { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 40% 62%; }
+  @media (min-width: 750px) { #kpr-{{ section.id }} .kpr__foto img, #kpr-{{ section.id }} .kpr__foto svg { aspect-ratio: 4 / 5; } }
   #kpr-{{ section.id }} .kpr__sello { position: absolute; left: 16px; top: 16px; background: rgb(246 242 236 / .92); color: rgb(63 81 71); font-size: .8125rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px; }
   #kpr-{{ section.id }} .kpr__etiqueta { margin: 0 0 8px; color: rgb(63 81 71); font-weight: 700; font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; }
   #kpr-{{ section.id }} .kpr__titulo { margin: 0 0 16px; }

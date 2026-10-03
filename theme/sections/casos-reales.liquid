@@ -35,7 +35,8 @@
 </div>
 
 <style>
-  #kc-{{ section.id }} { max-width: 1200px; margin: 0 auto; padding: 72px 16px; text-align: center; }
+  #kc-{{ section.id }} { max-width: 1200px; margin: 0 auto; padding: 48px 16px; text-align: center; }
+  @media (min-width: 750px) { #kc-{{ section.id }} { padding: 72px 16px; } }
   #kc-{{ section.id }} .kc__titulo { margin: 0 0 12px; }
   #kc-{{ section.id }} .kc__texto { max-width: 640px; margin: 0 auto 32px; opacity: .85; }
   #kc-{{ section.id }} .kc__marco { position: relative; }
