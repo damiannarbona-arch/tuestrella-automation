@@ -739,8 +739,8 @@ def publicacion_6():
 T7 = {
     'es': {
         'p': ('Foto real · sin filtros', 'Así llega\na casa', 1),
-        's2': ('Los detalles', 'Su cara, su nombre\ny su frase', 1),
-        's3': ('Tamaño real', '20 × 25 cm,\nen madera natural', 1),
+        's2': ('Los detalles · 20 × 25 cm', 'Su cara, su nombre\ny su frase', 1),
+        's3': ('Y al caer la tarde', 'Con luz cálida,\nigual de bonito', 1),
         's4': ('Listo para poner', 'Con soporte\npara la mesa', 1),
         'pol': ('delante', 'detrás'),
         'h': 'PENNY',
@@ -752,8 +752,8 @@ T7 = {
     },
     'en': {
         'p': ('Real photo · no filters', 'This is how\nit arrives', 1),
-        's2': ('The details', 'Her face, her name\nand her words', 1),
-        's3': ('Real size', '8 × 10 in, in\nnatural wood', 1),
+        's2': ('The details · 8 × 10 in', 'Her face, her name\nand her words', 1),
+        's3': ('And in the evening', 'In warm light,\njust as lovely', 1),
         's4': ('Ready to display', 'With a stand\nfor your shelf', 1),
         'pol': ('front', 'back'),
         'h': 'PENNY',
@@ -768,7 +768,7 @@ T7 = {
 
 def publicacion_7():
     P = lambda f: abrir(A('casos', 'penny', 'producto-real', f))
-    casa, mano, mano2, trasera, frente = P('web-principal.jpg'), P('foto-1.jpg'), P('foto-2.jpg'), P('trasera.jpg'), P('estudio-80.jpg')
+    casa, noche, mano2, trasera, frente = P('web-principal.jpg'), P('lampara-83.jpg'), P('foto-2.jpg'), P('trasera.jpg'), P('estudio-80.jpg')
     for lang, T in T7.items():
         out = A('redes', 'publicaciones', '07-penny-real', lang)
         os.makedirs(out, exist_ok=True)
@@ -786,10 +786,10 @@ def publicacion_7():
         foto_en_zona(im, mano2, cx=.5, cy=.56, zoom=1.2)
         diapos.append(im)
 
-        # 3 · Tamaño real en la mano
+        # 3 · De tarde, con la lámpara encendida (otro ambiente, no otra foto del marco en la mano)
         im = lienzo()
         cabecera(im, *T['s3'])
-        foto_en_zona(im, mano, cx=.45, cy=.5, zoom=1.12)
+        foto_en_zona(im, noche, cx=.5, cy=.62)
         diapos.append(im)
 
         # 4 · Delante y detrás (soporte y colgador)
