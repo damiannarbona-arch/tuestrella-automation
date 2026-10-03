@@ -1,0 +1,64 @@
+{%- comment -%}
+  "Así llega a casa": foto real del producto (sin mockup) junto a lo que recibe el cliente.
+  Responde a la duda "¿se verá igual que en la pantalla?" justo después de los casos reales.
+{%- endcomment -%}
+<div class="kpr" id="kpr-{{ section.id }}">
+  <div class="kpr__foto">
+    {%- if section.settings.imagen != blank -%}
+      {{ section.settings.imagen | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '500, 800, 1100, 1400', sizes: '(min-width: 750px) 50vw, 100vw', alt: section.settings.imagen.alt }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag }}
+    {%- endif -%}
+    {%- if section.settings.sello != blank -%}<span class="kpr__sello">{{ section.settings.sello }}</span>{%- endif -%}
+  </div>
+  <div class="kpr__texto">
+    {%- if section.settings.etiqueta != blank -%}<p class="kpr__etiqueta">{{ section.settings.etiqueta }}</p>{%- endif -%}
+    <h2 class="kpr__titulo">{{ section.settings.titulo }}</h2>
+    {%- if section.settings.texto != blank -%}<div class="kpr__parrafo">{{ section.settings.texto }}</div>{%- endif -%}
+    <ul class="kpr__lista">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M7 12.3l3.2 3.2L17 8.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ block.settings.texto }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.boton_texto != blank -%}
+      <a class="button" href="{{ section.settings.boton_enlace | default: '/collections/all' }}">{{ section.settings.boton_texto }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  #kpr-{{ section.id }} { max-width: 1200px; margin: 0 auto; padding: 72px 16px; display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 750px) { #kpr-{{ section.id }} { grid-template-columns: 1fr 1fr; gap: 64px; } }
+  #kpr-{{ section.id }} .kpr__foto { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 28px rgb(40 30 20 / .14); }
+  #kpr-{{ section.id }} .kpr__foto img, #kpr-{{ section.id }} .kpr__foto svg { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 62%; }
+  #kpr-{{ section.id }} .kpr__sello { position: absolute; left: 16px; top: 16px; background: rgb(246 242 236 / .92); color: rgb(63 81 71); font-size: .8125rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px; }
+  #kpr-{{ section.id }} .kpr__etiqueta { margin: 0 0 8px; color: rgb(63 81 71); font-weight: 700; font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; }
+  #kpr-{{ section.id }} .kpr__titulo { margin: 0 0 16px; }
+  #kpr-{{ section.id }} .kpr__parrafo { opacity: .85; margin-bottom: 20px; }
+  #kpr-{{ section.id }} .kpr__lista { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 12px; }
+  #kpr-{{ section.id }} .kpr__lista li { display: flex; gap: 12px; align-items: flex-start; }
+  #kpr-{{ section.id }} .kpr__lista svg { flex: none; width: 22px; height: 22px; margin-top: 2px; color: rgb(63 81 71); }
+</style>
+
+{% schema %}
+{
+  "name": "Producto real",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "imagen", "label": "Foto real del producto" },
+    { "type": "text", "id": "sello", "label": "Sello sobre la foto", "default": "Foto real · sin filtros" },
+    { "type": "text", "id": "etiqueta", "label": "Etiqueta", "default": "Así llega a casa" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Igual que en la pantalla, pero en tu salón" },
+    { "type": "richtext", "id": "texto", "label": "Texto" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Crear el mío" },
+    { "type": "url", "id": "boton_enlace", "label": "Enlace del botón" }
+  ],
+  "blocks": [
+    { "type": "punto", "name": "Punto", "settings": [{ "type": "text", "id": "texto", "label": "Texto" }] }
+  ],
+  "presets": [{ "name": "Producto real" }]
+}
+{% endschema %}
