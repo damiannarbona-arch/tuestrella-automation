@@ -91,9 +91,19 @@
             "estilo": "Clásico",
             "producto": "retrato-mascota-personalizado-clasico"
           }
+        },
+        "d10": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-penny-rosa.jpg",
+            "nombre": "Penny",
+            "estilo": "Rosa",
+            "producto": "retrato-mascota-personalizado-rosa"
+          }
         }
       },
       "block_order": [
+        "d10",
         "d9",
         "d1",
         "d2",
