@@ -734,6 +734,100 @@ def publicacion_6():
         im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
     print(out)
 
+# ---------- Publicación #7 · Producto real (Penny): así llega a casa ----------
+
+T7 = {
+    'es': {
+        'p': ('Foto real · sin filtros', 'Así llega\na casa', 1),
+        's2': ('Los detalles', 'Su cara, su nombre\ny su frase', 1),
+        's3': ('Tamaño real', '20 × 25 cm,\nen madera natural', 1),
+        's4': ('Listo para poner', 'Con soporte\npara la mesa', 1),
+        'pol': ('delante', 'detrás'),
+        'h': 'PENNY',
+        'h1': ['Ahora sigue', 'cada día', 'en el salón'],
+        'h2': ['entre una vela', 'y un poco de lavanda'],
+        'cta_t': ['¿Y el de', 'tu mascota?'],
+        'cta': ['Mándanos 4 fotos de tu móvil', 'Vista previa en 48 horas', 'No te cobramos hasta que lo apruebes'],
+        'boton': 'Pide el tuyo · enlace en la bio',
+    },
+    'en': {
+        'p': ('Real photo · no filters', 'This is how\nit arrives', 1),
+        's2': ('The details', 'Her face, her name\nand her words', 1),
+        's3': ('Real size', '8 × 10 in, in\nnatural wood', 1),
+        's4': ('Ready to display', 'With a stand\nfor your shelf', 1),
+        'pol': ('front', 'back'),
+        'h': 'PENNY',
+        'h1': ['Now she stays', 'every day', 'in the living room'],
+        'h2': ['between a candle', 'and some lavender'],
+        'cta_t': ['What about', 'your pet?'],
+        'cta': ['Send us 4 photos from your phone', 'Digital proof in 48 hours', "We don't charge you until you approve it"],
+        'boton': 'Get yours · link in bio',
+    },
+}
+
+
+def publicacion_7():
+    P = lambda f: abrir(A('casos', 'penny', 'producto-real', f))
+    casa, mano, mano2, trasera, frente = P('web-principal.jpg'), P('foto-1.jpg'), P('foto-2.jpg'), P('trasera.jpg'), P('estudio-80.jpg')
+    for lang, T in T7.items():
+        out = A('redes', 'publicaciones', '07-penny-real', lang)
+        os.makedirs(out, exist_ok=True)
+        total, diapos = 6, []
+
+        # 1 · Portada: en casa, con la vela y la lavanda
+        im = lienzo()
+        cabecera(im, *T['p'])
+        foto_en_zona(im, casa, cx=.42, cy=.6)
+        diapos.append(im)
+
+        # 2 · Detalle: cara, nombre y frase
+        im = lienzo()
+        cabecera(im, *T['s2'])
+        foto_en_zona(im, mano2, cx=.5, cy=.56, zoom=1.2)
+        diapos.append(im)
+
+        # 3 · Tamaño real en la mano
+        im = lienzo()
+        cabecera(im, *T['s3'])
+        foto_en_zona(im, mano, cx=.45, cy=.5, zoom=1.12)
+        diapos.append(im)
+
+        # 4 · Delante y detrás (soporte y colgador)
+        im = lienzo()
+        cabecera(im, *T['s4'])
+        polaroid(im, frente, (300, 760), 460, -4, T['pol'][0], foco=(.5, .55))
+        polaroid(im, trasera, (780, 790), 460, 4, T['pol'][1], foco=(.5, .55))
+        diapos.append(im)
+
+        # 5 · Solo texto: dónde está ahora
+        im = lienzo()
+        d = ImageDraw.Draw(im)
+        d.text((W / 2, 330), T['h'], font=TXT_B(28), fill=SALVIA, anchor='ms')
+        y = texto_centrado(d, T['h1'], 520, TIT(92), TINTA, 112)
+        y = texto_centrado(d, T['h2'], y + 60, TIT_I(70), GRIS, 88)
+        d.line((W / 2 - 60, y + 10, W / 2 + 60, y + 10), fill=ROSA, width=4)
+        diapos.append(im)
+
+        # 6 · Llamada
+        im = lienzo()
+        d = ImageDraw.Draw(im)
+        y = texto_centrado(d, T['cta_t'], 250, TIT(92), TINTA, 108)
+        d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+        y += 50
+        for b in T['cta']:
+            check(d, 150, y - 12)
+            d.text((196, y), b, font=TXT(40), fill=TINTA, anchor='ls')
+            y += 84
+        polaroid(im, casa, (W / 2, 950), 240, -4, foco=(.32, .6))
+        boton(ImageDraw.Draw(im), W / 2, 1185, T['boton'])
+        diapos.append(im)
+
+        for i, im in enumerate(diapos, 1):
+            pie(im, i, total)
+            im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+        print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
