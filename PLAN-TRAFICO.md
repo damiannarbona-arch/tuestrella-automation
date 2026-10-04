@@ -74,3 +74,10 @@ a la web y (b) abrir canales que sí mandan tráfico: Pinterest, Google y public
 ## 5. Bloqueantes fuera del marketing
 - Alta fiscal (Hacienda + autónomos) antes de que lleguen ventas recurrentes: hablar con gestor.
 - Meta: cuenta personal con control total de la página y el Instagram vinculado (bloqueo temporal en curso).
+
+## 6. Mensaje diferencial (usar en todo: vídeos, carruseles, web, anuncios)
+**"Un cuadro personalizado, no un cuadro cualquiera."** Lo que nos separa de las fotos impresas y de los
+retratos genéricos: su cara dibujada, **su carácter** (los rasgos), **su nombre y su frase**, y sus fotos favoritas.
+- Vídeos: una escena fija con el detalle de rasgos y frase + "Querían un cuadro personalizado, no uno cualquiera".
+- Descripciones y comentarios fijados: repetir la idea con las palabras "su cara, su carácter y su frase".
+- Web y bio: candidata a lema junto a "Su recuerdo, para siempre".

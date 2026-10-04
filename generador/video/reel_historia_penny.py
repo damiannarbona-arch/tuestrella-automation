@@ -1,6 +1,6 @@
 """Reel "historia" de Penny (1080×1920, ~18 s). El cuadro no se ve hasta el final:
 gancho sobre el cuadro difuminado → Penny en el campo → sus fotos pasando rápido (polaroids pequeñas)
-→ vista previa por mensaje en el móvil, aprobada → el cuadro en casa → información de Kivoa sin imagen.
+→ "querían un cuadro personalizado, no uno cualquiera" (detalle de rasgos y frase) → vista previa por mensaje en el móvil, aprobada → el cuadro en casa → información de Kivoa sin imagen.
 
 Uso: python3 generador/video/reel_historia_penny.py [idiomas]      (es por defecto)
 Sin audio: la música se pone en la app.
@@ -23,6 +23,7 @@ TXT_ = {
     'es': {'a': [('¿Has perdido a', 'b'), ('tu mascota, o conoces', 'b'), ('a alguien que sí?', 'b')],
            'b': [('Quédate y te cuento', 'b'), ('la historia de Penny', 'b')],
            'c': [('Su familia nos envió', 'b'), ('sus fotos favoritas', 'b')],
+           'p': [('Querían un cuadro', 'b'), ('personalizado,', 'b'), ('no uno cualquiera', 'i')],
            'd': [('En 48 h recibieron', 'b'), ('su vista previa…', 'b'), ('…y la aprobaron', 'i')],
            'e': [('Unos días después,', 'b'), ('sigue junto a ellos', 'b'), ('en casa', 'i')],
            'chat': ('Kivoa', 'en línea', '¡Aquí tenéis a Penny!', '¿Queréis cambiar algo?', '¡Es ella! Adelante'),
@@ -112,7 +113,7 @@ def montar(idiomas='es'):
     abrir = lambda p: ImageOps.exif_transpose(Image.open(p)).convert('RGB')
     noche, casa, campo = abrir(P('producto-real', 'lampara-83.jpg')), abrir(P('producto-real', 'web-principal.jpg')), abrir(P('foto-paisaje.jpg'))
     campo_v = apaisada(campo)
-    previa = abrir(P('vista-previa-rosa.jpg'))
+    previa, diseno = abrir(P('vista-previa-rosa.jpg')), abrir(P('retrato-rosa.jpg'))
     tapado = noche.filter(ImageFilter.GaussianBlur(26))
     fotos = [abrir(P(f'familia-{i}.jpg')) for i in (1, 2, 3)] + [campo]
     etapas = fotos_pasando(fotos)
@@ -125,6 +126,7 @@ def montar(idiomas='es'):
             (2.8, lambda tl, x: kenburns(tapado, S, x, 1.15, 1.3, (.5, .55), (.52, .5)), rot('a')),
             (2.8, lambda tl, x: kenburns(campo_v, S, x, 1.0, 1.06, (.5, .55), (.53, .56)), rot('b')),
             (2.6, lambda tl, x: etapas[min(int(x * 4.6), 3)], rot('c')),
+            (2.6, lambda tl, x: kenburns(diseno, S, x, 1.45, 1.2, (.5, .82), (.5, .74)), rot('p')),
             (3.2, lambda tl, x: chat[x > .55], rot('d')),
             (2.8, lambda tl, x: kenburns(casa, S, x, 1.35, 1.0, (.4, .6), (.42, .56)), rot('e')),
             (3.2, lambda tl, x: fin, []),
