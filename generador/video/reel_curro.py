@@ -23,7 +23,7 @@ C = lambda *p: os.path.join(RAIZ, 'assets', 'casos', 'curro', *p)
 CFG = {'pequeno': ('avelino', 'retrato-clasico-{}.jpg')}
 
 TXT = {
-    'es': {'a': [('Curro, ¿estás', 'b'), ('preparado para verte?', 'b')],
+    'es': {'a': [('Curro, ¿estás preparado', 'b'), ('para ver tu retrato', 'b'), ('personalizado?', 'b')],
            'b': [('Allá voy…', 'b')],
            'd': [('Ya sabía yo', 'b'), ('que era guapo', 'b')],
            'e': [('Un cuadro personalizado,', 'b'), ('no uno cualquiera', 'i')],
