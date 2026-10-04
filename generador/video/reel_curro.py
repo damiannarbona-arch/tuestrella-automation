@@ -25,7 +25,6 @@ CFG = {'pequeno': ('avelino', 'retrato-clasico-{}.jpg')}
 TXT = {
     'es': {'a': [('Curro, ¿estás', 'b'), ('preparado para verte?', 'b')],
            'b': [('Allá voy…', 'b')],
-           'c': [('Redoble de tambores…', 'b')],
            'd': [('Ya sabía yo', 'b'), ('que era guapo', 'b')],
            'e': [('Un cuadro personalizado,', 'b'), ('no uno cualquiera', 'i')],
            'f': [('¿Hacemos el de tu mascota?', 'b'), ('Enlace en el perfil', 'i')]},
@@ -48,7 +47,7 @@ def montar(idiomas='es'):
         render(f'reel-curro-{lang}.mp4', [
             (2.4, lambda tl, x: kenburns(dormido, S, x, 1.15, 1.45, (.52, .45), (.56, .42)), rot('a')),
             (2.0, lambda tl, x: anda(tl), rot('b')),
-            (1.5, lambda tl, x: recorte_log(tapada, x, VISTA, MARCO), rot('c', ABA, .1)),
+            (1.5, lambda tl, x: recorte_log(tapada, x, VISTA, MARCO), []),
             (0.7, caer, []),
             (1.4, lambda tl, x: recorte_log(muro, x, MARCO, cerca), []),
             (2.0, lambda tl, x: kenburns(guapo, S, x, 1.2, 1.45, (.53, .45), (.56, .42)), rot('d')),
