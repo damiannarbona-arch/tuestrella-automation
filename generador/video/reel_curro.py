@@ -1,5 +1,6 @@
-"""Reel de humor de Curro (1080×1920, ~17 s): "¿estás preparado para verte?" (ojos cerrados) → "Allá voy…"
-(vídeo real andando hacia la cámara) → cuadro tapado → cae el trapo → "Ya sabía yo que era guapo" (ojos abiertos)
+"""Reel de humor de Curro (1080×1920, ~17 s), con vídeo real hasta el resultado: "¿estás preparado para ver tu
+retrato personalizado?" (Curro mirando) → "Se lo está pensando…" (se da la vuelta) → "Allá voy…" (anda hacia la
+cámara) → cuadro tapado → cae el trapo → "Ya sabía yo que era guapo" (llega de frente, a cámara lenta)
 → detalle de rasgos y frase ("un cuadro personalizado, no uno cualquiera") → llamada.
 
 Uso: python3 generador/video/reel_curro.py [idiomas]      (es por defecto)
@@ -24,6 +25,7 @@ CFG = {'pequeno': ('avelino', 'retrato-clasico-{}.jpg')}
 
 TXT = {
     'es': {'a': [('Curro, ¿estás preparado', 'b'), ('para ver tu retrato', 'b'), ('personalizado?', 'b')],
+           'p': [('Se lo está pensando…', 'b')],
            'b': [('Allá voy…', 'b')],
            'd': [('Ya sabía yo', 'b'), ('que era guapo', 'b')],
            'e': [('Un cuadro personalizado,', 'b'), ('no uno cualquiera', 'i')],
@@ -33,8 +35,11 @@ TXT = {
 
 def montar(idiomas='es'):
     abrir = lambda f: ImageOps.exif_transpose(Image.open(C(f))).convert('RGB')
-    dormido, guapo = abrir('foto-2-limpia.jpg'), abrir('foto-1-limpia.jpg')
-    anda = tramo(C('video-1.mp4'), 8.4, 2.2)          # se acerca de frente a la cámara
+    video = C('video-1.mp4')
+    mira = tramo(video, 0.0, 3.0)                      # quieto, mirando alrededor
+    piensa = tramo(video, 6.0, 2.0)                    # se da la vuelta
+    anda = tramo(video, 8.3, 2.0)                      # anda hacia la cámara
+    llega = tramo(video, 10.3, 1.2)                    # llega de frente (se pone a cámara lenta)
     tela, m = trapo()
     for lang in idiomas.split(','):
         T = TXT[lang]
@@ -45,14 +50,15 @@ def montar(idiomas='es'):
         detalle = (gx0 + .5 * (gx1 - gx0), gy0 + .8 * (gy1 - gy0), (gx1 - gx0) * .97 * 16 / 9)
         caer = lambda tl, x: recorte_log(con_trapo(muro, tela, m, min(1, ease(x) * 1.05)), 0, MARCO, MARCO)
         render(f'reel-curro-{lang}.mp4', [
-            (2.4, lambda tl, x: kenburns(dormido, S, x, 1.15, 1.45, (.52, .45), (.56, .42)), rot('a')),
+            (3.0, lambda tl, x: mira(tl), rot('a')),
+            (2.0, lambda tl, x: piensa(tl), rot('p')),
             (2.0, lambda tl, x: anda(tl), rot('b')),
-            (1.5, lambda tl, x: recorte_log(tapada, x, VISTA, MARCO), []),
+            (1.3, lambda tl, x: recorte_log(tapada, x, VISTA, MARCO), []),
             (0.7, caer, []),
             (1.4, lambda tl, x: recorte_log(muro, x, MARCO, cerca), []),
-            (2.0, lambda tl, x: kenburns(guapo, S, x, 1.2, 1.45, (.53, .45), (.56, .42)), rot('d')),
-            (2.6, lambda tl, x: recorte_log(muro, x, cerca, detalle), rot('e', ARR, .1)),
-            (2.4, lambda tl, x: recorte_log(muro, x, VISTA, (VISTA[0], VISTA[1], VISTA[2] * .95)), rot('f', ABA, .1)),
+            (2.0, lambda tl, x: llega(tl * .6), rot('d')),
+            (2.4, lambda tl, x: recorte_log(muro, x, cerca, detalle), rot('e', ARR, .1)),
+            (2.2, lambda tl, x: recorte_log(muro, x, VISTA, (VISTA[0], VISTA[1], VISTA[2] * .95)), rot('f', ABA, .1)),
         ])
 
 
