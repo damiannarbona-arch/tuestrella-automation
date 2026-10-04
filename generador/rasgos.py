@@ -48,6 +48,8 @@ RASGOS = {
     'special': ('star', 'Special', 'Especial', 'Especial'),
     'unique': ('sparkles', 'Unique', 'Único', 'Única'),
     'greedy': ('cookie', 'Treat lover', 'Goloso', 'Golosa'),
+    'charming': ('sparkles', 'Charming', 'Coqueto', 'Coqueta'),
+    'faithful': ('paw', 'Faithful', 'Fiel', 'Fiel'),
 }
 
 
