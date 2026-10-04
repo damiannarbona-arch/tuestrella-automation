@@ -828,6 +828,75 @@ def publicacion_7():
         print(out)
 
 
+# ---------- Publicación #8 · Curro (humor: posando desde que nació) ----------
+
+def publicacion_8():
+    C = lambda f: abrir(A('casos', 'curro', f))
+    frente, dormido, perfil, hermano = C('foto-1-limpia.jpg'), C('foto-2-limpia.jpg'), C('foto-4-limpia.jpg'), C('foto-3-limpia.jpg')
+    ret = C('retrato-clasico-es.jpg')
+    out = A('redes', 'publicaciones', '08-curro', 'es')
+    os.makedirs(out, exist_ok=True)
+    total, diapos = 6, []
+    x0, y0, x1, y1 = FOTO
+
+    # 1 · Portada
+    im = lienzo()
+    cabecera(im, 'Curro · bulldog francés', 'Posando\ndesde que nació', 1)
+    foto_en_zona(im, frente, cx=.53, cy=.42, zoom=1.25)
+    diapos.append(im)
+
+    # 2 · El chiste: ojos cerrados
+    im = lienzo()
+    cabecera(im, 'Rasgo n.º 4', 'Dormilón\nprofesional', 1)
+    foto_en_zona(im, dormido, cx=.55, cy=.42, zoom=1.3)
+    diapos.append(im)
+
+    # 3 · Sus fotos
+    im = lienzo()
+    cabecera(im, 'Sus fotos', 'Directas del móvil\nde su familia', 1)
+    for foto, c, a, foco in zip([frente, perfil, hermano, dormido], [(300, 610), (780, 590), (310, 985), (780, 965)],
+                                [-5, 4, 3, -4], [(.53, .4, 1.7), (.42, .45, 1.45), (.62, .45, 1.15), (.56, .38, 1.9)]):
+        polaroid(im, foto, c, 380, a, foco=foco)
+    diapos.append(im)
+
+    # 4 · El resultado
+    im = lienzo()
+    cabecera(im, 'El resultado', 'Su retrato,\ncon su carácter', 1)
+    ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
+    h = y1 - y0 - 70
+    w = int(ret.width * h / ret.height)
+    cx = (x0 + x1) // 2
+    caja = (cx - w // 2, y0 + 35, cx + w // 2, y0 + 35 + h)
+    sombra(im, caja, radio=18, off=(0, 10), alfa=80)
+    im.paste(ret.resize((w, h), Image.LANCZOS), caja[:2])
+    diapos.append(im)
+
+    # 5 · Detalle: rasgos y frase
+    im = lienzo()
+    cabecera(im, 'Los detalles', 'Seis rasgos…\ny ninguno es mentira', 1)
+    foto_en_zona(im, ret, cx=.5, cy=.78, zoom=1.0)
+    diapos.append(im)
+
+    # 6 · Llamada
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    y = texto_centrado(d, ['Un cuadro personalizado,', 'no uno cualquiera'], 250, TIT(72), TINTA, 92)
+    d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+    y += 50
+    for b in ['Mándanos sus fotos del móvil', 'Vista previa en 48 horas', 'No te cobramos hasta que la apruebes']:
+        check(d, 150, y - 12)
+        d.text((196, y), b, font=TXT(40), fill=TINTA, anchor='ls')
+        y += 84
+    polaroid(im, ret, (W / 2, 950), 240, -4, foco=(.5, .35))
+    boton(ImageDraw.Draw(im), W / 2, 1185, 'Pide el tuyo · enlace en la bio')
+    diapos.append(im)
+
+    for i, im in enumerate(diapos, 1):
+        pie(im, i, total)
+        im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+    print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7, "8": publicacion_8}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
