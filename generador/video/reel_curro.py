@@ -1,4 +1,4 @@
-"""Reel de humor de Curro (1080×1920, ~17 s), con vídeo real hasta el resultado: "¿estás preparado para ver tu
+"""Reel de humor de Curro (1080×1920, ≤15 s), con vídeo real hasta el resultado: "¿estás preparado para ver tu
 retrato personalizado?" (Curro mirando) → "Se lo está pensando…" (se da la vuelta) → "Allá voy…" (anda hacia la
 cámara) → cuadro tapado → cae el trapo → "Ya sabía yo que era guapo" (llega de frente, a cámara lenta)
 → detalle de rasgos y frase ("un cuadro personalizado, no uno cualquiera") → llamada.
@@ -50,15 +50,15 @@ def montar(idiomas='es'):
         detalle = (gx0 + .5 * (gx1 - gx0), gy0 + .8 * (gy1 - gy0), (gx1 - gx0) * .97 * 16 / 9)
         caer = lambda tl, x: recorte_log(con_trapo(muro, tela, m, min(1, ease(x) * 1.05)), 0, MARCO, MARCO)
         render(f'reel-curro-{lang}.mp4', [
-            (3.0, lambda tl, x: mira(tl), rot('a')),
-            (2.0, lambda tl, x: piensa(tl), rot('p')),
-            (2.0, lambda tl, x: anda(tl), rot('b')),
-            (1.3, lambda tl, x: recorte_log(tapada, x, VISTA, MARCO), []),
+            (2.6, lambda tl, x: mira(tl), rot('a')),
+            (1.6, lambda tl, x: piensa(tl), rot('p')),
+            (1.8, lambda tl, x: anda(tl), rot('b')),
+            (1.0, lambda tl, x: recorte_log(tapada, x, VISTA, MARCO), []),
             (0.7, caer, []),
-            (1.4, lambda tl, x: recorte_log(muro, x, MARCO, cerca), []),
-            (2.0, lambda tl, x: llega(tl * .6), rot('d')),
-            (2.4, lambda tl, x: recorte_log(muro, x, cerca, detalle), rot('e', ARR, .1)),
-            (2.2, lambda tl, x: recorte_log(muro, x, VISTA, (VISTA[0], VISTA[1], VISTA[2] * .95)), rot('f', ABA, .1)),
+            (1.2, lambda tl, x: recorte_log(muro, x, MARCO, cerca), []),
+            (1.8, lambda tl, x: llega(tl * .66), rot('d')),
+            (2.2, lambda tl, x: recorte_log(muro, x, cerca, detalle), rot('e', ARR, .1)),
+            (2.0, lambda tl, x: recorte_log(muro, x, VISTA, (VISTA[0], VISTA[1], VISTA[2] * .95)), rot('f', ABA, .1)),
         ])
 
 

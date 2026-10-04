@@ -81,3 +81,9 @@ retratos genéricos: su cara dibujada, **su carácter** (los rasgos), **su nombr
 - Vídeos: una escena fija con el detalle de rasgos y frase + "Querían un cuadro personalizado, no uno cualquiera".
 - Descripciones y comentarios fijados: repetir la idea con las palabras "su cara, su carácter y su frase".
 - Web y bio: candidata a lema junto a "Su recuerdo, para siempre".
+
+## 7. Reglas de los vídeos
+- **Máximo 15 s.** Gancho escrito desde el segundo 0, con la palabra clave ("retrato personalizado").
+- **Vídeo real hasta el resultado** siempre que haya material: la mascota mirando, andando, con su costumbre.
+- Letra nativa de TikTok (TikTok Sans blanca con contorno), sin caja. Sin música: se pone en la app.
+- Una escena con el detalle de rasgos y frase: "un cuadro personalizado, no uno cualquiera".

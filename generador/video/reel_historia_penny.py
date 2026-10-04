@@ -1,4 +1,4 @@
-"""Reel "historia" de Penny (1080×1920, ~18 s). El cuadro no se ve hasta el final:
+"""Reel "historia" de Penny (1080×1920, ≤15 s). El cuadro no se ve hasta el final:
 gancho sobre el cuadro difuminado → Penny en el campo → sus fotos pasando rápido (polaroids pequeñas)
 → "querían un cuadro personalizado, no uno cualquiera" (detalle de rasgos y frase) → vista previa por mensaje en el móvil, aprobada → el cuadro en casa → información de Kivoa sin imagen.
 
@@ -123,13 +123,13 @@ def montar(idiomas='es'):
         chat = [movil(previa, T, False), movil(previa, T, True)]
         fin = info(T)
         render(f'reel-historia-penny-{lang}.mp4', [
-            (2.8, lambda tl, x: kenburns(tapado, S, x, 1.15, 1.3, (.5, .55), (.52, .5)), rot('a')),
-            (2.8, lambda tl, x: kenburns(campo_v, S, x, 1.0, 1.06, (.5, .55), (.53, .56)), rot('b')),
-            (2.6, lambda tl, x: etapas[min(int(x * 4.6), 3)], rot('c')),
-            (2.6, lambda tl, x: kenburns(diseno, S, x, 1.45, 1.2, (.5, .82), (.5, .74)), rot('p')),
-            (3.2, lambda tl, x: chat[x > .55], rot('d')),
-            (2.8, lambda tl, x: kenburns(casa, S, x, 1.35, 1.0, (.4, .6), (.42, .56)), rot('e')),
-            (3.2, lambda tl, x: fin, []),
+            (2.4, lambda tl, x: kenburns(tapado, S, x, 1.15, 1.3, (.5, .55), (.52, .5)), rot('a')),
+            (2.0, lambda tl, x: kenburns(campo_v, S, x, 1.0, 1.06, (.5, .55), (.53, .56)), rot('b')),
+            (1.9, lambda tl, x: etapas[min(int(x * 4.6), 3)], rot('c')),
+            (2.1, lambda tl, x: kenburns(diseno, S, x, 1.45, 1.2, (.5, .82), (.5, .74)), rot('p')),
+            (2.4, lambda tl, x: chat[x > .5], rot('d')),
+            (2.2, lambda tl, x: kenburns(casa, S, x, 1.35, 1.0, (.4, .6), (.42, .56)), rot('e')),
+            (2.0, lambda tl, x: fin, []),
         ])
 
 
