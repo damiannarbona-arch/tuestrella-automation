@@ -127,7 +127,6 @@ def montar(idiomas='es'):
             (2.6, lambda tl, x: etapas[min(int(x * 4.6), 3)], rot('c')),
             (3.2, lambda tl, x: chat[x > .55], rot('d')),
             (2.8, lambda tl, x: kenburns(casa, S, x, 1.35, 1.0, (.4, .6), (.42, .56)), rot('e')),
-            (1.6, lambda tl, x: kenburns(noche, S, x, 1.15, 1.25, (.5, .55), (.52, .5)), []),
             (3.2, lambda tl, x: fin, []),
         ])
 
