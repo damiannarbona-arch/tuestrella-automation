@@ -84,10 +84,46 @@ def sobre_papel(img, size, alto_rel=.78, t=0.0, z=(1.0, 1.04), sombra=True):
     return lienzo
 
 
-def texto(frame, lineas, y, alfa=1.0, tam=78):
-    """Rótulo en pastilla clara, centrado horizontalmente en y. lineas = [(txt, estilo), ...]."""
+# Estilo de los rótulos: 'tiktok' = letra nativa de TikTok (TikTok Sans seminegrita, blanca con contorno negro,
+# sin caja), la que llevan los vídeos virales; 'pastilla' = el rótulo antiguo en pastilla clara.
+ESTILO_TEXTO = 'tiktok'
+TIKTOK_SANS = os.path.join(RAIZ, 'generador', 'fuentes', 'TikTokSans.ttf')   # Google Fonts, licencia OFL
+
+
+def fuente_tiktok(tam, peso=600):
+    f = ImageFont.truetype(TIKTOK_SANS, tam)
+    f.set_variation_by_axes([36, 100, peso, 0])   # tamaño óptico, ancho, peso, inclinación
+    return f
+
+
+def texto_tiktok(frame, lineas, y, alfa=1.0, tam=78):
+    """Rótulo al estilo TikTok centrado en x desde y: blanco, contorno negro fino y sombra suave; sin caja.
+    Las líneas 'i' (secundarias) van algo más pequeñas."""
+    W = frame.width
+    t0 = int(tam * .88)
+    fuentes = [fuente_tiktok(int(t0 * (.78 if e == 'i' else 1)), 560 if e == 'i' else 640) for _, e in lineas]
+    capa = Image.new('RGBA', frame.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(capa)
+    a = int(255 * alfa)
+    yy = y + 20
+    for (t, e), f in zip(lineas, fuentes):
+        h = int(f.size * 1.22)
+        trazo = max(3, f.size // 14)
+        d.text((W / 2 + 2, yy + h / 2 + 4), t, font=f, fill=(0, 0, 0, int(a * .35)), anchor='mm',
+               stroke_width=trazo, stroke_fill=(0, 0, 0, int(a * .35)))
+        d.text((W / 2, yy + h / 2), t, font=f, fill=(255, 255, 255, a), anchor='mm', stroke_width=trazo, stroke_fill=(0, 0, 0, a))
+        yy += h
+    out = frame.convert('RGBA')
+    out.alpha_composite(capa)
+    return out.convert('RGB')
+
+
+def texto(frame, lineas, y, alfa=1.0, tam=78, estilo=None):
+    """Rótulo centrado horizontalmente en y. lineas = [(txt, estilo), ...]."""
     if alfa <= 0:
         return frame
+    if (estilo or ESTILO_TEXTO) == 'tiktok':
+        return texto_tiktok(frame, lineas, y, alfa, tam)
     W = frame.width
     fuentes = [F(BOLD if e == 'b' else ITAL if e == 'i' else SERIF, int(tam * (.62 if e == 'i' else 1))) for _, e in lineas]
     d0 = ImageDraw.Draw(frame)
