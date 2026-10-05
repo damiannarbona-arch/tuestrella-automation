@@ -87,12 +87,13 @@ def componer(video, retrato, salida, papel=(247, 241, 230)):
            '-s', f'{W}x{H}', '-r', str(fps), '-i', '-', '-c:v', 'libx264', '-crf', '16', '-pix_fmt', 'yuv420p', salida]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for a, q, m in zip(frames, Qs, masks):
+        q = q.mean(0) + (q - q.mean(0)) * 1.015   # un pelo más grande: sin línea gris en los bordes
         M = cv2.getPerspectiveTransform(origen, np.float32(q))
         warp = cv2.warpPerspective(src, M, (W, H), flags=cv2.INTER_LANCZOS4)
         zona = np.zeros((H, W), np.uint8)
         cv2.fillConvexPoly(zona, np.int32(np.round(q)), 1)
         if m is not None:   # solo donde había gris: lo que tapa el marco (dedos, papel) queda delante
-            zona &= ndimage.binary_dilation(m, iterations=3).astype(np.uint8)
+            zona &= ndimage.binary_dilation(m, iterations=6).astype(np.uint8)
         # luz: el gris del fotograma marca sombras y degradados; se aplican al retrato
         g = cv2.GaussianBlur(a.mean(2).astype(np.float32), (0, 0), 25)
         ref = np.median(a.mean(2)[zona > 0]) if zona.any() else 180
