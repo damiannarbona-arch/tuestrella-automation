@@ -47,7 +47,7 @@ def cierre():
     d.line((W / 2 - 80, 550, W / 2 + 80, 550), fill=ROSA, width=5)
     y = texto_centrado(d, ['El regalo que', 'no esperan'], 730, TIT(118), TINTA, 138)
     y += 120
-    for p in ['Vista previa en 48 h', 'No pagas hasta aprobarla', 'Pedidos para Navidad hasta el 1/12']:
+    for p in ['Vista previa en 48 h', 'No pagas hasta aprobarla', 'Navidad: pide antes del 1/12']:
         check(d, 170, y - 18, r=34)
         d.text((234, y), p, font=TXT(60), fill=TINTA, anchor='ls')
         y += 118
@@ -62,12 +62,17 @@ def cierre():
 def montar(caso, compuesto, video, desde):
     ia, dur = escena_ia(compuesto)
     ret = Image.open(os.path.join(RAIZ, 'assets', 'casos', caso, 'retrato-clasico-es.jpg')).convert('RGB')
+    # el retrato entero en 9:16 (papel arriba y abajo) para que al alejar se lean todos los rasgos
+    alto = round(ret.width * 16 / 9)
+    papel = Image.new('RGB', (ret.width, alto), ret.getpixel((20, ret.height - 20)))
+    papel.paste(ret, (0, (alto - ret.height) // 2))
+    ret = papel
     anda = tramo(video, float(desde), 2.4)
     fin = cierre()
     rot = lambda k: [(TXT_[k], ARR, 0, 1)]
     render(f'reel-regalo-{caso}-es.mp4', [
         (dur, lambda tl, x: ia(tl), rot('a')),
-        (3.0, lambda tl, x: kenburns(ret, S, x, 1.5, 1.15, (.5, .8), (.5, .7)), rot('b')),
+        (3.0, lambda tl, x: kenburns(ret, S, x, 1.9, 1.0, (.6, .38), (.5, .5)), rot('b')),
         (2.4, lambda tl, x: anda(tl), rot('c')),
         (3.4, lambda tl, x: fin, []),
     ])
