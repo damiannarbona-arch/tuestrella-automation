@@ -41,3 +41,45 @@ Imagen: Vertical 9:16 photo, quiet shelf in a living room at dusk, a lit candle 
 natural wood frame facing the camera (picture area flat matte grey #BDBDBD). Soft warm light, calm atmosphere.
 Vídeo: A woman's hand (no face) slowly enters the shot and gently touches the corner of the frame, then rests there for a
 moment. The candle flame flickers softly. Static camera, very slow push-in. The frame does not move. No text.
+
+---
+# Versión 2 · El marco NUNCA se mueve (05/10/2026)
+Probado con Hailuo: cuando la IA mueve el marco, se nota (flota, cambia de forma). Regla nueva: **el marco está quieto y
+nadie lo toca**; se mueven la cámara (acercamiento lento), las mascotas, la luz o las manos haciendo otra cosa.
+Ventaja extra: con el marco quieto el encaje del retrato es exacto en todos los fotogramas.
+Frase obligatoria en todos los prompts de vídeo: "The picture frame stays completely still and is never touched."
+
+## A · Rincón del salón con luces (ambiente / regalo)
+Imagen: Vertical 9:16 photo, cozy living room corner at night, a natural light-wood picture frame standing on a wooden
+sideboard, picture area flat matte uniform grey #BDBDBD (no image, no reflection), next to a small lit candle and a sprig of
+eucalyptus; warm Christmas fairy lights softly blurred in the background. Realistic smartphone photo.
+Vídeo: Very slow camera push-in towards the frame. The fairy lights twinkle softly in the background and the candle flame
+flickers. The picture frame stays completely still and is never touched. No people. No text.
+
+## B · El perro entra y se sienta delante (carácter / humor)
+Imagen: Vertical 9:16 photo, bright living room, a natural wood picture frame hanging on a white wall at dog eye level,
+above a low bench; picture area flat matte grey #BDBDBD. Empty floor in front of it. Realistic smartphone photo, daylight.
+Vídeo: A [RAZA] walks into the shot from the side, stops in front of the frame, sits down and looks up at it, tilting its
+head with curiosity, then looks back at the camera. Static camera. The picture frame stays completely still and is never
+touched. Natural, realistic dog movement. No text.
+
+## C · El gato se sube al mueble (carácter)
+Imagen: Vertical 9:16 photo, living room, a natural wood picture frame standing on a low wooden sideboard, picture area flat
+matte grey #BDBDBD; the rest of the sideboard is empty. Soft afternoon light. Realistic smartphone photo.
+Vídeo: A [RAZA DE GATO] jumps up onto the sideboard next to the frame, sniffs the corner of the frame without moving it,
+then lies down beside it and slowly blinks at the camera. Static camera. The picture frame stays completely still and is
+never touched. Realistic cat movement. No text.
+
+## D · Bajo el árbol, sin manos (regalo)
+Imagen: Vertical 9:16 photo, base of a decorated Christmas tree with warm lights, wrapped presents; in front, a natural wood
+picture frame leaning upright against a present, facing the camera, picture area flat matte grey #BDBDBD. Window with light
+snowfall in the background. Realistic, cozy.
+Vídeo: Slow camera dolly towards the frame. Tree lights twinkle, snow falls gently outside the window. The picture frame
+stays completely still and is never touched. No people. No text.
+
+## E · Café junto al cuadro (hogar / recuerdo)
+Imagen: Vertical 9:16 photo, wooden side table by a window in the morning, a natural wood picture frame standing on it facing
+the camera (picture area flat matte grey #BDBDBD), a knitted blanket on the armchair next to it. Soft morning light.
+Vídeo: A woman's hand (no face) places a steaming mug of coffee on the table next to the frame, then the hand leaves the shot.
+Steam rises slowly from the mug. Static camera, very slow push-in. The picture frame stays completely still and is never
+touched. No text.
