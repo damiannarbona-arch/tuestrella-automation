@@ -899,8 +899,8 @@ def sello_ia(im, texto='EJEMPLO CREADO CON IA'):
 
 
 def publicacion_9(raza='caniche', nombre='Canela'):
-    """Ejemplo por raza: sus fotos → su retrato → en casa → Kivoa. Mascota creada con IA: sello en las fotos y
-    aviso en el texto de la publicación (y etiqueta de IA de la red social)."""
+    """Ejemplo por raza: sus fotos → su retrato → en casa → Kivoa. Mascota creada con IA: el aviso va en la
+    etiqueta de IA de la red social y en el texto de la publicación ("ejemplo de estilo creado con IA")."""
     E = lambda f: abrir(A('ejemplos-ia', nombre.lower(), f))
     ret, escena = E('retrato-lavanda-es.jpg'), abrir(A('ia', 'salon-oscuro', f'inicial-{nombre.lower()}.jpg'))
     fotos = [E('foto-principal.webp'), E('extra-parque.webp'), E('extra-juguete.webp'), E('extra-dormida.webp')]
@@ -914,7 +914,6 @@ def publicacion_9(raza='caniche', nombre='Canela'):
     cabecera(im, f'¿Tienes un {raza}?', 'Mándanos unas fotos\nde tu móvil…', 1)
     for foto, c, a in zip(fotos, [(300, 610), (780, 590), (310, 985), (780, 965)], [-5, 4, 3, -4]):
         polaroid(im, foto, c, 380, a, foco=(.5, .4, 1.1))
-    sello_ia(im)
     diapos.append(im)
 
     # 2 · Su retrato
