@@ -16,11 +16,11 @@
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "bottom",
             "thumbnail_width": 72,
-            "thumbnail_radius": 6,
+            "thumbnail_radius": 8,
             "aspect_ratio": "1",
-            "constrain_to_viewport": true,
-            "media_fit": "contain",
-            "media_radius": 0,
+            "constrain_to_viewport": false,
+            "media_fit": "cover",
+            "media_radius": 12,
             "extend_media": false,
             "zoom": true,
             "video_loop": false,
@@ -680,8 +680,8 @@
         "padding-block-end": 0
       },
       "custom_css": [
-        "@media (min-width: 750px) { .product-information__media { position: sticky; top: calc(var(--header-height, 72px) + 12px); align-self: start; } }",
-        "@media (min-width: 750px) { .product-information__media .product-media-constraint-wrapper { width: min(100%, 540px, calc(100vh - var(--header-height, 72px) - 150px)); margin-inline: auto; } }"
+        "@media (min-width: 750px) { .product-information__media { position: sticky; top: calc(var(--header-height, 72px) + 16px); align-self: start; justify-self: end; min-width: 0; width: 100%; max-width: min(600px, calc(100vh - var(--header-height, 72px) - 140px)); } }",
+        "@media (min-width: 750px) { .product-information__media .slideshow-controls__thumbnails { margin-inline: 0; padding-inline: 0; flex-wrap: wrap; } .product-information__media .slideshow-controls__thumbnails .slideshow-control { width: 84px !important; } }"
       ]
     },
     "product_recommendations_qggXJq": {
