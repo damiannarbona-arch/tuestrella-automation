@@ -94,6 +94,34 @@ def afinar(m, q):
     return out
 
 
+def suavizar(Q):
+    """Trayectoria de las esquinas sin temblor: mediana (quita picos sueltos de fotogramas de transición) y
+    Savitzky-Golay (suaviza conservando el movimiento real de la cámara)."""
+    from scipy.signal import savgol_filter
+    Q = ndimage.median_filter(Q, size=(7, 1, 1), mode='nearest')
+    n = len(Q)
+    v = min(15, n - (1 - n % 2)) if n > 4 else 0
+    return savgol_filter(Q, v, 2, axis=0, mode='interp') if v >= 5 else Q
+
+
+def desenfoque(a, m):
+    """Sigma del desenfoque del fotograma en el borde del gris (escalón borroso: pendiente máx = salto / (√2π·σ))."""
+    g = cv2.GaussianBlur(a.mean(2).astype(np.float32), (0, 0), .8)
+    gx, gy = cv2.Sobel(g, cv2.CV_32F, 1, 0, ksize=3) / 8, cv2.Sobel(g, cv2.CV_32F, 0, 1, ksize=3) / 8
+    mag = np.hypot(gx, gy)
+    borde = ndimage.binary_dilation(m, iterations=12) & ~ndimage.binary_erosion(m, iterations=12)
+    dentro = ndimage.binary_erosion(m, iterations=16)
+    fuera = ndimage.binary_dilation(m, iterations=30) & ~ndimage.binary_dilation(m, iterations=16)
+    if not borde.any() or not dentro.any() or not fuera.any():
+        return 0.0
+    salto = abs(np.median(g[dentro]) - np.median(g[fuera]))
+    pend = np.percentile(mag[borde], 97)
+    if salto < 8 or pend <= 0:
+        return 0.0
+    sigma = salto / (np.sqrt(2 * np.pi) * pend)
+    return float(np.sqrt(max(sigma ** 2 - 1.2 ** 2, 0)))   # lo que pasa de un borde nítido normal
+
+
 def retrato_con_papel(ret, papel):
     """El retrato (2:3) dentro del hueco 4:5, con papel a los lados, como el impreso."""
     w = int(ret.height / PROP)
@@ -136,11 +164,13 @@ def componer(video, retrato, salida, papel=(247, 241, 230)):
         if i not in validos:
             quads[i] = quads[min(validos, key=lambda j: abs(j - i))]
     Q = np.array(quads)
-    Qs = ndimage.uniform_filter1d(Q, size=5, axis=0, mode='nearest')     # sin temblores
+    Qs = suavizar(Q)
+    sig = np.array([desenfoque(a, m) if m is not None else 0 for a, m in zip(frames, masks)])
+    sig = ndimage.median_filter(sig, size=5, mode='nearest')
     cmd = [imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24',
            '-s', f'{W}x{H}', '-r', str(fps), '-i', '-', '-c:v', 'libx264', '-crf', '16', '-pix_fmt', 'yuv420p', salida]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
-    for a, q, m in zip(frames, Qs, masks):
+    for a, q, m, sg in zip(frames, Qs, masks, sig):
         q = q.mean(0) + (q - q.mean(0)) * 1.015   # un pelo más grande: sin línea gris en los bordes
         M = cv2.getPerspectiveTransform(origen, np.float32(q))
         warp = cv2.warpPerspective(src, M, (W, H), flags=cv2.INTER_LANCZOS4)
@@ -154,6 +184,8 @@ def componer(video, retrato, salida, papel=(247, 241, 230)):
         g = cv2.GaussianBlur(a.mean(2).astype(np.float32), (0, 0), 25)
         # 189 = gris #BDBDBD pedido a la IA: si la escena lo dejó más oscuro, el retrato se oscurece igual
         luz = np.clip(g / 189, .5, 1.12)[..., None]
+        if sg > .4:   # el fotograma está desenfocado ahí: el retrato también
+            warp = cv2.GaussianBlur(warp, (0, 0), sg)
         out = np.clip(warp * luz, 0, 255)
         alfa = cv2.GaussianBlur(zona.astype(np.float32), (0, 0), 1.2)[..., None]
         comp = (a * (1 - alfa) + out * alfa).astype(np.uint8)
