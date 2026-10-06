@@ -1,0 +1,114 @@
+{%- comment -%}
+  Zona de compra de Kivoa en la ficha de producto (adaptado de lo que mejor convierte en tiendas de un producto):
+  - parte "beneficios": lista con checks bajo el precio.
+  - parte "confianza": código de bienvenida con botón de copiar, envío y plazos, 3 garantías e iconos de pago
+    (los métodos activos de la tienda, sin dibujarlos a mano).
+  Todo con datos reales de Kivoa: nada de cifras de clientes ni reseñas que no existan.
+{%- endcomment -%}
+{%- assign p = block.settings.parte -%}
+<div class="kc-compra kc-compra--{{ p }}" {{ block.shopify_attributes }}>
+  {%- if p == 'beneficios' -%}
+    <ul class="kc-lista">
+      {%- for i in (1..5) -%}
+        {%- assign k = 'punto_' | append: i -%}
+        {%- if block.settings[k] != blank -%}
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 12.4l3 3 6-6.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ block.settings[k] }}</span></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- else -%}
+    {%- if block.settings.codigo != blank -%}
+      <div class="kc-codigo">
+        <p><strong>{{ block.settings.codigo_texto }}</strong> {{ block.settings.codigo_detalle }}</p>
+        <button type="button" class="kc-codigo__btn" data-codigo="{{ block.settings.codigo }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span>{{ block.settings.codigo }}</span>
+        </button>
+      </div>
+    {%- endif -%}
+    <div class="kc-envio">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="17" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="17" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <div><p>{{ block.settings.envio }}</p>{%- if block.settings.envio_2 != blank -%}<p class="kc-envio__2">{{ block.settings.envio_2 }}</p>{%- endif -%}</div>
+    </div>
+    <div class="kc-garantias">
+      <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>{{ block.settings.g1 }}</span></div>
+      <{% if block.settings.g2_url != blank %}a href="{{ block.settings.g2_url }}"{% else %}div{% endif %}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>{{ block.settings.g2 }}</span></{% if block.settings.g2_url != blank %}a{% else %}div{% endif %}>
+      <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="13" width="4" height="6" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="13" width="4" height="6" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>{{ block.settings.g3 }}</span></div>
+    </div>
+    {%- if block.settings.mostrar_pagos -%}
+      <ul class="kc-pagos" aria-label="Métodos de pago">
+        {%- for tipo in shop.enabled_payment_types -%}<li>{{ tipo | payment_type_svg_tag }}</li>{%- endfor -%}
+      </ul>
+    {%- endif -%}
+    {%- if block.settings.politica != blank -%}<p class="kc-politica">{{ block.settings.politica }}</p>{%- endif -%}
+  {%- endif -%}
+</div>
+
+{%- if p != 'beneficios' -%}
+<script>
+  document.querySelectorAll('.kc-codigo__btn:not([data-listo])').forEach((b) => {
+    b.dataset.listo = '1';
+    b.addEventListener('click', () => {
+      const t = b.querySelector('span'), c = b.dataset.codigo;
+      (navigator.clipboard ? navigator.clipboard.writeText(c) : Promise.reject()).then(() => {
+        t.textContent = '¡Copiado!';
+        setTimeout(() => { t.textContent = c; }, 1600);
+      }).catch(() => {});
+    });
+  });
+</script>
+{%- endif -%}
+
+{% stylesheet %}
+  .kc-compra { width: 100%; display: grid; gap: 12px; }
+  .kc-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .kc-lista li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.4; }
+  .kc-lista svg { flex: none; width: 20px; height: 20px; margin-top: 1px; color: rgb(63 81 71); }
+  .kc-codigo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px;
+    border: 1px dashed rgb(63 81 71 / .55); border-radius: 12px; background: rgb(63 81 71 / .06); }
+  .kc-codigo p { margin: 0; font-size: .92rem; line-height: 1.35; }
+  .kc-codigo strong { color: rgb(63 81 71); }
+  .kc-codigo__btn { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 0;
+    border-radius: 999px; background: rgb(63 81 71); color: #fff; font: inherit; font-weight: 700; letter-spacing: .04em; cursor: pointer; }
+  .kc-codigo__btn svg { width: 16px; height: 16px; }
+  .kc-envio { display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px; background: rgb(var(--color-foreground-rgb, 44 51 47) / .04); }
+  .kc-envio svg { flex: none; width: 24px; height: 24px; color: rgb(63 81 71); }
+  .kc-envio p { margin: 0; font-size: .92rem; line-height: 1.35; }
+  .kc-envio__2 { opacity: .75; }
+  .kc-garantias { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .kc-garantias > * { color: inherit; text-decoration: none; display: grid; justify-items: center; gap: 6px; padding: 12px 8px; text-align: center; border-radius: 12px;
+    background: rgb(var(--color-foreground-rgb, 44 51 47) / .04); font-size: .82rem; line-height: 1.3; }
+  .kc-garantias svg { width: 22px; height: 22px; color: rgb(63 81 71); }
+  .kc-pagos { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .kc-pagos svg { width: 38px; height: 24px; display: block; }
+  .kc-politica { margin: 0; text-align: center; font-size: .8rem; opacity: .7; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Kivoa · zona de compra",
+  "settings": [
+    { "type": "select", "id": "parte", "label": "Parte", "default": "confianza",
+      "options": [{ "value": "beneficios", "label": "Beneficios (bajo el precio)" }, { "value": "confianza", "label": "Confianza (bajo el botón)" }] },
+    { "type": "header", "content": "Beneficios" },
+    { "type": "text", "id": "punto_1", "label": "Punto 1", "default": "Su retrato ilustrado a partir de fotos de tu móvil" },
+    { "type": "text", "id": "punto_2", "label": "Punto 2", "default": "Con su nombre, sus 6 rasgos y su frase" },
+    { "type": "text", "id": "punto_3", "label": "Punto 3", "default": "Vista previa en 48 h y 2 rondas de cambios" },
+    { "type": "text", "id": "punto_4", "label": "Punto 4", "default": "Enmarcado y listo para colgar o regalar" },
+    { "type": "text", "id": "punto_5", "label": "Punto 5" },
+    { "type": "header", "content": "Confianza" },
+    { "type": "text", "id": "codigo", "label": "Código de descuento", "default": "BIENVENIDA10" },
+    { "type": "text", "id": "codigo_texto", "label": "Texto destacado", "default": "-10 %" },
+    { "type": "text", "id": "codigo_detalle", "label": "Texto", "default": "en tu primer pedido. Cópialo y pégalo al pagar." },
+    { "type": "text", "id": "envio", "label": "Envío", "default": "Envío con seguimiento · en casa en 5–9 días laborables" },
+    { "type": "text", "id": "envio_2", "label": "Envío (2.ª línea)", "default": "Navidad: pide antes del 1 de diciembre" },
+    { "type": "text", "id": "g1", "label": "Garantía 1", "default": "Vista previa antes de pagar" },
+    { "type": "text", "id": "g2", "label": "Garantía 2", "default": "Reimpresión gratis si llega dañado" },
+    { "type": "url", "id": "g2_url", "label": "Enlace garantía 2 (política)" },
+    { "type": "text", "id": "g3", "label": "Garantía 3", "default": "Atención en español" },
+    { "type": "checkbox", "id": "mostrar_pagos", "label": "Mostrar iconos de pago", "default": true },
+    { "type": "text", "id": "politica", "label": "Nota final", "default": "Pago 100 % seguro · no te cobramos hasta que apruebes tu diseño" }
+  ],
+  "presets": [{ "name": "Kivoa · zona de compra" }]
+}
+{% endschema %}

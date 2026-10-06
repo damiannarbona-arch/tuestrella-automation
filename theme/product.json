@@ -296,459 +296,6 @@
               },
               "block_order": []
             },
-            "confianza": {
-              "type": "group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 8,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "background_color": "",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 8,
-                "padding-block-end": 8,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "a": {
-                  "type": "group",
-                  "settings": {
-                    "content_direction": "row",
-                    "vertical_on_mobile": true,
-                    "horizontal_alignment": "flex-start",
-                    "vertical_alignment": "center",
-                    "align_baseline": false,
-                    "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
-                    "gap": 10,
-                    "width": "fill",
-                    "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
-                    "height": "fit",
-                    "custom_height": 100,
-                    "background_media": "none",
-                    "background_color": "",
-                    "video_position": "cover",
-                    "background_image_position": "cover",
-                    "toggle_overlay": false,
-                    "overlay_color": "#00000026",
-                    "overlay_style": "solid",
-                    "gradient_direction": "to top",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "placeholder": "",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {
-                    "i": {
-                      "type": "icon",
-                      "settings": {
-                        "icon": "paw_print",
-                        "width": 18,
-                        "link": "",
-                        "open_in_new_tab": false,
-                        "icon_color": ""
-                      },
-                      "blocks": {}
-                    },
-                    "t": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p><strong>No te cobramos hasta que apruebes tu diseño</strong> · vista previa en 48 h</p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "paragraph",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "i",
-                    "t"
-                  ]
-                },
-                "b": {
-                  "type": "group",
-                  "settings": {
-                    "content_direction": "row",
-                    "vertical_on_mobile": true,
-                    "horizontal_alignment": "flex-start",
-                    "vertical_alignment": "center",
-                    "align_baseline": false,
-                    "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
-                    "gap": 10,
-                    "width": "fill",
-                    "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
-                    "height": "fit",
-                    "custom_height": 100,
-                    "background_media": "none",
-                    "background_color": "",
-                    "video_position": "cover",
-                    "background_image_position": "cover",
-                    "toggle_overlay": false,
-                    "overlay_color": "#00000026",
-                    "overlay_style": "solid",
-                    "gradient_direction": "to top",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "placeholder": "",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {
-                    "i": {
-                      "type": "icon",
-                      "settings": {
-                        "icon": "truck",
-                        "width": 18,
-                        "link": "",
-                        "open_in_new_tab": false,
-                        "icon_color": ""
-                      },
-                      "blocks": {}
-                    },
-                    "t": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p>En casa en 5–9 días laborables (España) · envío con seguimiento a España y Europa</p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "paragraph",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "i",
-                    "t"
-                  ]
-                },
-                "n": {
-                  "type": "group",
-                  "settings": {
-                    "content_direction": "row",
-                    "vertical_on_mobile": true,
-                    "horizontal_alignment": "flex-start",
-                    "vertical_alignment": "center",
-                    "align_baseline": false,
-                    "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
-                    "gap": 10,
-                    "width": "fill",
-                    "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
-                    "height": "fit",
-                    "custom_height": 100,
-                    "background_media": "none",
-                    "background_color": "",
-                    "video_position": "cover",
-                    "background_image_position": "cover",
-                    "toggle_overlay": false,
-                    "overlay_color": "#00000026",
-                    "overlay_style": "solid",
-                    "gradient_direction": "to top",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "placeholder": "",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {
-                    "i": {
-                      "type": "icon",
-                      "settings": {
-                        "icon": "snowflake",
-                        "width": 18,
-                        "link": "",
-                        "open_in_new_tab": false,
-                        "icon_color": ""
-                      },
-                      "blocks": {}
-                    },
-                    "t": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p><strong>Navidad:</strong> pide antes del 1 de diciembre</p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "paragraph",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "i",
-                    "t"
-                  ]
-                },
-                "d": {
-                  "type": "group",
-                  "settings": {
-                    "content_direction": "row",
-                    "vertical_on_mobile": true,
-                    "horizontal_alignment": "flex-start",
-                    "vertical_alignment": "center",
-                    "align_baseline": false,
-                    "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
-                    "gap": 10,
-                    "width": "fill",
-                    "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
-                    "height": "fit",
-                    "custom_height": 100,
-                    "background_media": "none",
-                    "background_color": "",
-                    "video_position": "cover",
-                    "background_image_position": "cover",
-                    "toggle_overlay": false,
-                    "overlay_color": "#00000026",
-                    "overlay_style": "solid",
-                    "gradient_direction": "to top",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "placeholder": "",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {
-                    "i": {
-                      "type": "icon",
-                      "settings": {
-                        "icon": "return",
-                        "width": 18,
-                        "link": "",
-                        "open_in_new_tab": false,
-                        "icon_color": ""
-                      },
-                      "blocks": {}
-                    },
-                    "t": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p>¿Llega dañado? Lo reimprimimos gratis · <a href=\"/pages/envios-y-devoluciones#devoluciones\">Ver política</a></p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "paragraph",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "i",
-                    "t"
-                  ]
-                },
-                "c": {
-                  "type": "group",
-                  "settings": {
-                    "content_direction": "row",
-                    "vertical_on_mobile": true,
-                    "horizontal_alignment": "flex-start",
-                    "vertical_alignment": "center",
-                    "align_baseline": false,
-                    "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
-                    "gap": 10,
-                    "width": "fill",
-                    "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
-                    "height": "fit",
-                    "custom_height": 100,
-                    "background_media": "none",
-                    "background_color": "",
-                    "video_position": "cover",
-                    "background_image_position": "cover",
-                    "toggle_overlay": false,
-                    "overlay_color": "#00000026",
-                    "overlay_style": "solid",
-                    "gradient_direction": "to top",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "placeholder": "",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {
-                    "i": {
-                      "type": "icon",
-                      "settings": {
-                        "icon": "lock",
-                        "width": 18,
-                        "link": "",
-                        "open_in_new_tab": false,
-                        "icon_color": ""
-                      },
-                      "blocks": {}
-                    },
-                    "t": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p>Pago 100 % seguro · Listo para colgar, con kit incluido</p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "paragraph",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "i",
-                    "t"
-                  ]
-                }
-              },
-              "block_order": [
-                "a",
-                "b",
-                "n",
-                "d",
-                "c"
-              ]
-            },
             "descripcion": {
               "type": "product-description",
               "settings": {
@@ -1077,16 +624,45 @@
                 "r5",
                 "r3"
               ]
+            },
+            "kivoa_beneficios": {
+              "type": "kivoa-compra",
+              "settings": {
+                "parte": "beneficios",
+                "punto_1": "Su retrato ilustrado a partir de fotos de tu móvil",
+                "punto_2": "Con su nombre, sus 6 rasgos y su frase",
+                "punto_3": "Vista previa en 48 h y 2 rondas de cambios",
+                "punto_4": "Listo para colgar, con kit incluido",
+                "punto_5": ""
+              }
+            },
+            "kivoa_confianza": {
+              "type": "kivoa-compra",
+              "settings": {
+                "parte": "confianza",
+                "codigo": "BIENVENIDA10",
+                "codigo_texto": "-10 %",
+                "codigo_detalle": "en tu primer pedido. Cópialo y pégalo al pagar.",
+                "envio": "Envío con seguimiento a España y Europa · en casa en 5–9 días laborables (España)",
+                "envio_2": "Navidad: pide antes del 1 de diciembre",
+                "g1": "Vista previa antes de pagar",
+                "g2": "Reimpresión gratis si llega dañado",
+                "g2_url": "/pages/envios-y-devoluciones#devoluciones",
+                "g3": "Atención en español",
+                "mostrar_pagos": true,
+                "politica": "Pago 100 % seguro · no te cobramos hasta que apruebes tu diseño"
+              }
             }
           },
           "block_order": [
             "group_icgrde",
+            "kivoa_beneficios",
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "uploadfly",
             "judge_me_reviews_verified_badge_T7fGph",
             "buy_buttons_eYQEYi",
-            "confianza",
+            "kivoa_confianza",
             "descripcion",
             "faq"
           ]
