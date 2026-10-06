@@ -899,6 +899,8 @@ def sello_ia(im, texto='EJEMPLO CREADO CON IA'):
 
 
 def publicacion_9(raza='caniche', nombre='Canela'):
+    """Ejemplo por raza: sus fotos → su retrato → en casa → Kivoa. Mascota creada con IA: sello en las fotos y
+    aviso en el texto de la publicación (y etiqueta de IA de la red social)."""
     E = lambda f: abrir(A('ejemplos-ia', nombre.lower(), f))
     ret, escena = E('retrato-lavanda-es.jpg'), abrir(A('ia', 'salon-oscuro', f'inicial-{nombre.lower()}.jpg'))
     fotos = [E('foto-principal.webp'), E('extra-parque.webp'), E('extra-juguete.webp'), E('extra-dormida.webp')]
@@ -907,21 +909,17 @@ def publicacion_9(raza='caniche', nombre='Canela'):
     total, diapos = 4, []
     x0, y0, x1, y1 = FOTO
 
+    # 1 · Sus fotos (portada)
     im = lienzo()
-    cabecera(im, f'¿Tienes un {raza}?', 'Así quedaría\nel retrato del tuyo', 1)
-    foto_en_zona(im, escena, cx=.55, cy=.62, zoom=1.15)
-    sello_ia(im)
-    diapos.append(im)
-
-    im = lienzo()
-    cabecera(im, 'Paso 1', 'Unas fotos\nde tu móvil', 1)
+    cabecera(im, f'¿Tienes un {raza}?', 'Mándanos unas fotos\nde tu móvil…', 1)
     for foto, c, a in zip(fotos, [(300, 610), (780, 590), (310, 985), (780, 965)], [-5, 4, 3, -4]):
         polaroid(im, foto, c, 380, a, foco=(.5, .4, 1.1))
     sello_ia(im)
     diapos.append(im)
 
+    # 2 · Su retrato
     im = lienzo()
-    cabecera(im, 'Paso 2', 'Su retrato,\ncon su carácter', 1)
+    cabecera(im, 'Su retrato', '…y creamos el suyo,\ncon su carácter', 1)
     ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
     h = y1 - y0 - 70
     w = int(ret.width * h / ret.height)
@@ -929,9 +927,15 @@ def publicacion_9(raza='caniche', nombre='Canela'):
     caja = (cx - w // 2, y0 + 35, cx + w // 2, y0 + 35 + h)
     sombra(im, caja, radio=18, off=(0, 10), alfa=80)
     im.paste(ret.resize((w, h), Image.LANCZOS), caja[:2])
-    sello_ia(im)
     diapos.append(im)
 
+    # 3 · En casa
+    im = lienzo()
+    cabecera(im, 'En casa', 'Enmarcado y listo\npara su rincón', 1)
+    foto_en_zona(im, escena, cx=.55, cy=.62, zoom=1.15)
+    diapos.append(im)
+
+    # 4 · Kivoa
     im = lienzo()
     d = ImageDraw.Draw(im)
     d.text((W / 2, 420), 'Kivoa', font=MARCA(110), fill=SALVIA, anchor='ms')
