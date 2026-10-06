@@ -48,6 +48,36 @@ def escena(ruta):
     return lambda tl: frames[min(int(tl * fps), len(frames) - 1)], len(frames) / fps
 
 
+def cinemagraph(ruta, dur=5.0, fps=30, zoom=(1.0, 1.1), centro=(.55, .6)):
+    """Foto fija hecha vídeo sin IA: empieza desenfocada y enfoca (intriga), acercamiento lento de cámara y las
+    luces (puntos brillantes cálidos) parpadeando cada una a su ritmo. Nada se deforma: el retrato es el de la foto."""
+    import numpy as np
+    from scipy import ndimage
+    im = Image.open(ruta).convert('RGB')
+    k = max(S[0] / im.width, S[1] / im.height) * 1.12
+    im = im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS)
+    a = np.asarray(im).astype(np.float32)
+    lum = a.mean(2)
+    calido = (a[..., 0] > a[..., 2] + 25)
+    luces = np.clip((lum - 170) / 60, 0, 1) * calido
+    lab, n = ndimage.label(luces > .15)
+    rng = np.random.default_rng(3)
+    fase, vel = rng.uniform(0, 6.28, n + 1), rng.uniform(1.5, 4.0, n + 1)
+    halo = ndimage.gaussian_filter(luces, 6)
+    color = np.array([255, 196, 120], np.float32)
+    def frame(tl):
+        x = tl / dur
+        f = .5 + .5 * np.sin(fase * 1.0 + vel * tl * 2)
+        mod = f[lab] * (lab > 0)
+        mod = ndimage.gaussian_filter(mod.astype(np.float32), 4)
+        b = a + (halo * (mod - .5) * 70)[..., None] * (color / 255)
+        img = Image.fromarray(np.clip(b, 0, 255).astype(np.uint8))
+        out = kenburns(img, S, x, zoom[0], zoom[1], centro, centro)
+        sigma = 14 * max(0.0, 1 - x / .5) ** 1.6     # empieza desenfocado y enfoca a mitad de plano (intriga)
+        return out.filter(ImageFilter.GaussianBlur(sigma)) if sigma > .3 else out
+    return frame
+
+
 def cierre():
     im = Image.new('RGB', S, PAPEL)
     d = ImageDraw.Draw(im)
@@ -67,13 +97,17 @@ def cierre():
     return im
 
 
-def montar(esc, caso, retrato, video=None, desde=0.0, gancho=0):
+def montar(esc, caso, retrato, video=None, desde=0.0, gancho=0, imagen=None):
     carpeta = os.path.join(RAIZ, 'assets', 'ia', esc)
     ruta_ret = os.path.join(RAIZ, 'assets', 'casos', caso, retrato)
     comp = os.path.join(carpeta, f'{caso}-compuesto.mp4')
-    if not os.path.exists(comp):
+    if not imagen and not os.path.exists(comp):
         componer(os.path.join(carpeta, 'hailuo-1.mp4'), ruta_ret, comp)
-    ia, dur = escena(comp)
+    if imagen:
+        dur = 5.0
+        ia = cinemagraph(imagen, dur)
+    else:
+        ia, dur = escena(comp)
     ret = Image.open(ruta_ret).convert('RGB')
     alto = round(ret.width * 16 / 9)
     papel = Image.new('RGB', (ret.width, alto), ret.getpixel((20, ret.height - 20)))
@@ -89,7 +123,7 @@ def montar(esc, caso, retrato, video=None, desde=0.0, gancho=0):
         escenas.append((2.2, lambda tl, x: clip(tl), [([('Hecho a partir de', 'b'), ('sus fotos del móvil', 'b')], ARR, 0, 1)]))
     fin = cierre()
     escenas.append((3.0, lambda tl, x: fin, []))
-    render(f'reel-{esc}-{caso}-es.mp4', escenas)
+    render(f'reel-{esc}-{caso}' + ('-foto' if imagen else '') + '-es.mp4', escenas)
 
 
 if __name__ == '__main__':
@@ -97,5 +131,6 @@ if __name__ == '__main__':
     ap.add_argument('escena'); ap.add_argument('caso'); ap.add_argument('retrato')
     ap.add_argument('video', nargs='?'); ap.add_argument('desde', nargs='?', default=0)
     ap.add_argument('--gancho', type=int, default=0)
+    ap.add_argument('--imagen', help='foto fija con el retrato ya encajado (marco_en_imagen.py): vídeo sin IA')
     a = ap.parse_args()
-    montar(a.escena, a.caso, a.retrato, a.video, a.desde, a.gancho)
+    montar(a.escena, a.caso, a.retrato, a.video, a.desde, a.gancho, a.imagen)
