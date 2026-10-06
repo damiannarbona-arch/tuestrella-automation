@@ -54,6 +54,46 @@ def esquinas(m, prev):
     return q
 
 
+def afinar(m, q):
+    """Esquinas subpíxel: recta ajustada a todos los puntos del borde gris de cada lado (no a un píxel suelto)
+    y cruce de rectas vecinas. Evita el temblor del retrato respecto al marco."""
+    c, _ = cv2.findContours(m.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    if not c:
+        return q
+    pts = max(c, key=len)[:, 0, :].astype(float)
+    H, W = m.shape
+    lineas = []
+    for k in range(4):
+        p0, p1 = q[k], q[(k + 1) % 4]
+        lado = p1 - p0
+        L = np.linalg.norm(lado)
+        if L < 20:
+            return q
+        u = lado / L
+        n = np.array([-u[1], u[0]])
+        t = (pts - p0) @ u
+        dist = np.abs((pts - p0) @ n)
+        sel = (t > .1 * L) & (t < .9 * L) & (dist < max(6, .02 * L))
+        # puntos pegados al borde de la imagen no son borde del marco
+        sel &= (pts[:, 0] > 2) & (pts[:, 0] < W - 3) & (pts[:, 1] > 2) & (pts[:, 1] < H - 3)
+        if sel.sum() < 15:
+            lineas.append(None)
+            continue
+        vx, vy, x0, y0 = cv2.fitLine(pts[sel].astype(np.float32), cv2.DIST_HUBER, 0, .01, .01).ravel()
+        lineas.append((np.array([x0, y0]), np.array([vx, vy])))
+    out = q.copy()
+    for k in range(4):   # esquina k = cruce del lado k-1 y el lado k
+        a, b = lineas[k - 1], lineas[k]
+        if a is None or b is None:
+            continue
+        M = np.array([a[1], -b[1]]).T
+        if abs(np.linalg.det(M)) < 1e-6:
+            continue
+        t = np.linalg.solve(M, b[0] - a[0])
+        out[k] = a[0] + a[1] * t[0]
+    return out
+
+
 def retrato_con_papel(ret, papel):
     """El retrato (2:3) dentro del hueco 4:5, con papel a los lados, como el impreso."""
     w = int(ret.height / PROP)
@@ -80,6 +120,8 @@ def componer(video, retrato, salida, papel=(247, 241, 230)):
         if m is not None and m.sum() < 15000:      # marca de agua u otro gris pequeño: no es el marco
             m = None
         q = esquinas(m, prev) if m is not None else None
+        if q is not None:
+            q = afinar(m, q)
         frames.append(a); quads.append(q); masks.append(m)
         if m is not None and m[:3].sum() == 0 and m[-3:].sum() == 0:
             prev = q
