@@ -3,7 +3,7 @@
 Objetivo: fotos de producto limpias, realistas y del mismo estilo en todos los artículos, para que la ficha no se vea cargada.
 
 ## Método (no cambiar)
-1. ChatGPT crea **solo la escena con el marco vacío**: el hueco del cuadro va en **gris liso #BDBDBD**.
+1. ChatGPT crea **solo la escena con el marco vacío**: el hueco del cuadro va en **gris liso #BDBDBD**, en proporción 2:3 como nuestros diseños (1024×1536), para que no se deformen al insertarlos.
 2. Nosotros insertamos el diseño real con `generador/marco_en_imagen.py`. Así la cara, el nombre y los rasgos salen exactos; si ChatGPT los dibuja, los deforma.
 3. Si una escena no tiene el gris liso y plano, se pide otra.
 
@@ -14,7 +14,7 @@ Plantillas de referencia, por ser las más limpias que tenemos:
 Adjunta las dos a ChatGPT junto con el prompt.
 
 ## Bloque de estilo (pegar siempre al final)
-> Photorealistic interior product photo, shot on a full-frame camera with a 50 mm lens, natural soft window light from the left, gentle realistic shadows. Minimalist Scandinavian style: smooth warm off-white wall (#F6F2EC), light oak wood, at most ONE small decorative object. Lots of empty space, calm and airy, no clutter, no text, no logos, no people's faces. The picture frame interior must be a perfectly flat, uniform solid grey (#BDBDBD) rectangle with no texture, no reflection and no glare, with crisp straight edges, fully visible and not covered by anything. Portrait-orientation frame with a 4:5 ratio and a thin white mat. Do not draw any artwork inside the frame.
+> Photorealistic interior product photo, shot on a full-frame camera with a 50 mm lens, natural soft window light from the left, gentle realistic shadows. Minimalist Scandinavian style: smooth warm off-white wall (#F6F2EC), light oak wood, at most ONE small decorative object. Lots of empty space, calm and airy, no clutter, no text, no logos, no people's faces. The picture frame interior must be a perfectly flat, uniform solid grey (#BDBDBD) rectangle with no texture, no reflection and no glare, with crisp straight edges, fully visible and not covered by anything. Portrait-orientation frame with a thin white mat; the grey artwork area inside the mat has an exact 2:3 ratio (taller than wide). Do not draw any artwork inside the frame.
 
 ## Formato fijo de cada artículo (6 elementos, siempre en este orden)
 | # | Contenido | Origen |
