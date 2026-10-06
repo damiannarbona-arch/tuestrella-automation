@@ -14,7 +14,7 @@
             "icons_style": "chevron",
             "slideshow_controls_style": "thumbnails",
             "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "left",
+            "thumbnail_position": "bottom",
             "thumbnail_width": 72,
             "thumbnail_radius": 6,
             "aspect_ratio": "1",
@@ -681,7 +681,7 @@
       },
       "custom_css": [
         "@media (min-width: 750px) { .product-information__media { position: sticky; top: calc(var(--header-height, 72px) + 12px); align-self: start; } }",
-        "@media (min-width: 750px) { .product-information__media .product-media-constraint-wrapper { width: min(100%, calc(100vh - var(--header-height, 72px) - 60px)); margin-inline: auto; } }"
+        "@media (min-width: 750px) { .product-information__media .product-media-constraint-wrapper { width: min(100%, 540px, calc(100vh - var(--header-height, 72px) - 150px)); margin-inline: auto; } }"
       ]
     },
     "product_recommendations_qggXJq": {
