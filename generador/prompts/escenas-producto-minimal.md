@@ -1,63 +1,57 @@
-# Escenas minimalistas para las fichas de producto
+# Escenas minimalistas para las fichas de producto (versión final, 06-10)
 
-Objetivo: fotos de producto limpias, realistas y del mismo estilo en todos los artículos, para que la ficha no se vea cargada.
+## Reparto del trabajo
+- **ChatGPT hace 3 escenas vacías** (A, B y C), con el hueco del cuadro en gris liso #BDBDBD. Son las mismas para todos los estilos.
+- **El resto lo hacemos nosotros**: insertar cada diseño (`generador/marco_en_imagen.py`), de sus fotos a su retrato, marcos, tamaños y el vídeo sin música ni letras. Todo con la plantilla y los colores de las publicaciones.
 
-## Método (no cambiar)
-1. ChatGPT crea **solo la escena con el marco vacío**: el hueco del cuadro va en **gris liso #BDBDBD**, en proporción 2:3 como nuestros diseños (1024×1536), para que no se deformen al insertarlos.
-2. Nosotros insertamos el diseño real con `generador/marco_en_imagen.py`. Así la cara, el nombre y los rasgos salen exactos; si ChatGPT los dibuja, los deforma.
-3. Si una escena no tiene el gris liso y plano, se pide otra.
-
-Plantillas de referencia, por ser las más limpias que tenemos:
-- `assets/mockups/pared-dos-marcos.webp`: pared lisa, mueble de madera clara, luz de ventana.
-- `assets/casos/penny/producto-real/estudio-79.jpg`: foto real, marco apoyado en una mesa blanca, mucho aire.
-
-Adjunta las dos a ChatGPT junto con el prompt.
-
-## Bloque de estilo (pegar siempre al final)
-> Photorealistic interior product photo, shot on a full-frame camera with a 50 mm lens, natural soft window light from the left, gentle realistic shadows. Minimalist Scandinavian style: smooth warm off-white wall (#F6F2EC), light oak wood, at most ONE small decorative object. Lots of empty space, calm and airy, no clutter, no text, no logos, no people's faces. The picture frame interior must be a perfectly flat, uniform solid grey (#BDBDBD) rectangle with no texture, no reflection and no glare, with crisp straight edges, fully visible and not covered by anything. Portrait-orientation frame with a thin white mat; the grey artwork area inside the mat has an exact 2:3 ratio (taller than wide). Do not draw any artwork inside the frame.
-
-## Formato fijo de cada artículo (6 elementos, siempre en este orden)
-| # | Contenido | Origen |
-|---|---|---|
-| 1 | Escena A: el cuadro protagonista, de frente | ChatGPT + nuestro diseño |
-| 2 | Escena B: el cuadro apoyado en un mueble, en casa | ChatGPT + nuestro diseño (o foto real si existe) |
-| 3 | De sus fotos a su retrato (caso real) | Ya existe (sus-fotos / antes-después) |
-| 4 | Escena C: detalle de cerca (nombre, rasgos, frase) | ChatGPT + nuestro diseño |
-| 5 | Tamaños o marcos | Ya existe |
-| 6 | Vídeo corto sin música ni letras | Sacado de los reels |
-
-## Prompts (uno por escena; cambia solo el [ACENTO] según el estilo)
-
-**Escena A, de frente (foto 1, la que se ve en la tienda)**
-> A single light-oak picture frame hanging centered on a plain warm off-white wall, front view, straight-on, the frame filling about 55 % of the image height. Below it, the top edge of a low light-oak sideboard with [ACENTO]. Square 1:1 image. + BLOQUE DE ESTILO
-
-**Escena B, apoyado en un mueble (foto 2)**
-> A light-oak picture frame standing on a white table, leaning slightly back against a plain warm off-white wall, three-quarter view from the front-left, camera at table height. Next to it, [ACENTO]. Soft morning light, a light linen curtain shadow on the wall. Square 1:1 image. + BLOQUE DE ESTILO
-
-**Escena C, detalle (foto 4)**
-> Close-up of the lower half of a light-oak picture frame standing on a light oak shelf, slight angle from above, shallow depth of field, the wall softly out of focus behind. The grey area is the lower part of the artwork. [ACENTO] slightly blurred at the edge of the image. Square 1:1 image. + BLOQUE DE ESTILO
-
-## [ACENTO] por estilo (un solo objeto, pequeño)
-| Estilo | Acento |
+## Paleta Kivoa (la misma que la web)
+| Uso | Color |
 |---|---|
-| Rosa | a small glass vase with two pale pink peonies |
-| Lavanda | a small ceramic cup with a few sprigs of dried lavender |
-| Clásico | a small white ceramic vase with a single eucalyptus branch |
-| Aventurero | a single pine cone and a small sprig of pine |
-| Caballos | a small bundle of dried wheat in a clear glass jar |
+| Fondo / pared | crema cálido #F6F2EC |
+| Detalles cálidos | arena #DCD5CA |
+| Acento | verde salvia #3F5147 (eucalipto, textil) |
+| Madera | roble claro natural |
+| Texto | carbón #2C332F |
 
-## Variantes de marco
-Pide la misma escena en **blanco** y en **negro** cambiando "light-oak picture frame" por "white wooden picture frame" o "matte black picture frame". Así cada foto 1 coincide con el marco que se elige en la ficha.
+Cómo se consigue que todo tenga el mismo tono:
+1. Los prompts piden la pared crema #F6F2EC, la madera de roble claro y el eucalipto verde salvia, que son los colores de la web.
+2. Al montar cada foto, aplicamos a la escena una misma corrección de color: balance cálido y blancos llevados a #F6F2EC. Así las 3 escenas y las fotos que hacemos nosotros encajan entre sí, aunque ChatGPT varíe un poco la luz.
+3. Todas las fotos son cuadradas (1:1), que es el formato del carrusel de la ficha.
+
+## Cómo pedírselo a ChatGPT
+1. Abre un chat nuevo y adjunta las 2 referencias de estilo:
+   - `assets/mockups/pared-dos-marcos.webp`
+   - `assets/casos/penny/producto-real/estudio-79.jpg`
+2. Pega primero el **mensaje inicial** y después cada prompt, uno por uno, en el mismo chat, para que las 3 escenas salgan con la misma luz y la misma pared.
+3. Para cada marco (madera, blanco, negro), pide de nuevo la misma escena con la línea de cambio de marco del final.
+
+### Mensaje inicial
+> I'm going to ask you for 3 product photos for my online shop of framed pet portraits. Use the two attached images ONLY as a reference for the mood: minimalist, warm, airy and realistic. In all 3 photos, keep exactly the same room, wall colour, wood tone, light and decoration, as if they were taken in the same session. The artwork inside the frame must ALWAYS be a flat solid grey rectangle (#BDBDBD) because I will insert the real portrait later. Never draw any artwork, text or animal inside the frame.
+
+### Escena A: de frente (foto 1, la portada del artículo)
+> Photo 1 of 3. A single light natural oak picture frame hanging centered on a smooth, plain, warm cream wall (#F6F2EC), straight-on front view, perfectly level, the frame occupying about 55 % of the image height. Below it, the top edge of a low light-oak sideboard with one small matte white ceramic vase holding a single sage-green eucalyptus branch, placed to the right, not touching the frame. Soft natural window light from the left, a very subtle diagonal window shadow on the wall, gentle realistic contact shadows. Inside the frame: a thin white mat and, inside the mat, a perfectly flat, uniform solid grey (#BDBDBD) rectangle with an exact 2:3 ratio (taller than wide), with crisp straight edges, no texture, no reflection, no glare, nothing covering it. Photorealistic interior product photo, 50 mm lens, high detail, calm and minimalist, lots of empty space, no clutter, no text, no logos, no people. Square 1:1 image.
+
+### Escena B: apoyado en un mueble (foto 2)
+> Photo 2 of 3, same room and light as photo 1. The same light natural oak picture frame standing on a light-oak sideboard, leaning slightly back against the same warm cream wall (#F6F2EC), three-quarter view from the front-left, camera at sideboard height, the frame in the centre-left of the image. Next to it on the right, the same small matte white vase with one sage-green eucalyptus branch and a folded sand-coloured (#DCD5CA) linen cloth. Soft morning window light from the left, a gentle linen-curtain shadow on the wall. Inside the frame: a thin white mat and a perfectly flat, uniform solid grey (#BDBDBD) rectangle with an exact 2:3 ratio, with crisp straight edges, no texture, no reflection, no glare, fully visible. Photorealistic, 50 mm lens, minimalist, airy, no clutter, no text, no logos, no people. Square 1:1 image.
+
+### Escena C: detalle de cerca (foto 4)
+> Photo 3 of 3, same room and light. Close-up of the same light natural oak picture frame standing on the light-oak sideboard, slight angle from above and from the right, shallow depth of field: the frame in sharp focus, the cream wall softly blurred behind, the eucalyptus branch blurred at the left edge of the image. The frame fills about 80 % of the image height. Inside the frame: a thin white mat and a perfectly flat, uniform solid grey (#BDBDBD) rectangle with an exact 2:3 ratio, with crisp straight edges, no texture, no reflection, no glare, fully visible. Photorealistic, macro-like product photo, warm and calm, no text, no logos, no people. Square 1:1 image.
+
+### Cambio de marco (repetir A, B y C)
+> Now give me exactly the same image, with the same composition, light and decoration, but with a **white painted wooden frame** instead of the oak one.
+
+> Now the same image again, but with a **matte black thin wooden frame**.
+
+### Si el gris sale mal
+> The grey area is not usable: it must be one perfectly flat solid #BDBDBD colour from edge to edge, with no gradient, no shadow, no reflection, no texture and nothing overlapping it, and with an exact 2:3 ratio. Please regenerate the same image fixing only that.
 
 ## Qué rechazar
-- Gris con degradado, reflejos, sombra dentro o tapado por la planta → no sirve para insertar.
-- Más de un objeto decorativo, plantas grandes, textos o cuadros extra en la pared.
-- Marco torcido o en perspectiva fuerte en la escena A (debe ser frontal).
+- Gris con degradado, sombra, reflejo o tapado por algo.
+- Pared que no sea crema cálido (blanca fría, gris o beige oscuro).
+- Más de un adorno, plantas grandes, cuadros extra o texto.
+- En la escena A, un marco torcido o visto en perspectiva.
 
-## Decisión (06-10): una escena por posición, igual para todos los estilos
-Para que la tienda se vea uniforme y haga falta pedir menos imágenes, se usa la **misma escena A, B y C en todos los estilos**, con un adorno neutro: "a small white ceramic vase with a single eucalyptus branch". Lo único que cambia de un artículo a otro es el diseño que insertamos.
-
-Diseño que va en cada artículo:
+## Diseño de cada artículo
 | Artículo | Caso | Diseño |
 |---|---|---|
 | Rosa | Penny | `assets/casos/penny/retrato-rosa.jpg` |
@@ -65,3 +59,13 @@ Diseño que va en cada artículo:
 | Lavanda | Miau | `assets/retratos/miau-lavanda.jpg` |
 | Aventurero | Sonic | `assets/casos/sonic/diseno-aventurero-es.png` |
 | Caballos | pendiente de caso real | se mantienen las fotos actuales |
+
+## Formato fijo de cada artículo (6 elementos)
+| # | Contenido | Quién |
+|---|---|---|
+| 1 | Escena A con su diseño | ChatGPT (escena) + nosotros (diseño) |
+| 2 | Escena B con su diseño | ChatGPT (escena) + nosotros (diseño) |
+| 3 | De sus fotos a su retrato (su caso real) | Nosotros |
+| 4 | Escena C, detalle | ChatGPT (escena) + nosotros (diseño) |
+| 5 | Los 3 marcos y los 3 tamaños | Nosotros |
+| 6 | Vídeo corto sin música ni letras | Nosotros |
