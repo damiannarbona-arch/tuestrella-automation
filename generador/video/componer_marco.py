@@ -77,10 +77,22 @@ def componer(video, retrato, salida, papel=(247, 241, 230)):
     for f in gen:
         a = np.frombuffer(f, np.uint8).reshape(H, W, 3).copy()
         m = mascara_gris(a)
-        q = esquinas(m, prev) if m is not None else prev
+        if m is not None and m.sum() < 15000:      # marca de agua u otro gris pequeño: no es el marco
+            m = None
+        q = esquinas(m, prev) if m is not None else None
         frames.append(a); quads.append(q); masks.append(m)
         if m is not None and m[:3].sum() == 0 and m[-3:].sum() == 0:
             prev = q
+    # fotogramas en que el marco está tapado a medias (una puerta, una mano) o no se ve: el encuadre del marco
+    # completo más cercano; como solo se pinta donde hay gris, lo tapado sigue tapado
+    areas = np.array([m.sum() if m is not None else 0 for m in masks], float)
+    ref = np.median(areas[areas > 0]) if (areas > 0).any() else 0
+    validos = [i for i, (q, ar) in enumerate(zip(quads, areas)) if q is not None and ar > .5 * ref]
+    if not validos:
+        raise SystemExit('No se encuentra el marco gris en el vídeo')
+    for i in range(len(quads)):
+        if i not in validos:
+            quads[i] = quads[min(validos, key=lambda j: abs(j - i))]
     Q = np.array(quads)
     Qs = ndimage.uniform_filter1d(Q, size=5, axis=0, mode='nearest')     # sin temblores
     cmd = [imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24',
@@ -92,8 +104,10 @@ def componer(video, retrato, salida, papel=(247, 241, 230)):
         warp = cv2.warpPerspective(src, M, (W, H), flags=cv2.INTER_LANCZOS4)
         zona = np.zeros((H, W), np.uint8)
         cv2.fillConvexPoly(zona, np.int32(np.round(q)), 1)
-        if m is not None:   # solo donde había gris: lo que tapa el marco (dedos, papel) queda delante
-            zona &= ndimage.binary_dilation(m, iterations=6).astype(np.uint8)
+        if m is None:       # el marco no se ve en este fotograma
+            p.stdin.write(a.tobytes())
+            continue
+        zona &= ndimage.binary_dilation(m, iterations=6).astype(np.uint8)   # lo que tapa el gris queda delante
         # luz: el gris del fotograma marca sombras y degradados; se aplican al retrato
         g = cv2.GaussianBlur(a.mean(2).astype(np.float32), (0, 0), 25)
         ref = np.median(a.mean(2)[zona > 0]) if zona.any() else 180
