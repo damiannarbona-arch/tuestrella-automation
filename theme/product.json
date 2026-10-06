@@ -866,10 +866,109 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "por_que_kivoa": {
+      "type": "por-que-kivoa",
+      "blocks": {
+        "f1": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Protagonista",
+            "kivoa": "Tu mascota, desde tus fotos",
+            "otro": "Un diseño de catálogo",
+            "otro_tiene": false
+          }
+        },
+        "f2": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Su nombre y una frase vuestra",
+            "kivoa": "",
+            "otro": "",
+            "otro_tiene": false
+          }
+        },
+        "f3": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Sus 6 rasgos de personalidad",
+            "kivoa": "Los eliges tú",
+            "otro": "",
+            "otro_tiene": false
+          }
+        },
+        "f4": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Ves el diseño antes de pagar",
+            "kivoa": "Vista previa en 48 h",
+            "otro": "",
+            "otro_tiene": false
+          }
+        },
+        "f5": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Cambios hasta que te encante",
+            "kivoa": "2 rondas incluidas",
+            "otro": "",
+            "otro_tiene": false
+          }
+        },
+        "f6": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Cuántos hay iguales",
+            "kivoa": "Solo existe el suyo",
+            "otro": "Miles iguales",
+            "otro_tiene": false
+          }
+        },
+        "f7": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Listo para colgar o regalar",
+            "kivoa": "Con kit incluido",
+            "otro": "A veces",
+            "otro_tiene": true
+          }
+        },
+        "f8": {
+          "type": "fila",
+          "settings": {
+            "concepto": "Lo que dices al verlo",
+            "kivoa": "«¡Es igualito!»",
+            "otro": "«Qué bonito»",
+            "otro_tiene": true
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7",
+        "f8"
+      ],
+      "settings": {
+        "etiqueta": "¿Por qué Kivoa?",
+        "titulo": "Un cuadro personalizado, no un cuadro cualquiera",
+        "subtitulo": "Un cuadro cualquiera decora una pared. El suyo cuenta quién es.",
+        "mostrar_pilares": false,
+        "col_kivoa": "Kivoa",
+        "col_otro": "Un cuadro cualquiera",
+        "cierre": "Cada retrato lo diseñamos y revisamos uno a uno contigo, hasta que lo miras y dices: «¡es igualito!».",
+        "boton_texto": "",
+        "boton_enlace": ""
+      }
     }
   },
   "order": [
     "main",
+    "por_que_kivoa",
     "product_recommendations_qggXJq",
     "1790284433717a587f"
   ]
