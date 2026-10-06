@@ -97,9 +97,9 @@ def cierre():
     return im
 
 
-def montar(esc, caso, retrato, video=None, desde=0.0, gancho=0, imagen=None):
+def montar(esc, caso, retrato, video=None, desde=0.0, gancho=0, imagen=None, ejemplo=False):
     carpeta = os.path.join(RAIZ, 'assets', 'ia', esc)
-    ruta_ret = os.path.join(RAIZ, 'assets', 'casos', caso, retrato)
+    ruta_ret = retrato if os.path.exists(retrato) else os.path.join(RAIZ, 'assets', 'casos', caso, retrato)
     comp = os.path.join(carpeta, f'{caso}-compuesto.mp4')
     if not imagen and not os.path.exists(comp):
         componer(os.path.join(carpeta, 'hailuo-1.mp4'), ruta_ret, comp)
@@ -116,7 +116,8 @@ def montar(esc, caso, retrato, video=None, desde=0.0, gancho=0, imagen=None):
     escenas = [
         (dur, lambda tl, x: ia(tl), [(GANCHOS[gancho], ARR, 0, .45)]),
         (2.8, lambda tl, x: kenburns(papel, S, x, 1.9, 1.0, (.6, .38), (.5, .5)),
-         [([(f'Es {nombre}', 'b'), ('con su carácter y su frase', 'i')], ARR, 0, 1)]),
+         [([(f'Es {nombre}', 'b'), ('con su carácter y su frase', 'i')], ARR, 0, 1)]
+         + ([([('Ejemplo de estilo · creado con IA', 'i')], 1700, 0, 1)] if ejemplo else [])),
     ]
     if video:
         clip = tramo(video, float(desde), 2.2)
@@ -131,6 +132,7 @@ if __name__ == '__main__':
     ap.add_argument('escena'); ap.add_argument('caso'); ap.add_argument('retrato')
     ap.add_argument('video', nargs='?'); ap.add_argument('desde', nargs='?', default=0)
     ap.add_argument('--gancho', type=int, default=0)
+    ap.add_argument('--ejemplo', action='store_true', help='mascota creada con IA: rótulo "Ejemplo de estilo · creado con IA"')
     ap.add_argument('--imagen', help='foto fija con el retrato ya encajado (marco_en_imagen.py): vídeo sin IA')
     a = ap.parse_args()
-    montar(a.escena, a.caso, a.retrato, a.video, a.desde, a.gancho, a.imagen)
+    montar(a.escena, a.caso, a.retrato, a.video, a.desde, a.gancho, a.imagen, a.ejemplo)

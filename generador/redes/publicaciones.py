@@ -888,6 +888,70 @@ def publicacion_8():
     print(out)
 
 
+# ---------- Publicación #9 · Ejemplo por raza (mascota creada con IA, siempre marcada) ----------
+
+def sello_ia(im, texto='EJEMPLO CREADO CON IA'):
+    d = ImageDraw.Draw(im)
+    f = TXT_B(22)
+    w = d.textlength(texto, font=f) + 40
+    d.rounded_rectangle((W - M - w, 70, W - M, 112), 21, fill=ARENA)
+    d.text((W - M - w / 2, 91), texto, font=f, fill=TINTA, anchor='mm')
+
+
+def publicacion_9(raza='caniche', nombre='Canela'):
+    E = lambda f: abrir(A('ejemplos-ia', nombre.lower(), f))
+    ret, escena = E('retrato-lavanda-es.jpg'), abrir(A('ia', 'salon-oscuro', f'inicial-{nombre.lower()}.jpg'))
+    fotos = [E('foto-principal.webp'), E('extra-parque.webp'), E('extra-juguete.webp'), E('extra-dormida.webp')]
+    out = A('redes', 'publicaciones', f'09-ejemplo-{raza}', 'es')
+    os.makedirs(out, exist_ok=True)
+    total, diapos = 4, []
+    x0, y0, x1, y1 = FOTO
+
+    im = lienzo()
+    cabecera(im, f'¿Tienes un {raza}?', 'Así quedaría\nel retrato del tuyo', 1)
+    foto_en_zona(im, escena, cx=.55, cy=.62, zoom=1.15)
+    sello_ia(im)
+    diapos.append(im)
+
+    im = lienzo()
+    cabecera(im, 'Paso 1', 'Unas fotos\nde tu móvil', 1)
+    for foto, c, a in zip(fotos, [(300, 610), (780, 590), (310, 985), (780, 965)], [-5, 4, 3, -4]):
+        polaroid(im, foto, c, 380, a, foco=(.5, .4, 1.1))
+    sello_ia(im)
+    diapos.append(im)
+
+    im = lienzo()
+    cabecera(im, 'Paso 2', 'Su retrato,\ncon su carácter', 1)
+    ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
+    h = y1 - y0 - 70
+    w = int(ret.width * h / ret.height)
+    cx = (x0 + x1) // 2
+    caja = (cx - w // 2, y0 + 35, cx + w // 2, y0 + 35 + h)
+    sombra(im, caja, radio=18, off=(0, 10), alfa=80)
+    im.paste(ret.resize((w, h), Image.LANCZOS), caja[:2])
+    sello_ia(im)
+    diapos.append(im)
+
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 420), 'Kivoa', font=MARCA(110), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['Un cuadro personalizado,', 'no uno cualquiera'], 560, TIT(72), TINTA, 92)
+    d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+    y += 60
+    for b in [f'Mándanos las fotos de tu {raza}', 'Vista previa en 48 horas', 'No te cobramos hasta que la apruebes',
+              'Navidad: pide antes del 1/12']:
+        check(d, 150, y - 12)
+        d.text((196, y), b, font=TXT(40), fill=TINTA, anchor='ls')
+        y += 84
+    boton(d, W / 2, y + 90, 'Pide el suyo · enlace en la bio')
+    diapos.append(im)
+
+    for i, im in enumerate(diapos, 1):
+        pie(im, i, total)
+        im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+    print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7, "8": publicacion_8}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7, "8": publicacion_8, "9": publicacion_9}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
