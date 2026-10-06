@@ -110,8 +110,8 @@ def componer(video, retrato, salida, papel=(247, 241, 230)):
         zona &= ndimage.binary_dilation(m, iterations=6).astype(np.uint8)   # lo que tapa el gris queda delante
         # luz: el gris del fotograma marca sombras y degradados; se aplican al retrato
         g = cv2.GaussianBlur(a.mean(2).astype(np.float32), (0, 0), 25)
-        ref = np.median(a.mean(2)[zona > 0]) if zona.any() else 180
-        luz = np.clip(g / max(ref, 1), .8, 1.12)[..., None]
+        # 189 = gris #BDBDBD pedido a la IA: si la escena lo dejó más oscuro, el retrato se oscurece igual
+        luz = np.clip(g / 189, .5, 1.12)[..., None]
         out = np.clip(warp * luz, 0, 255)
         alfa = cv2.GaussianBlur(zona.astype(np.float32), (0, 0), 1.2)[..., None]
         comp = (a * (1 - alfa) + out * alfa).astype(np.uint8)
