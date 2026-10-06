@@ -53,3 +53,15 @@ Pide la misma escena en **blanco** y en **negro** cambiando "light-oak picture f
 - Gris con degradado, reflejos, sombra dentro o tapado por la planta → no sirve para insertar.
 - Más de un objeto decorativo, plantas grandes, textos o cuadros extra en la pared.
 - Marco torcido o en perspectiva fuerte en la escena A (debe ser frontal).
+
+## Decisión (06-10): una escena por posición, igual para todos los estilos
+Para que la tienda se vea uniforme y haga falta pedir menos imágenes, se usa la **misma escena A, B y C en todos los estilos**, con un adorno neutro: "a small white ceramic vase with a single eucalyptus branch". Lo único que cambia de un artículo a otro es el diseño que insertamos.
+
+Diseño que va en cada artículo:
+| Artículo | Caso | Diseño |
+|---|---|---|
+| Rosa | Penny | `assets/casos/penny/retrato-rosa.jpg` |
+| Clásico | Curro | `assets/casos/curro/diseno-clasico-v2.webp` |
+| Lavanda | Miau | `assets/retratos/miau-lavanda.jpg` |
+| Aventurero | Sonic | `assets/casos/sonic/diseno-aventurero-es.png` |
+| Caballos | pendiente de caso real | se mantienen las fotos actuales |
