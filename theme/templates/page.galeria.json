@@ -4,7 +4,7 @@
       "type": "galeria-disenos",
       "settings": {
         "titulo": "Galería de diseños",
-        "texto": "<p>Todos los retratos que hemos creado a partir de las fotos del móvil de sus familias. Elige un estilo y pulsa el que más te guste para crear el de tu mascota.</p>",
+        "texto": "<p>Retratos que hemos creado a partir de las fotos del móvil de sus familias, junto a algunos diseños de muestra de cada estilo. Elige un estilo y pulsa el que más te guste para crear el de tu mascota.</p>",
         "filtros": true,
         "columnas": 4,
         "boton_texto": "Crear el retrato de mi mascota",

@@ -31,7 +31,7 @@
       <li class="kg__item" data-estilo="{{ block.settings.estilo | handleize }}" {{ block.shopify_attributes }}>
         <a class="kg__enlace" href="{{ block.settings.producto.url | default: '/collections/all' }}">
           <div class="kg__marco">
-            {%- if block.settings.ejemplo -%}<span class="kg__ejemplo">Ejemplo · creado con IA</span>{%- endif -%}
+            {%- if block.settings.ejemplo -%}<span class="kg__ejemplo">Diseño de muestra</span>{%- endif -%}
             {%- if block.settings.imagen != blank -%}
               {{ block.settings.imagen | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 25vw, 50vw', alt: block.settings.imagen.alt | default: block.settings.nombre }}
             {%- else -%}
@@ -113,7 +113,7 @@
             { "value": "Ecuestre", "label": "Ecuestre" }
           ] },
         { "type": "product", "id": "producto", "label": "Producto al que enlaza" },
-        { "type": "checkbox", "id": "ejemplo", "label": "Es un ejemplo creado con IA (no un caso real)", "default": false }
+        { "type": "checkbox", "id": "ejemplo", "label": "Es un diseño de muestra (no un cliente real)", "default": false }
       ]
     }
   ],
