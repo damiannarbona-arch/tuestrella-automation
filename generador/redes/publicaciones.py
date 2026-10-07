@@ -955,6 +955,110 @@ def publicacion_9(raza='caniche', nombre='Canela'):
     print(out)
 
 
+# ---------- Publicación #10 · Cómo pedir tu cuadro (paso a paso, aporta valor) ----------
+
+def paso(im, n, etiqueta, titular, acento=1):
+    """Cabecera de paso: número grande salvia + titular."""
+    cabecera(im, f'Paso {n} · {etiqueta}', titular, acento)
+
+
+def publicacion_10():
+    F = lambda *p: A('web', 'ficha', *p)
+    out = A('redes', 'publicaciones', '10-como-pedir', 'es')
+    os.makedirs(out, exist_ok=True)
+    total = 7
+    diapos = []
+
+    # 1 · Portada: la duda que tiene la gente
+    im = lienzo()
+    cabecera(im, 'Guía rápida', '¿Quieres el cuadro\nde tu mascota y no\nsabes cómo pedirlo?', 2)
+    x0, y0, x1, y1 = FOTO
+    zona = (x0, y0 + 70, x1, y1)
+    sombra(im, zona, radio=22, off=(0, 12), alfa=55)
+    im.paste(recorte(abrir(F('clasico-1-frente.jpg')), x1 - x0, y1 - y0 - 70, .5, .42, 1.15), zona[:2])
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((W / 2 - 250, y1 - 110, W / 2 + 250, y1 - 30), 40, fill=PAPEL + (235,))
+    d.text((W / 2, y1 - 68), 'Te lo explico en 5 pasos  »', font=TXT_B(34), fill=SALVIA, anchor='mm')
+    diapos.append(im)
+
+    # 2 · Elige el estilo
+    im = lienzo()
+    paso(im, 1, 'El estilo', 'Elige el estilo\nque cuente su historia')
+    estilos = [('rosa', 'Recuerdo', 'para recordar'), ('lavanda', 'Botánico', 'para regalar'),
+               ('clasico', 'Clásico', 'para decorar'), ('aventurero', 'Aventurero', 'para aventureros'),
+               ('caballos', 'Ecuestre', 'para caballos')]
+    d = ImageDraw.Draw(im)
+    posiciones = [(250, 560), (540, 560), (830, 560), (395, 930), (685, 930)]
+    for (k, nom, para), (cx, cy) in zip(estilos, posiciones):
+        foto = recorte(abrir(F(f'{k}-1-frente.jpg')), 250, 250, .5, .4, 1.6)
+        caja = (cx - 125, cy - 150, cx + 125, cy + 100)
+        sombra(im, caja, radio=14, off=(0, 8), alfa=50)
+        im.paste(foto, caja[:2])
+        d = ImageDraw.Draw(im)
+        d.text((cx, cy + 142), nom, font=TIT(40), fill=TINTA, anchor='ms')
+        d.text((cx, cy + 180), para, font=TXT(26), fill=GRIS, anchor='ms')
+    diapos.append(im)
+
+    # 3 · Tamaño y marco
+    im = lienzo()
+    paso(im, 2, 'Tamaño y marco', 'Elige tamaño\ny color del marco')
+    foto_en_zona(im, abrir(F('clasico-2-tres-marcos.jpg')), cy=.578, zoom=1.15)   # sin el título de la imagen
+    diapos.append(im)
+
+    # 4 · Sus fotos y sus datos
+    im = lienzo()
+    paso(im, 3, 'Sus fotos', 'Sube sus fotos y\ncuéntanos cómo es')
+    C = lambda n: A('casos', 'curro', n)
+    polaroid(im, abrir(C('foto-principal.jpg')), (300, 640), 360, -5, 'la principal', foco=(.55, .5))
+    polaroid(im, abrir(C('extra-1.jpg')), (640, 560), 250, 6, foco=(.5, .5))
+    polaroid(im, abrir(C('extra-2.jpg')), (820, 760), 230, -4, foco=(.5, .5))
+    d = ImageDraw.Draw(im)
+    y = 1000
+    for b in ['1 foto principal + hasta 3 más', 'Su nombre y una frase', 'Hasta 6 rasgos de su forma de ser']:
+        check(d, 150, y - 12)
+        d.text((196, y), b, font=TXT(40), fill=TINTA, anchor='ls')
+        y += 76
+    diapos.append(im)
+
+    # 5 · Vista previa
+    im = lienzo()
+    paso(im, 4, 'La vista previa', 'En 48 h te enviamos\nsu vista previa')
+    foto_en_zona(im, abrir(F('clasico-5-vista-previa.jpg')), cx=.5, cy=.578, zoom=1.15)
+    diapos.append(im)
+
+    # 6 · En casa
+    im = lienzo()
+    paso(im, 5, 'En casa', 'Lo apruebas y\nte llega enmarcado')
+    foto_en_zona(im, abrir(A('casos', 'penny', 'producto-real', 'web-principal.jpg')), cx=.5, cy=.55, zoom=1.0)
+    d = ImageDraw.Draw(im)
+    x0, y0, x1, y1 = FOTO
+    d.rounded_rectangle((x0 + 24, y1 - 86, x0 + 430, y1 - 24), 31, fill=PAPEL + (235,))
+    d.text((x0 + 227, y1 - 55), 'Foto real · en casa en 5–9 días', font=TXT_B(26), fill=SALVIA, anchor='mm')
+    diapos.append(im)
+
+    # 7 · Llamada a la acción
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 330), 'Kivoa', font=MARCA(110), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['Un cuadro personalizado,', 'no un cuadro cualquiera'], 470, TIT(68), TINTA, 88)
+    d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+    y += 60
+    for b in ['Vista previa en 48 horas', '2 rondas de cambios incluidas', 'No te cobramos hasta que la apruebes',
+              'Navidad: pide antes del 1/12']:
+        check(d, 170, y - 12)
+        d.text((216, y), b, font=TXT(40), fill=TINTA, anchor='ls')
+        y += 82
+    d.rounded_rectangle((W / 2 - 330, y + 10, W / 2 + 330, y + 96), 18, outline=SALVIA, width=3)
+    d.text((W / 2, y + 54), '-10 % en tu primer pedido: BIENVENIDA10', font=TXT_B(32), fill=SALVIA, anchor='mm')
+    boton(d, W / 2, y + 200, 'kivoa.es · enlace en la bio')
+    diapos.append(im)
+
+    for i, im in enumerate(diapos, 1):
+        pie(im, i, total)
+        im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+    print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7, "8": publicacion_8, "9": publicacion_9}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7, "8": publicacion_8, "9": publicacion_9, "10": publicacion_10}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
