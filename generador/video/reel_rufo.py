@@ -20,7 +20,6 @@ TXT = [  # (desde, hasta, líneas, y)
     (7.8, 10.0, [('Ahora tiene su sitio', 'b')], ABA),
 ]
 FIN = [('Un cuadro personalizado,', 'b'), ('no un cuadro cualquiera', 'b')]
-NOTA = [('Historia recreada con IA · Adopta', 'i')]
 
 
 def leer(ruta):
@@ -50,8 +49,7 @@ def montar(clip):
 
     def cierre(tl, x):
         im = ultimo
-        im = texto(im, FIN, ABA - 80, min(1, tl / .2), tam=78)
-        return texto(im, NOTA, ABA + 140, min(1, tl / .3), tam=46)
+        return texto(im, FIN, ABA, min(1, tl / .2), tam=78)
 
     render('reel-rufo-adopcion-es.mp4', [(dur, historia, []), (2.6, cierre, [])])
 

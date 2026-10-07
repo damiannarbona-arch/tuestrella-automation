@@ -45,32 +45,44 @@ def componer(video, retrato, salida, desde):
     # de atrás hacia delante: en el último fotograma el marco se ve entero; el color se va siguiendo
     color = frames[-1][H // 2 - 40:H // 2 + 40, W // 2 - 40:W // 2 + 40].reshape(-1, 3).mean(0)
     masks = [None] * len(frames)
+    colores = [None] * len(frames)
     for k in range(len(frames) - 1, i0 - 1, -1):
         m = mascara(frames[k], color, 20)
         if m is None:
             break
         masks[k] = m
         color = np.median(frames[k][m], 0)
+        colores[k] = color
     val = [k for k, m in enumerate(masks) if m is not None]
     # cuadrilátero del hueco completo (último fotograma) y, en los que el marco sale cortado por arriba,
     # el mismo desplazado/escalado para que encaje con el borde inferior y los laterales visibles
     q_full = afinar(masks[-1], esquinas(masks[-1], None))
     ancho_full = np.linalg.norm(q_full[2] - q_full[3])
     quads = [None] * len(frames)
+    # el marco está quieto en la pared y solo se mueve la cámara: en cada fotograma se miden con precisión
+    # subpíxel el borde inferior y los laterales del hueco (promedio de cientos de columnas/filas) y el retrato
+    # sigue ese movimiento tal cual. Sin suavizar: los vídeos de IA dan saltos de cámara (fotogramas perdidos)
+    # y, si se suaviza, el retrato se desfasa del marco y parece que se balancea.
+    medida = {}
     for k in val:
-        m = masks[k]
+        a, m = frames[k], masks[k]
+        d = np.abs(a.astype(np.float32) - colores[k]).max(2)
+        w = np.clip((32 - d) / 16, 0, 1)
         ys, xs = np.nonzero(m)
-        if ys.min() > 10:
-            quads[k] = afinar(m, esquinas(m, None))
-            continue
-        fila = ys.max() - 6
-        xs_f = np.nonzero(m[fila])[0]
-        xl, xr = xs_f.min(), xs_f.max()
-        s = (xr - xl) / ancho_full
-        base_full = (q_full[2] + q_full[3]) / 2
-        base = np.array([(xl + xr) / 2, ys.max()], float)
-        quads[k] = (q_full - base_full) * s + base
-    Q = suavizar(np.array([quads[k] for k in val]))
+        y1, x0, x1 = ys.max(), xs.min(), xs.max()
+        cols = slice(int(x0 + .2 * (x1 - x0)), int(x1 - .2 * (x1 - x0)))
+        yb = y1 - 30
+        abajo = yb + w[yb:yb + 50, cols].sum(0).mean()
+        filas = slice(max(ys.min(), y1 - 250), y1 - 30)
+        xl = (x0 + 30) - w[filas, x0 - 20:x0 + 30].sum(1).mean()
+        xr = (x1 - 30) + w[filas, x1 - 30:x1 + 20].sum(1).mean()
+        medida[k] = ((xl + xr) / 2, abajo, xr - xl)
+    # la forma la da el último fotograma; su base, medida con el mismo método, es el ancla
+    bx0, by0, w0 = medida[val[-1]]
+    for k in val:
+        bx, by, wk = medida[k]
+        quads[k] = (q_full - np.array([bx0, by0])) * (wk / w0) + np.array([bx, by])
+    Q = np.array([quads[k] for k in val])
     q = q_full
     prop = (np.linalg.norm(q[3] - q[0]) + np.linalg.norm(q[2] - q[1])) / (np.linalg.norm(q[1] - q[0]) + np.linalg.norm(q[2] - q[3]))
     ret = Image.open(retrato).convert('RGB')
