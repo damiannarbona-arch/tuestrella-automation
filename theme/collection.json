@@ -204,7 +204,10 @@
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 0,
         "padding-block-end": 32
-      }
+      },
+      "custom_css": [
+        "@media (min-width: 750px) { .product-grid.product-grid--grid[product-grid-view='default'] { --product-grid-columns-desktop: repeat(auto-fit, minmax(220px, 290px)); justify-content: center; } }"
+      ]
     },
     "elige_estilo": {
       "type": "elige-estilo",
