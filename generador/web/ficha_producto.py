@@ -37,6 +37,8 @@ ARTICULOS = {
                 [A(f'casos/miau/extra-{i}.jpg') for i in (1, 2, 3)]),
     'aventurero': ('Sonic', A('casos/sonic/retrato-aventurero-es.jpg'), A('casos/sonic/foto-principal.jpg'),
                    [A(f'casos/sonic/extra-{i}.jpg') for i in (1, 2, 3)]),
+    # sin caso real todavía: diseño de ejemplo (IA), así que NO lleva «De sus fotos a su retrato»
+    'caballos': ('Thor', A('ejemplos-ia/thor/diseno-caballos.webp'), None, []),
 }
 
 
@@ -151,6 +153,7 @@ if __name__ == '__main__':
     out = A('web', 'ficha')
     os.makedirs(out, exist_ok=True)
     for e in (sys.argv[1:] or ARTICULOS):
-        sus_fotos(e, os.path.join(out, f'{e}-4-sus-fotos.jpg'))
+        if ARTICULOS[e][2]:           # solo con caso real
+            sus_fotos(e, os.path.join(out, f'{e}-4-sus-fotos.jpg'))
         vista_previa(e, os.path.join(out, f'{e}-5-vista-previa.jpg'))
         print(e, 'ok')
