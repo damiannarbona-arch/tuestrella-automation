@@ -1002,14 +1002,14 @@ def publicacion_10():
     # 3 · Tamaño y marco
     im = lienzo()
     paso(im, 2, 'Tamaño y marco', 'Elige tamaño\ny color del marco')
-    foto_en_zona(im, abrir(F('clasico-2-tres-marcos.jpg')), cy=.578, zoom=1.15)   # sin el título de la imagen
+    foto_en_zona(im, abrir(F('lavanda-2-tres-marcos.jpg')), cy=.578, zoom=1.15)   # sin el título de la imagen
     diapos.append(im)
 
     # 4 · Sus fotos y sus datos
     im = lienzo()
     paso(im, 3, 'Sus fotos', 'Sube sus fotos y\ncuéntanos cómo es')
-    C = lambda n: A('casos', 'curro', n)
-    polaroid(im, abrir(C('foto-principal.jpg')), (300, 640), 360, -5, 'la principal', foco=(.55, .5))
+    C = lambda n: A('casos', 'sonic', n)
+    polaroid(im, abrir(C('foto-principal.jpg')), (300, 640), 360, -5, 'la principal', foco=(.5, .4))
     polaroid(im, abrir(C('extra-1.jpg')), (640, 560), 250, 6, foco=(.5, .5))
     polaroid(im, abrir(C('extra-2.jpg')), (820, 760), 230, -4, foco=(.5, .5))
     d = ImageDraw.Draw(im)
@@ -1020,10 +1020,10 @@ def publicacion_10():
         y += 76
     diapos.append(im)
 
-    # 5 · Vista previa
+    # 5 · Vista previa (Penny: la diapositiva siguiente es su cuadro real ya en casa)
     im = lienzo()
     paso(im, 4, 'La vista previa', 'En 48 h te enviamos\nsu vista previa')
-    foto_en_zona(im, abrir(F('clasico-5-vista-previa.jpg')), cx=.5, cy=.578, zoom=1.15)
+    foto_en_zona(im, abrir(F('rosa-5-vista-previa.jpg')), cx=.5, cy=.578, zoom=1.15)
     diapos.append(im)
 
     # 6 · En casa
