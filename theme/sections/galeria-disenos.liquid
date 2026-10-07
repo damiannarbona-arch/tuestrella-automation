@@ -31,6 +31,7 @@
       <li class="kg__item" data-estilo="{{ block.settings.estilo | handleize }}" {{ block.shopify_attributes }}>
         <a class="kg__enlace" href="{{ block.settings.producto.url | default: '/collections/all' }}">
           <div class="kg__marco">
+            {%- if block.settings.ejemplo -%}<span class="kg__ejemplo">Ejemplo · creado con IA</span>{%- endif -%}
             {%- if block.settings.imagen != blank -%}
               {{ block.settings.imagen | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 25vw, 50vw', alt: block.settings.imagen.alt | default: block.settings.nombre }}
             {%- else -%}
@@ -58,6 +59,9 @@
   #kg-{{ section.id }} .kg__rejilla { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 750px) { #kg-{{ section.id }} .kg__rejilla { gap: 24px; grid-template-columns: repeat(var(--kg-cols), minmax(0, 1fr)); } }
   #kg-{{ section.id }} .kg__item[hidden] { display: none; }
+  #kg-{{ section.id }} .kg__marco { position: relative; }
+  #kg-{{ section.id }} .kg__ejemplo { position: absolute; left: 8px; top: 8px; z-index: 1; background: rgb(246 242 236 / .92); color: rgb(63 81 71);
+    font-size: .7rem; font-weight: 700; letter-spacing: .04em; padding: 4px 9px; border-radius: 999px; }
   #kg-{{ section.id }} .kg__enlace { display: block; color: inherit; text-decoration: none; }
   #kg-{{ section.id }} .kg__marco { aspect-ratio: 2 / 3; overflow: hidden; border-radius: 8px; box-shadow: 0 6px 18px rgb(40 30 20 / .12); background: #f6f2ec; }
   #kg-{{ section.id }} .kg__marco img, #kg-{{ section.id }} .kg__marco svg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
@@ -108,7 +112,8 @@
             { "value": "Aventurero", "label": "Aventurero" },
             { "value": "Ecuestre", "label": "Ecuestre" }
           ] },
-        { "type": "product", "id": "producto", "label": "Producto al que enlaza" }
+        { "type": "product", "id": "producto", "label": "Producto al que enlaza" },
+        { "type": "checkbox", "id": "ejemplo", "label": "Es un ejemplo creado con IA (no un caso real)", "default": false }
       ]
     }
   ],

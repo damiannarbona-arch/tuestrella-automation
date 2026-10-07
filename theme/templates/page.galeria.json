@@ -109,11 +109,22 @@
             "estilo": "Clásico",
             "producto": "retrato-mascota-personalizado-clasico"
           }
+        },
+        "d12": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-rufo-clasico.jpg",
+            "nombre": "Rufo",
+            "estilo": "Clásico",
+            "producto": "retrato-mascota-personalizado-clasico",
+            "ejemplo": true
+          }
         }
       },
       "block_order": [
         "d10",
         "d11",
+        "d12",
         "d9",
         "d1",
         "d2",
