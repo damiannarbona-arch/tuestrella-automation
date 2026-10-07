@@ -1,11 +1,11 @@
-"""Fotos 1, 2 y 4 del carrusel: el diseño real dentro del hueco gris de las 3 escenas de ChatGPT.
+"""Fotos 1, 2, 3 y 5 del carrusel: el diseño real dentro del hueco gris de las 3 escenas de ChatGPT.
 
-Escenas en assets/ia/ficha/: escena-a-frente, escena-b-apoyado, escena-c-detalle (hueco gris 2:3).
+Escenas en assets/ia/ficha/: escena-a-frente, escena-d-tres-marcos, escena-b-apoyado, escena-c-detalle (huecos grises 2:3).
 Por cada escena: máscara del gris → esquinas subpíxel → perspectiva → luz del gris aplicada al retrato →
 corrección de color común (pared hacia el #F6F2EC de la web) → 2000×2000.
 
 Uso: python3 generador/web/escenas_ficha.py [estilo ...]
-→ assets/web/ficha/<estilo>-1-frente.jpg, -2-apoyado.jpg, -4-detalle.jpg
+→ assets/web/ficha/<estilo>-1-frente.jpg, -2-tres-marcos.jpg, -3-apoyado.jpg, -5-detalle.jpg
 """
 import os, sys
 import cv2
@@ -15,18 +15,40 @@ from scipy import ndimage
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'video'))
 sys.path.insert(0, os.path.dirname(__file__))
-from componer_marco import mascara_gris, esquinas, afinar  # noqa: E402
+from componer_marco import esquinas, afinar  # noqa: E402
 from ficha_producto import ARTICULOS, A  # noqa: E402
 
-ESCENAS = [('a-frente', '1-frente'), ('b-apoyado', '2-apoyado'), ('c-detalle', '4-detalle')]
+ESCENAS = [('a-frente', '1-frente'), ('d-tres-marcos', '2-tres-marcos'), ('b-apoyado', '3-apoyado'), ('c-detalle', '5-detalle')]
 PARED_WEB = np.array([246, 242, 236], np.float32)   # #F6F2EC
 LADO = 2000
 
 
+def huecos(a):
+    """Todos los huecos grises de la escena (la de los 3 marcos tiene 3), de mayor a menor."""
+    v = a.mean(2)
+    g = (np.abs(a[..., 0] - a[..., 1]) < 11) & (np.abs(a[..., 1] - a[..., 2]) < 13) & (v > 120) & (v < 215)
+    lab, n = ndimage.label(g)
+    tam = ndimage.sum(g, lab, range(1, n + 1))
+    res = []
+    for i in np.argsort(-tam):
+        if tam[i] < g.size * .01:
+            break
+        m = ndimage.binary_fill_holes(ndimage.binary_closing(lab == i + 1, np.ones((9, 9)), iterations=2))
+        res.append(m)
+    return res
+
+
 def encajar(escena, retrato):
     a = np.asarray(Image.open(escena).convert('RGB')).astype(np.float32)
+    todos = np.zeros(a.shape[:2], bool)
+    for m in huecos(a):
+        a = encajar_hueco(a, m, retrato)
+        todos |= m
+    return a, todos
+
+
+def encajar_hueco(a, m, retrato):
     H, W = a.shape[:2]
-    m = mascara_gris(a.astype(np.uint8))
     q = afinar(m, esquinas(m, None))
     q = q.mean(0) + (q - q.mean(0)) * 1.006             # cubre el borde antialias del gris
     ret = Image.open(retrato).convert('RGB')
@@ -66,7 +88,7 @@ def encajar(escena, retrato):
     warp *= (1 - .22 * somb)[..., None]
     # grano de la foto
     warp += np.random.default_rng(1).normal(0, 1.6, warp.shape).astype(np.float32)
-    return a * (1 - al) + np.clip(warp, 0, 255) * al, m
+    return a * (1 - al) + np.clip(warp, 0, 255) * al
 
 
 def color_web(a, m):

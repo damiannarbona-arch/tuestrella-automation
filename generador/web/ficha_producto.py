@@ -1,15 +1,14 @@
 """Fotos cuadradas (2000×2000) para el carrusel de la ficha de producto, con la paleta de la web.
 
-Formato fijo de cada artículo (ver generador/prompts/escenas-producto-minimal.md):
-  1, 2 y 4 → escenas de ChatGPT con el diseño insertado (marco_en_imagen.py)
-  3        → «De sus fotos a su retrato» (este script)
-  5        → «3 marcos · 3 tamaños» (este script)
-  6        → «Tu vista previa en 48 h» (este script)
+Orden del carrusel de cada artículo:
+  1 frente · 2 tres marcos · 3 apoyado · 5 detalle → escenas de ChatGPT con el diseño (escenas_ficha.py)
+  4 «De sus fotos a su retrato» · 6 «Tu vista previa en 48 h» · 7 «3 marcos · 3 tamaños» (este script)
+  8 vídeo sin música ni letras
 
 Uso:
   python3 generador/web/ficha_producto.py            (genera los 4 artículos)
   python3 generador/web/ficha_producto.py rosa       (solo uno)
-→ assets/web/ficha/<estilo>-3-sus-fotos.jpg y <estilo>-5-marcos-tamanos.jpg
+→ assets/web/ficha/<estilo>-4-sus-fotos.jpg, -6-vista-previa.jpg y -7-marcos-tamanos.jpg
 """
 import os, sys
 from PIL import Image, ImageDraw
@@ -151,7 +150,7 @@ if __name__ == '__main__':
     out = A('web', 'ficha')
     os.makedirs(out, exist_ok=True)
     for e in (sys.argv[1:] or ARTICULOS):
-        sus_fotos(e, os.path.join(out, f'{e}-3-sus-fotos.jpg'))
-        marcos_tamanos(e, os.path.join(out, f'{e}-5-marcos-tamanos.jpg'))
+        sus_fotos(e, os.path.join(out, f'{e}-4-sus-fotos.jpg'))
+        marcos_tamanos(e, os.path.join(out, f'{e}-7-marcos-tamanos.jpg'))
         vista_previa(e, os.path.join(out, f'{e}-6-vista-previa.jpg'))
         print(e, 'ok')
