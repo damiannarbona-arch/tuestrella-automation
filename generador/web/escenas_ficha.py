@@ -51,6 +51,21 @@ def encajar(escena, retrato):
     zona = np.zeros((H * 4, W * 4), np.uint8)
     cv2.fillConvexPoly(zona, np.int32(np.round(q * 4)), 255, lineType=cv2.LINE_AA)
     al = cv2.resize(zona, (W, H), interpolation=cv2.INTER_AREA).astype(np.float32)[..., None] / 255
+    dentro = al[..., 0] > .5
+    # papel del impreso con el mismo brillo que el paspartú que lo rodea, no más
+    anillo = ndimage.binary_dilation(dentro, iterations=14) & ~ndimage.binary_dilation(dentro, iterations=4)
+    pasp = np.median(a[anillo], 0)
+    papel = np.percentile(warp[dentro], 92, axis=0)
+    warp *= float(np.clip(pasp.mean() * 1.01 / papel.mean(), .75, 1.05))   # solo brillo: se mantiene el tono crema
+    # tras el cristal: un poco menos de contraste
+    media = warp[dentro].mean(0)
+    warp = media + (warp - media) * .95
+    # sombra del paspartú sobre el impreso (luz desde la izquierda y arriba)
+    desp = ndimage.shift(dentro.astype(np.float32), (5, 5), order=1)
+    somb = cv2.GaussianBlur(np.clip(dentro - desp, 0, 1).astype(np.float32), (0, 0), 3)
+    warp *= (1 - .22 * somb)[..., None]
+    # grano de la foto
+    warp += np.random.default_rng(1).normal(0, 1.6, warp.shape).astype(np.float32)
     return a * (1 - al) + np.clip(warp, 0, 255) * al, m
 
 
