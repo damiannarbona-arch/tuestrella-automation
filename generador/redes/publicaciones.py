@@ -1059,6 +1059,95 @@ def publicacion_10():
     print(out)
 
 
+# ---------- Publicación #11 · «¿Sabéis quién se ha puesto celosa?» (caso real Noah, compañera de Curro) ----------
+
+def publicacion_11():
+    N = lambda f: abrir(A('casos', 'noah', f))
+    cocina, perfil, cachorra, durmiendo, playa = (N('sentada-cocina.jpg'), N('calle-perfil.jpg'), N('cachorra.jpg'),
+                                                  N('con-curro-durmiendo.jpg'), N('con-curro-playa.jpg'))
+    ret_n = N('retrato-botanico-es.jpg')
+    ret_c = abrir(A('casos', 'curro', 'retrato-clasico-es.jpg'))
+    pared_c = abrir(A('web', 'ficha', 'clasico-1-frente.jpg'))
+    out = A('redes', 'publicaciones', '11-noah-celosa', 'es')
+    os.makedirs(out, exist_ok=True)
+    for f in os.listdir(out):
+        os.remove(os.path.join(out, f))
+    total, diapos = 7, []
+    x0, y0, x1, y1 = FOTO
+
+    def retrato_en_zona(im, rets):
+        ImageDraw.Draw(im).rectangle(FOTO, fill=ARENA)
+        h = y1 - y0 - 70 if len(rets) == 1 else int((x1 - x0 - 90) / 2 * 1.5)
+        ws = [int(r.width * h / r.height) for r in rets]
+        g = 30
+        x = (x0 + x1 - sum(ws) - g * (len(rets) - 1)) // 2
+        y = (y0 + y1 - h) // 2
+        for r, w in zip(rets, ws):
+            sombra(im, (x, y, x + w, y + h), radio=18, off=(0, 10), alfa=80)
+            im.paste(r.resize((w, h), Image.LANCZOS), (x, y))
+            x += w + g
+
+    # 1 · Gancho
+    im = lienzo()
+    cabecera(im, 'Caso real', '¿Sabéis quién se\nha puesto celosa?', 1)
+    foto_en_zona(im, cocina, cx=.5, cy=.36, zoom=1.15)
+    diapos.append(im)
+
+    # 2 · Curro ya tenía el suyo
+    im = lienzo()
+    cabecera(im, 'Hace unas semanas', 'Curro estrenó\nsu cuadro…', 1)
+    foto_en_zona(im, pared_c, cx=.445, cy=.45, zoom=1.0)
+    diapos.append(im)
+
+    # 3 · Noah, ofendida
+    im = lienzo()
+    cabecera(im, 'Desde entonces', '…y Noah no nos\nmira igual', 1)
+    foto_en_zona(im, perfil, cx=.55, cy=.45, zoom=1.35)
+    diapos.append(im)
+
+    # 4 · Sus fotos
+    im = lienzo()
+    cabecera(im, 'Así que', 'le pedimos\nsus fotos', 1)
+    for foto, c, a, foco in zip([cachorra, cocina, durmiendo, playa], [(300, 610), (780, 590), (310, 985), (780, 965)],
+                                [-5, 4, 3, -4], [(.45, .35, 1.3), (.5, .38, 1.5), (.5, .5, 1.2), (.5, .55, 1.0)]):
+        polaroid(im, foto, c, 380, a, foco=foco)
+    diapos.append(im)
+
+    # 5 · Su retrato
+    im = lienzo()
+    cabecera(im, 'Su resultado', 'Noah, en estilo\nBotánico', 1)
+    retrato_en_zona(im, [ret_n])
+    diapos.append(im)
+
+    # 6 · Los dos
+    im = lienzo()
+    cabecera(im, 'Paz en casa', 'Ahora sí: cada uno\ncon el suyo', 1)
+    retrato_en_zona(im, [ret_c, ret_n])
+    diapos.append(im)
+
+    # 7 · Kivoa
+    im = lienzo()
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 330), 'Kivoa', font=MARCA(110), fill=SALVIA, anchor='ms')
+    y = texto_centrado(d, ['Un cuadro personalizado,', 'no un cuadro cualquiera'], 470, TIT(68), TINTA, 88)
+    d.line((W / 2 - 60, y - 30, W / 2 + 60, y - 30), fill=ROSA, width=4)
+    y += 60
+    for b in ['¿Tienes dos? Hacemos uno para cada uno', 'Vista previa en 48 horas',
+              'No te cobramos hasta que la apruebes', 'Enmarcado y listo para colgar']:
+        check(d, 150, y - 12)
+        d.text((196, y), b, font=TXT(38), fill=TINTA, anchor='ls')
+        y += 82
+    d.rounded_rectangle((W / 2 - 330, y + 10, W / 2 + 330, y + 96), 18, outline=SALVIA, width=3)
+    d.text((W / 2, y + 54), '-10 % en tu primer pedido: BIENVENIDA10', font=TXT_B(32), fill=SALVIA, anchor='mm')
+    boton(d, W / 2, y + 200, 'kivoa.es · enlace en la bio')
+    diapos.append(im)
+
+    for i, im in enumerate(diapos, 1):
+        pie(im, i, total)
+        im.convert('RGB').save(os.path.join(out, f'{i:02d}.jpg'), quality=92)
+    print(out)
+
+
 if __name__ == '__main__':
     import sys
-    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7, "8": publicacion_8, "9": publicacion_9, "10": publicacion_10}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
+    {"1": publicacion_1, "2": publicacion_2, "3": publicacion_3, "4": publicacion_4, "5": publicacion_5, "6": publicacion_6, "7": publicacion_7, "8": publicacion_8, "9": publicacion_9, "10": publicacion_10, "11": publicacion_11}[sys.argv[1] if len(sys.argv) > 1 else "2"]()
