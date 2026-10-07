@@ -1,11 +1,11 @@
-"""Fotos 1, 2, 3 y 5 del carrusel: el diseño real dentro del hueco gris de las 3 escenas de ChatGPT.
+"""Fotos 1, 2 y 3 del carrusel: el diseño real dentro del hueco gris de las 3 escenas de ChatGPT.
 
 Escenas en assets/ia/ficha/: escena-a-frente, escena-d-tres-marcos, escena-b-apoyado, escena-c-detalle (huecos grises 2:3).
 Por cada escena: máscara del gris → esquinas subpíxel → perspectiva → luz del gris aplicada al retrato →
 corrección de color común (pared hacia el #F6F2EC de la web) → 2000×2000.
 
 Uso: python3 generador/web/escenas_ficha.py [estilo ...]
-→ assets/web/ficha/<estilo>-1-frente.jpg, -2-tres-marcos.jpg, -3-apoyado.jpg, -5-detalle.jpg
+→ assets/web/ficha/<estilo>-1-frente.jpg, -2-tres-marcos.jpg, -3-detalle.jpg
 """
 import os, sys
 import cv2
@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from componer_marco import esquinas, afinar  # noqa: E402
 from ficha_producto import ARTICULOS, A  # noqa: E402
 
-ESCENAS = [('a-frente', '1-frente'), ('d-tres-marcos', '2-tres-marcos'), ('b-apoyado', '3-apoyado'), ('c-detalle', '5-detalle')]
+ESCENAS = [('a-frente', '1-frente'), ('d-tres-marcos', '2-tres-marcos'), ('c-detalle', '3-detalle')]
 PARED_WEB = np.array([246, 242, 236], np.float32)   # #F6F2EC
 LADO = 2000
 
@@ -100,6 +100,27 @@ def color_web(a, m):
     return np.clip(a * k, 0, 255)
 
 
+def rotular_marcos(im, escena):
+    """Escena de los 3 marcos: título en la pared y la medida bajo cada marco, con la tipografía de la web."""
+    from PIL import ImageDraw
+    from ficha_producto import F, SERIF, ITAL, TINTA, GRIS, SALVIA
+    a = np.asarray(Image.open(escena).convert('RGB')).astype(np.float32)
+    k = LADO / a.shape[1]
+    d = ImageDraw.Draw(im)
+    d.text((LADO / 2, 150), '3 marcos · 3 tamaños', font=F(SERIF, 100), fill=TINTA, anchor='mm')
+    d.text((LADO / 2, 250), 'Cualquier marco en cualquier tamaño', font=F(ITAL, 54), fill=GRIS, anchor='mm')
+    # de izquierda a derecha: el marco pequeño, el mediano y el grande
+    centros = sorted(ndimage.center_of_mass(m)[1] * k for m in huecos(a))
+    fondo = max(np.nonzero(m)[0].max() for m in huecos(a)) * k
+    for x, txt in zip(centros, ('20×25 cm', '30×40 cm', '50×70 cm')):
+        f = F(SERIF, 46)
+        w = d.textlength(txt, font=f) + 56
+        y = fondo + 175
+        d.rounded_rectangle((x - w / 2, y - 36, x + w / 2, y + 36), radius=36, fill=SALVIA)
+        d.text((x, y), txt, font=f, fill=(255, 255, 255), anchor='mm')
+    return im
+
+
 if __name__ == '__main__':
     out = A('web', 'ficha')
     os.makedirs(out, exist_ok=True)
@@ -108,6 +129,8 @@ if __name__ == '__main__':
         for esc, nombre in ESCENAS:
             img, m = encajar(A('ia', 'ficha', f'escena-{esc}.webp'), retrato)
             img = color_web(img, m)
-            Image.fromarray(img.astype(np.uint8)).resize((LADO, LADO), Image.LANCZOS).save(
-                os.path.join(out, f'{e}-{nombre}.jpg'), quality=92)
+            im = Image.fromarray(img.astype(np.uint8)).resize((LADO, LADO), Image.LANCZOS)
+            if esc == 'd-tres-marcos':
+                im = rotular_marcos(im, A('ia', 'ficha', f'escena-{esc}.webp'))
+            im.save(os.path.join(out, f'{e}-{nombre}.jpg'), quality=92)
         print(e, 'ok')
