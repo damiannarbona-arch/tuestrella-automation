@@ -50,6 +50,7 @@ RASGOS = {
     'greedy': ('cookie', 'Treat lover', 'Goloso', 'Golosa'),
     'charming': ('sparkles', 'Charming', 'Coqueto', 'Coqueta'),
     'faithful': ('paw', 'Faithful', 'Fiel', 'Fiel'),
+    'stubborn': ('hand-stop', 'Stubborn', 'Cabezota', 'Cabezota'),
 }
 
 
