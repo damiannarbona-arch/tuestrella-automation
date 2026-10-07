@@ -4,6 +4,7 @@ Formato fijo de cada artículo (ver generador/prompts/escenas-producto-minimal.m
   1, 2 y 4 → escenas de ChatGPT con el diseño insertado (marco_en_imagen.py)
   3        → «De sus fotos a su retrato» (este script)
   5        → «3 marcos · 3 tamaños» (este script)
+  6        → «Tu vista previa en 48 h» (este script)
 
 Uso:
   python3 generador/web/ficha_producto.py            (genera los 4 artículos)
@@ -15,6 +16,9 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'casos'))
 from caso_real import abrir, polaroid, marco, sombra, flecha, centrado, F, SERIF, ITAL, TINTA, GRIS  # noqa: E402
+from fotos_etsy import check, redondear  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from marca_agua import vista_previa as con_marca  # noqa: E402
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 A = lambda *p: os.path.join(RAIZ, 'assets', *p)
@@ -97,10 +101,57 @@ def marcos_tamanos(estilo, salida):
     im.save(salida, quality=92)
 
 
+def vista_previa(estilo, salida):
+    nombre, retrato, *_ = ARTICULOS[estilo]
+    im, d = lienzo()
+    cabecera(d, 'Tu vista previa en 48 h', 'Antes de imprimir, ves su retrato y lo apruebas tú')
+    # puntos a la izquierda
+    x, y = 150, 720
+    for txt, sub in (('Te la enviamos por mensaje', 'en menos de 48 horas'),
+                     ('2 rondas de cambios', 'incluidas en el precio'),
+                     ('Nada se imprime', 'sin tu aprobación')):
+        check(d, x + 40, y + 40, True, r=44)
+        d.text((x + 115, y), txt, font=F(SERIF, 60), fill=TINTA)
+        d.text((x + 115, y + 78), sub, font=F(ITAL, 44), fill=GRIS)
+        y += 260
+    # teléfono a la derecha con la vista previa con marca de agua
+    pw, ph = 720, 1440
+    px, py = 1150, 440
+    sombra(im, (px, py, px + pw, py + ph), r=100, off=(14, 24), alfa=90)
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((px, py, px + pw, py + ph), 100, fill=(30, 32, 34))
+    m = 24
+    sx0, sy0, sx1, sy1 = px + m, py + m, px + pw - m, py + ph - m
+    d.rounded_rectangle((sx0, sy0, sx1, sy1), 80, fill=(250, 249, 246))
+    d.rounded_rectangle((px + pw / 2 - 100, sy0 + 20, px + pw / 2 + 100, sy0 + 64), 22, fill=(30, 32, 34))
+    d.line((sx0, sy0 + 180, sx1, sy0 + 180), fill=(225, 220, 212), width=3)
+    d.ellipse((sx0 + 36, sy0 + 100, sx0 + 106, sy0 + 170), fill=SALVIA)
+    centrado(d, sx0 + 71, sy0 + 135, 'K', F(SERIF, 42), 'white')
+    d.text((sx0 + 128, sy0 + 135), 'Kivoa', font=F(SERIF, 44), fill=TINTA, anchor='lm')
+    tmp = os.path.join(os.path.dirname(salida), f'.{estilo}-previa.jpg')
+    prev = abrir(con_marca(retrato, tmp, lado=900))
+    os.remove(tmp)
+    bx0, by0, bx1 = sx0 + 32, sy0 + 220, sx1 - 90
+    rw = bx1 - bx0 - 50
+    rh = round(rw * prev.height / prev.width)
+    prev = prev.resize((rw, rh), Image.LANCZOS)
+    d.rounded_rectangle((bx0, by0, bx1, by0 + rh + 170), 32, fill=(236, 232, 224))
+    d.text((bx0 + 25, by0 + 24), f'¡La vista previa de {nombre}!', font=F(SERIF, 34), fill=TINTA)
+    im.paste(prev, (bx0 + 25, by0 + 80), redondear(prev, 14))
+    d.text((bx0 + 25, by0 + 80 + rh + 22), '¿Quieres cambiar algo?', font=F(ITAL, 32), fill=GRIS)
+    ry0 = by0 + rh + 205
+    txt, f = '¡Me encanta! Adelante', F(SERIF, 36)
+    tw = d.textlength(txt, font=f)
+    d.rounded_rectangle((sx1 - 32 - tw - 64, ry0, sx1 - 32, ry0 + 84), 42, fill=SALVIA)
+    d.text((sx1 - 32 - tw - 32, ry0 + 42), txt, font=f, fill='white', anchor='lm')
+    im.save(salida, quality=92)
+
+
 if __name__ == '__main__':
     out = A('web', 'ficha')
     os.makedirs(out, exist_ok=True)
     for e in (sys.argv[1:] or ARTICULOS):
         sus_fotos(e, os.path.join(out, f'{e}-3-sus-fotos.jpg'))
         marcos_tamanos(e, os.path.join(out, f'{e}-5-marcos-tamanos.jpg'))
+        vista_previa(e, os.path.join(out, f'{e}-6-vista-previa.jpg'))
         print(e, 'ok')
