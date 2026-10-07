@@ -1,6 +1,6 @@
 # Caso real Noah (bulldog francés, compañera de Curro)
 
-Fotos en `assets/casos/noah/`: foto-principal (cara de perfil), extra-1 (calle, cuerpo entero), extra-2, extra-3-cara (fotograma del vídeo), extra-4-con-curro, vídeos originales e `inicio-video-9x16.jpg` (extra-1 recortada a 9:16 para Dola).
+Fotos en `assets/casos/noah/`: foto-principal (sentada en la cocina), extra-1 (cachorra), extra-2 (durmiendo con Curro), extra-3 (calle de perfil), calle-*, paseo-con-curro, con-curro-playa, vídeos originales e `inicio-video-9x16.jpg` (extra-1 recortada a 9:16 para Dola).
 
 ## Retrato · Estilo Botánico
 Curro es Clásico (azul); Noah en Botánico (lavanda) para que la pareja se distinga y la pared enseñe dos estilos.

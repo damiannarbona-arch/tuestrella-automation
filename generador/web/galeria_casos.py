@@ -20,6 +20,7 @@ CASOS = [
     ('sonic', 'retrato-aventurero-es.jpg', 'Sonic', 'Aventurero', [(.5, .38), (.55, .6), (.78, .72), (.6, .5)]),
     ('ricky', 'retrato-clasico-es.jpg', 'Ricky', 'Clásico', [(.45, .4), (.48, .45), (.5, .45), (.55, .5)]),
     ('curro', 'retrato-clasico-es.jpg', 'Curro', 'Clásico', [(.53, .42), (.55, .42), (.62, .45), (.33, .4)]),
+    ('noah', 'retrato-botanico-es.jpg', 'Noah', 'Botánico', [(.5, .35), (.45, .35), (.5, .5), (.5, .45)]),
 ]
 
 

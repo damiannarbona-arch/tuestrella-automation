@@ -129,9 +129,19 @@
             "producto": "retrato-mascota-personalizado-botanico",
             "ejemplo": true
           }
+        },
+        "d14": {
+          "type": "diseno",
+          "settings": {
+            "imagen": "shopify://shop_images/kivoa-diseno-noah-botanico.jpg",
+            "nombre": "Noah",
+            "estilo": "Botánico",
+            "producto": "retrato-mascota-personalizado-botanico"
+          }
         }
       },
       "block_order": [
+        "d14",
         "d10",
         "d11",
         "d12",
