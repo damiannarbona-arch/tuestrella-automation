@@ -218,7 +218,9 @@
             "para": "Quieres decorar tu casa con tu mascota como protagonista.",
             "punto_1": "Fondo de acuarela suave, sin adornos",
             "punto_2": "Colores neutros que pegan en cualquier casa",
-            "punto_3": "Su retrato es el centro de todo"
+            "punto_3": "Su retrato es el centro de todo",
+            "motivo": "Para decorar",
+            "icono": "marco"
           }
         },
         "e2": {
@@ -230,7 +232,9 @@
             "para": "Tu mascota se ha ido y quieres un homenaje para siempre.",
             "punto_1": "Rosas en acuarela alrededor de su retrato",
             "punto_2": "Su fecha especial",
-            "punto_3": "Una frase de despedida"
+            "punto_3": "Una frase de despedida",
+            "motivo": "Para recordar",
+            "icono": "corazon"
           }
         },
         "e3": {
@@ -242,7 +246,9 @@
             "para": "Buscas algo delicado o quieres hacer un regalo.",
             "punto_1": "Ramas de lavanda y tonos lila",
             "punto_2": "Detalles dibujados alrededor del nombre",
-            "punto_3": "Acabado suave y luminoso"
+            "punto_3": "Acabado suave y luminoso",
+            "motivo": "Para regalar",
+            "icono": "flor"
           }
         },
         "e4": {
@@ -254,7 +260,9 @@
             "para": "Tu perro vive contigo en el campo, la playa o la montaña.",
             "punto_1": "Paisaje de montaña, río y bosque",
             "punto_2": "Carteles con sus sitios favoritos",
-            "punto_3": "Brújula y detalles de aventura"
+            "punto_3": "Brújula y detalles de aventura",
+            "motivo": "Para aventureros",
+            "icono": "montana"
           }
         },
         "e5": {
@@ -266,7 +274,9 @@
             "para": "Tienes caballo o quieres sorprender a un jinete.",
             "punto_1": "Paisaje de campo andaluz",
             "punto_2": "Su lugar especial al fondo",
-            "punto_3": "Iconos ecuestres, como la herradura"
+            "punto_3": "Iconos ecuestres, como la herradura",
+            "motivo": "Para caballos",
+            "icono": "herradura"
           }
         }
       },
@@ -280,7 +290,8 @@
       "settings": {
         "titulo": "¿No sabes cuál elegir?",
         "subtitulo": "Todos llevan su retrato, su nombre y sus rasgos. Elige el estilo según la historia que quieras contar.",
-        "nota": ""
+        "nota": "",
+        "con_fotos": false
       }
     }
   },

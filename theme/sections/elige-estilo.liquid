@@ -2,7 +2,7 @@
   «¿Qué estilo es el suyo?»: comparativa de estilos justo debajo de los artículos.
   Cada bloque toma la foto y el enlace del producto elegido y muestra para quién es y lo que solo lleva ese estilo.
 {%- endcomment -%}
-<div class="kee" id="kee-{{ section.id }}">
+<div class="kee{% unless section.settings.con_fotos %} kee--sin-fotos{% endunless %}" id="kee-{{ section.id }}">
   <div class="kee__cabecera">
     {%- if section.settings.titulo != blank -%}<h2 class="kee__titulo">{{ section.settings.titulo }}</h2>{%- endif -%}
     {%- if section.settings.subtitulo != blank -%}<p class="kee__sub">{{ section.settings.subtitulo }}</p>{%- endif -%}
@@ -11,6 +11,7 @@
     {%- for block in section.blocks -%}
       {%- assign p = block.settings.producto -%}
       <a class="kee__estilo" href="{{ p.url | default: '/collections/all' }}" {{ block.shopify_attributes }}>
+        {%- if section.settings.con_fotos -%}
         <div class="kee__foto">
           {%- if p.featured_media -%}
             {{ p.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 990px) 20vw, 70vw', alt: p.featured_media.alt }}
@@ -19,7 +20,20 @@
           {%- endif -%}
           {%- if block.settings.etiqueta != blank -%}<span class="kee__etiqueta">{{ block.settings.etiqueta }}</span>{%- endif -%}
         </div>
+        {%- endif -%}
         <div class="kee__texto">
+          {%- unless section.settings.con_fotos -%}
+            <span class="kee__icono" aria-hidden="true">
+              {%- case block.settings.icono -%}
+                {%- when 'corazon' -%}<svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></svg>
+                {%- when 'flor' -%}<svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.2"/><path d="M12 6.8c0-2.6 3.6-2.6 3.6 0 2.6 0 2.6 3.6 0 3.6M12 11.2c0 2.6-3.6 2.6-3.6 0-2.6 0-2.6-3.6 0-3.6M12 11.2V21M12 17c-2 0-3.5-1.2-4-3 2 0 3.5 1.2 4 3z"/></svg>
+                {%- when 'montana' -%}<svg viewBox="0 0 24 24"><path d="M3 19l6.5-11 4 6.5 2-3L21 19z"/><path d="M8 11.5l1.5 1.2 1.6-1.4"/></svg>
+                {%- when 'herradura' -%}<svg viewBox="0 0 24 24"><path d="M7 20H4.5V11a7.5 7.5 0 0 1 15 0v9H17v-9a5 5 0 0 0-10 0z"/></svg>
+                {%- else -%}<svg viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="1.5"/><rect x="7.5" y="7" width="9" height="10"/></svg>
+              {%- endcase -%}
+            </span>
+            {%- if block.settings.motivo != blank -%}<span class="kee__motivo">{{ block.settings.motivo }}</span>{%- endif -%}
+          {%- endunless -%}
           <h3>{{ block.settings.nombre }}</h3>
           <p class="kee__para">{{ block.settings.para }}</p>
           <ul>
@@ -63,6 +77,11 @@
   #kee-{{ section.id }} .kee__texto li { display: flex; gap: 8px; align-items: flex-start; font-size: .875rem; line-height: 1.35; }
   #kee-{{ section.id }} .kee__texto li svg { flex: none; width: 18px; height: 18px; color: rgb(var(--kee-salvia)); margin-top: 1px; }
   #kee-{{ section.id }} .kee__ver { margin-top: auto; padding-top: 6px; font-weight: 700; font-size: .875rem; color: rgb(var(--kee-salvia)); }
+  #kee-{{ section.id }}.kee--sin-fotos .kee__estilo { background: #fff6; }
+  #kee-{{ section.id }}.kee--sin-fotos .kee__texto { padding: 20px 18px 20px; }
+  #kee-{{ section.id }} .kee__icono { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgb(var(--kee-salvia)); color: #fff; }
+  #kee-{{ section.id }} .kee__icono svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  #kee-{{ section.id }} .kee__motivo { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgb(var(--kee-salvia)); }
   #kee-{{ section.id }} .kee__nota { text-align: center; margin: 18px 16px 0; font-size: .9rem; opacity: .75; }
 </style>
 
@@ -72,6 +91,7 @@
   "settings": [
     { "type": "text", "id": "titulo", "label": "Título", "default": "¿Qué estilo es el suyo?" },
     { "type": "textarea", "id": "subtitulo", "label": "Subtítulo", "default": "Todos llevan su retrato, su nombre y sus rasgos. Lo que cambia es la historia que cuentan." },
+    { "type": "checkbox", "id": "con_fotos", "label": "Mostrar fotos (desactívalo si hay artículos justo encima)", "default": true },
     { "type": "text", "id": "nota", "label": "Nota final" }
   ],
   "blocks": [
@@ -79,7 +99,10 @@
       "settings": [
         { "type": "product", "id": "producto", "label": "Producto" },
         { "type": "text", "id": "nombre", "label": "Nombre del estilo", "default": "Clásico" },
-        { "type": "text", "id": "etiqueta", "label": "Etiqueta (opcional)" },
+        { "type": "text", "id": "etiqueta", "label": "Etiqueta sobre la foto (opcional)" },
+        { "type": "text", "id": "motivo", "label": "Motivo (sin fotos)", "default": "Para decorar" },
+        { "type": "select", "id": "icono", "label": "Icono (sin fotos)", "default": "marco",
+          "options": [{ "value": "marco", "label": "Marco" }, { "value": "corazon", "label": "Corazón" }, { "value": "flor", "label": "Flor" }, { "value": "montana", "label": "Montaña" }, { "value": "herradura", "label": "Herradura" }] },
         { "type": "text", "id": "para", "label": "Para ti si…" },
         { "type": "text", "id": "punto_1", "label": "Solo en este estilo · 1" },
         { "type": "text", "id": "punto_2", "label": "Solo en este estilo · 2" },
