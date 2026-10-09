@@ -1,8 +1,9 @@
-"""Reel «Competición de alegría» (1080×1920, ~9 s, sin audio): Curro contra Noah celebrando su cuadro.
+"""Reel «Competición de alegría» (1080×1920, ~11 s, sin audio): Curro contra Noah celebrando su cuadro.
 
-Gancho: los dos marcos tapados con tela («les enseñamos lo que hay debajo…») → pantalla partida, Curro arriba
-(apenas se mueve: «3/10») y Noah abajo, cuyo nivel de alegría va en un rótulo con fondo que la sigue y tapa la zona
-íntima (la IA de vídeo le dibujó genitales de macho) → caen las telas: los dos cuadros y pregunta para comentarios.
+Gancho: los dos marcos tapados con tela («les enseñamos lo que hay debajo…») → pantalla partida, Curro arriba y
+Noah abajo con un rótulo con fondo («¿Qué nota le das del 1 al 10?») que la sigue y tapa la zona íntima (la IA de
+vídeo le dibujó genitales de macho) → caen las telas: los dos cuadros («sea cual sea su nota… su cuadro es de 10»)
+→ cierre de Kivoa.
 
 Uso: python3 generador/video/reel_competicion_alegria.py
 Clips: assets/ia/baile/curro-dola.mp4 y assets/ia/noah-video/dola-baile.mp4 (Dola, 720×1280, 24 fps).
@@ -18,6 +19,8 @@ from videos import ease, fuente_tiktok  # noqa: E402
 from reel_duelo import lienzo  # noqa: E402
 from reel_trapo import trapo, con_trapo  # noqa: E402
 from reel_zoom import recorte_log  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'redes'))
+from publicaciones import check, texto_centrado, PAPEL, TINTA, SALVIA, ROSA, TIT, MARCA, TXT as LETRA, TXT_B  # noqa: E402
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 A = lambda *p: os.path.join(RAIZ, 'assets', *p)
@@ -28,14 +31,11 @@ CENSURA = [(0.35, 358, 775), (0.5, 358, 792), (1.0, 350, 825), (1.5, 358, 833), 
            (3.0, 342, 858), (3.5, 358, 858), (4.0, 342, 850), (4.5, 333, 833), (5.0, 367, 850), (5.5, 367, 850),
            (6.0, 290, 858), (6.5, 333, 883), (7.0, 333, 900), (7.5, 392, 925), (7.9, 392, 925)]
 # rótulo con fondo que tapa la zona y sigue a Noah
-CARTEL = {'?': [('Nivel de alegría:', 'i'), ('???', 'b')],
-          'sube': [('Nivel de alegría:', 'i'), ('subiendo…', 'b')],
-          'fuera': [('Nivel de alegría:', 'i'), ('FUERA DE', 'b'), ('ESCALA', 'b')]}
+CARTEL = [('¿Qué nota le das?', 'i'), ('del 1 al 10', 'b')]
 
 TXT = {
     'gancho': [('Les enseñamos lo que', 'b'), ('hay debajo de las telas…', 'b')],
-    'curro': [('Nivel de alegría', 'i'), ('Curro: 3/10', 'b')],
-    'final': [('¿Quién ganó?', 'b'), ('Comenta Curro o Noah', 'b')],
+    'final': [('Sea cual sea su nota…', 'b'), ('su cuadro es de 10', 'b')],
 }
 
 
@@ -57,7 +57,7 @@ def zona(t):
 def cartel(im, centro, k, lineas):
     """Rótulo con fondo blanco (estilo texto de TikTok) que tapa la zona; k = escala respecto a pantalla completa."""
     d = ImageDraw.Draw(im)
-    w, h = 540 * k, 340 * k
+    w, h = 600 * k, 300 * k
     cx, cy = centro
     cy += 15 * k
     d.rounded_rectangle((cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2), 34 * k, fill=(255, 255, 255))
@@ -79,6 +79,27 @@ def recorte(im, z, cx, cy, size, caja=False):
     y0 = min(max(cy * h - ch / 2, 0), h - ch)
     out = im.resize(size, Image.LANCZOS, box=(x0, y0, x0 + cw, y0 + ch))
     return (out, (x0, y0, s)) if caja else out
+
+
+def cierre():
+    W, H = S
+    im = Image.new('RGB', S, PAPEL)
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 480), 'Kivoa', font=MARCA(170), fill=SALVIA, anchor='ms')
+    d.line((W / 2 - 80, 550, W / 2 + 80, 550), fill=ROSA, width=5)
+    y = texto_centrado(d, ['Un cuadro personalizado,', 'no un cuadro cualquiera'], 730, TIT(86), TINTA, 110)
+    y += 110
+    for p in ['A partir de sus fotos del móvil', 'Vista previa en 48 h', 'No pagas hasta aprobarla',
+              '¿Tienes dos? Uno para cada uno']:
+        check(d, 140, y - 18, r=34)
+        d.text((204, y), p, font=LETRA(54), fill=TINTA, anchor='ls')
+        y += 108
+    f = TXT_B(50)
+    cta = 'Enlace en el perfil'
+    w = d.textlength(cta, font=f) + 150
+    d.rounded_rectangle((W / 2 - w / 2, y + 40, W / 2 + w / 2, y + 160), 60, fill=SALVIA)
+    d.text((W / 2, y + 102), cta, font=f, fill='white', anchor='mm')
+    return im
 
 
 def montar():
@@ -107,7 +128,7 @@ def montar():
     def partida(t, x):
         im = Image.new('RGB', S)
         im.paste(f_curro(t, mitad, 1.25), (0, 0))
-        im.paste(f_noah(t + 1.0, mitad, 1.0, .5, CARTEL['sube' if t < 1.1 else 'fuera'], .72), (0, S[1] // 2))
+        im.paste(f_noah(t + 1.0, mitad, 1.0, .5, CARTEL, .8), (0, S[1] // 2))
         ImageDraw.Draw(im).rectangle((0, S[1] // 2 - 4, S[0], S[1] // 2 + 4), fill=(255, 255, 255))
         return im
 
@@ -129,11 +150,13 @@ def montar():
     todo = (pared.width / 2, H / 2, H)
     cerca = (pared.width / 2, (b0 + b1) / 2 + 120, H * .8)
 
+    fin = cierre()
     render('reel-competicion-alegria-es.mp4', [
         (1.6, lambda t, x: recorte_log(quieta, x, todo, cerca), [(TXT['gancho'], ARR, 0, 1)]),
-        (4.2, partida, [(TXT['curro'], ARR, 0, 1)]),
+        (4.2, partida, []),
         (0.7, lambda t, x: recorte_log(tapada(min(1, x * 1.1)), 0, cerca, cerca), []),
-        (2.6, lambda t, x: recorte_log(pared, x, cerca, todo), [(TXT['final'], ARR, .05, 1)]),
+        (2.4, lambda t, x: recorte_log(pared, x, cerca, todo), [(TXT['final'], ARR, .05, 1)]),
+        (2.6, lambda t, x: fin, []),
     ])
 
 
