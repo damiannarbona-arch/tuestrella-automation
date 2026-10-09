@@ -1,7 +1,7 @@
 """Reel «Competición de alegría» (1080×1920, ~13 s, sin audio): Curro contra Noah celebrando su cuadro.
 
-Pantalla partida con la pregunta → Curro (apenas se mueve: «nivel 3/10») → Noah se viene arriba («fuera de
-escala») con la zona íntima pixelada como censura de broma (la IA de vídeo le dibujó genitales de macho) →
+Pantalla partida con la pregunta → Curro (apenas se mueve: «nivel 3/10») → Noah se viene arriba: su nivel de
+alegría va en un rótulo con fondo que la sigue y tapa la zona íntima (la IA de vídeo le dibujó genitales de macho) →
 los dos cuadros en la pared y pregunta para comentarios.
 
 Uso: python3 generador/video/reel_competicion_alegria.py
@@ -25,13 +25,15 @@ ARR, ABA = 250, 1300
 CENSURA = [(0.35, 358, 775), (0.5, 358, 792), (1.0, 350, 825), (1.5, 358, 833), (2.0, 358, 842), (2.5, 358, 858),
            (3.0, 342, 858), (3.5, 358, 858), (4.0, 342, 850), (4.5, 333, 833), (5.0, 367, 850), (5.5, 367, 850),
            (6.0, 290, 858), (6.5, 333, 883), (7.0, 333, 900), (7.5, 392, 925), (7.9, 392, 925)]
-CW, CH = 200, 250            # tamaño del pixelado (px del clip)
+# rótulo con fondo que tapa la zona y sigue a Noah
+CARTEL = {'?': [('Nivel de alegría:', 'i'), ('???', 'b')],
+          'sube': [('Nivel de alegría:', 'i'), ('subiendo…', 'b')],
+          'fuera': [('Nivel de alegría:', 'i'), ('FUERA DE', 'b'), ('ESCALA', 'b')]}
 
 TXT = {
     'gancho': [('Competición de alegría:', 'b'), ('¿quién celebró más su cuadro?', 'b')],
     'curro': [('Curro', 'b'), ('Nivel de alegría: 3/10', 'i')],
-    'noah1': [('Noah', 'b'), ('Nivel de alegría…', 'i')],
-    'noah2': [('Noah', 'b'), ('FUERA DE ESCALA', 'b')],
+    'noah': [('Noah', 'b')],
     'final': [('¿Quién ganó?', 'b'), ('Comenta Curro o Noah', 'b')],
 }
 
@@ -43,38 +45,39 @@ def leer(ruta):
     return [Image.frombytes('RGB', (w, h), f) for f in gen], meta.get('fps') or 24
 
 
-def censura(im, t):
-    """Pixelado redondeado que sigue la zona, con su etiqueta de broma."""
+def zona(t):
+    """Centro de la zona a tapar en el clip original, o None fuera del tramo en que se ve."""
     if not CENSURA[0][0] <= t <= CENSURA[-1][0]:
-        return im
+        return None
     ts = [k[0] for k in CENSURA]
-    x = np.interp(t, ts, [k[1] for k in CENSURA])
-    y = np.interp(t, ts, [k[2] for k in CENSURA])
-    caja = (int(x - CW / 2), int(y - CH / 2), int(x + CW / 2), int(y + CH / 2))
-    zona = im.crop(caja)
-    px = zona.resize((max(1, CW // 22), max(1, CH // 22)), Image.BILINEAR).resize(zona.size, Image.NEAREST)
-    m = Image.new('L', zona.size, 0)
-    ImageDraw.Draw(m).rounded_rectangle((0, 0, zona.width - 1, zona.height - 1), 26, fill=255)
-    im = im.copy()
-    im.paste(px, caja[:2], m)
+    return np.interp(t, ts, [k[1] for k in CENSURA]), np.interp(t, ts, [k[2] for k in CENSURA])
+
+
+def cartel(im, centro, k, lineas):
+    """Rótulo con fondo blanco (estilo texto de TikTok) que tapa la zona; k = escala respecto a pantalla completa."""
     d = ImageDraw.Draw(im)
-    f = fuente_tiktok(26, 700)
-    txt = 'demasiada alegría'
-    tw = d.textlength(txt, font=f)
-    cx, ty = x, caja[3] + 26
-    d.rounded_rectangle((cx - tw / 2 - 14, ty - 20, cx + tw / 2 + 14, ty + 20), 20, fill=(255, 255, 255))
-    d.text((cx, ty), txt, font=f, fill=(20, 20, 20), anchor='mm')
+    w, h = 540 * k, 340 * k
+    cx, cy = centro
+    cy += 15 * k
+    d.rounded_rectangle((cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2), 34 * k, fill=(255, 255, 255))
+    fs = [fuente_tiktok(int((58 if e == 'i' else 84) * k), 600 if e == 'i' else 760) for _, e in lineas]
+    alto = sum(f.size * 1.18 for f in fs)
+    y = cy - alto / 2
+    for (t, e), f in zip(lineas, fs):
+        d.text((cx, y + f.size * .59), t, font=f, fill=(20, 20, 20), anchor='mm')
+        y += f.size * 1.18
     return im
 
 
-def recorte(im, z, cx, cy, size):
+def recorte(im, z, cx, cy, size, caja=False):
     w, h = im.size
     tw, th = size
     s = max(tw / w, th / h) * z
     cw, ch = tw / s, th / s
     x0 = min(max(cx * w - cw / 2, 0), w - cw)
     y0 = min(max(cy * h - ch / 2, 0), h - ch)
-    return im.resize(size, Image.LANCZOS, box=(x0, y0, x0 + cw, y0 + ch))
+    out = im.resize(size, Image.LANCZOS, box=(x0, y0, x0 + cw, y0 + ch))
+    return (out, (x0, y0, s)) if caja else out
 
 
 def montar():
@@ -90,17 +93,20 @@ def montar():
 
     VN = 1.2   # Noah algo acelerada: el baile gana ritmo
 
-    def f_noah(t, size=S, z=1.1, cy=.47):
+    def f_noah(t, size=S, z=1.1, cy=.47, lineas=None, ks=1.0):
         tc = min(0.2 + t * VN, (len(noah) - 1) / fn)
-        f = censura(noah[int(tc * fn)], tc)
-        return recorte(f, z, .47, cy, size)
+        im, (x0, y0, s) = recorte(noah[int(tc * fn)], z, .47, cy, size, caja=True)
+        p = zona(tc)
+        if p and lineas:
+            im = cartel(im, ((p[0] - x0) * s, (p[1] - y0) * s), s / 1.65 * ks, lineas)
+        return im
 
     mitad = (S[0], S[1] // 2)
 
     def partida(t, x):
         im = Image.new('RGB', S)
         im.paste(f_curro(t, mitad, 1.25), (0, 0))
-        im.paste(f_noah(t + 1.0, mitad, 1.0, .45), (0, S[1] // 2))
+        im.paste(f_noah(t + 1.0, mitad, 1.0, .48, CARTEL['?'], .78), (0, S[1] // 2))
         ImageDraw.Draw(im).rectangle((0, S[1] // 2 - 4, S[0], S[1] // 2 + 4), fill=(255, 255, 255))
         return im
 
@@ -116,7 +122,7 @@ def montar():
     render('reel-competicion-alegria-es.mp4', [
         (1.8, partida, [(TXT['gancho'], 800, 0, 1)]),
         (2.6, lambda t, x: f_curro(t), [(TXT['curro'], ARR, 0, 1)]),
-        (d_noah, lambda t, x: f_noah(t), [(TXT['noah1'], ARR, 0, .28), (TXT['noah2'], ARR, .28, 1)]),
+        (d_noah, lambda t, x: f_noah(t, lineas=CARTEL['sube' if x < .28 else 'fuera']), [(TXT['noah'], ARR, 0, 1)]),
         (2.6, final, [(TXT['final'], ARR, .1, 1)]),
     ])
 
