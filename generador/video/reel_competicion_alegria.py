@@ -1,8 +1,8 @@
-"""Reel «Competición de alegría» (1080×1920, ~13 s, sin audio): Curro contra Noah celebrando su cuadro.
+"""Reel «Competición de alegría» (1080×1920, ~9 s, sin audio): Curro contra Noah celebrando su cuadro.
 
-Pantalla partida con la pregunta → Curro (apenas se mueve: «nivel 3/10») → Noah se viene arriba: su nivel de
-alegría va en un rótulo con fondo que la sigue y tapa la zona íntima (la IA de vídeo le dibujó genitales de macho) →
-los dos cuadros en la pared y pregunta para comentarios.
+Gancho: los dos marcos tapados con tela («les enseñamos lo que hay debajo…») → pantalla partida, Curro arriba
+(apenas se mueve: «3/10») y Noah abajo, cuyo nivel de alegría va en un rótulo con fondo que la sigue y tapa la zona
+íntima (la IA de vídeo le dibujó genitales de macho) → caen las telas: los dos cuadros y pregunta para comentarios.
 
 Uso: python3 generador/video/reel_competicion_alegria.py
 Clips: assets/ia/baile/curro-dola.mp4 y assets/ia/noah-video/dola-baile.mp4 (Dola, 720×1280, 24 fps).
@@ -16,6 +16,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from tiktok_revelacion import render, S  # noqa: E402
 from videos import ease, fuente_tiktok  # noqa: E402
 from reel_duelo import lienzo  # noqa: E402
+from reel_trapo import trapo, con_trapo  # noqa: E402
+from reel_zoom import recorte_log  # noqa: E402
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 A = lambda *p: os.path.join(RAIZ, 'assets', *p)
@@ -31,9 +33,8 @@ CARTEL = {'?': [('Nivel de alegría:', 'i'), ('???', 'b')],
           'fuera': [('Nivel de alegría:', 'i'), ('FUERA DE', 'b'), ('ESCALA', 'b')]}
 
 TXT = {
-    'gancho': [('Competición de alegría:', 'b'), ('¿quién celebró más su cuadro?', 'b')],
-    'curro': [('Curro', 'b'), ('Nivel de alegría: 3/10', 'i')],
-    'noah': [('Noah', 'b')],
+    'gancho': [('Les enseñamos lo que', 'b'), ('hay debajo de las telas…', 'b')],
+    'curro': [('Nivel de alegría', 'i'), ('Curro: 3/10', 'b')],
     'final': [('¿Quién ganó?', 'b'), ('Comenta Curro o Noah', 'b')],
 }
 
@@ -106,24 +107,33 @@ def montar():
     def partida(t, x):
         im = Image.new('RGB', S)
         im.paste(f_curro(t, mitad, 1.25), (0, 0))
-        im.paste(f_noah(t + 1.0, mitad, 1.0, .48, CARTEL['?'], .78), (0, S[1] // 2))
+        im.paste(f_noah(t + 1.0, mitad, 1.0, .5, CARTEL['sube' if t < 1.1 else 'fuera'], .72), (0, S[1] // 2))
         ImageDraw.Draw(im).rectangle((0, S[1] // 2 - 4, S[0], S[1] // 2 + 4), fill=(255, 255, 255))
         return im
 
+    # pared con los dos cuadros tapados con tela: se destapan al final
     ret_c = Image.open(A('casos', 'curro', 'retrato-clasico-es.jpg')).convert('RGB')
     ret_n = Image.open(A('casos', 'noah', 'retrato-botanico-es.jpg')).convert('RGB')
-    pared, _ = lienzo([ret_c, ret_n], ['Curro', 'Noah'])
-    pared = pared.resize(S, Image.LANCZOS)
+    pared, marcos = lienzo([ret_c, ret_n], ['Curro', 'Noah'])
+    (a0, b0, a1, b1), (c0, d0, c1, d1) = marcos
+    cajas = [(a0 - 30, b0 - 30, a1 + 12, b1 + 70), (c0 - 12, d0 - 30, c1 + 30, d1 + 70)]
+    telas = [trapo(cajas[0])]
+    tt, mm = trapo(cajas[1])
+    telas.append((tt.transpose(Image.FLIP_LEFT_RIGHT), mm.transpose(Image.FLIP_LEFT_RIGHT)))
 
-    def final(t, x):
-        return recorte(pared, 1.0 + .05 * ease(x), .5, .5, S)
+    def tapada(caida=0.0):
+        return con_trapo(con_trapo(pared, *telas[1], caida, cajas[1]), *telas[0], caida, cajas[0])
 
-    d_noah = 6.2
+    quieta = tapada()
+    H = pared.height
+    todo = (pared.width / 2, H / 2, H)
+    cerca = (pared.width / 2, (b0 + b1) / 2 + 120, H * .8)
+
     render('reel-competicion-alegria-es.mp4', [
-        (1.8, partida, [(TXT['gancho'], 800, 0, 1)]),
-        (2.6, lambda t, x: f_curro(t), [(TXT['curro'], ARR, 0, 1)]),
-        (d_noah, lambda t, x: f_noah(t, lineas=CARTEL['sube' if x < .28 else 'fuera']), [(TXT['noah'], ARR, 0, 1)]),
-        (2.6, final, [(TXT['final'], ARR, .1, 1)]),
+        (1.6, lambda t, x: recorte_log(quieta, x, todo, cerca), [(TXT['gancho'], ARR, 0, 1)]),
+        (4.2, partida, [(TXT['curro'], ARR, 0, 1)]),
+        (0.7, lambda t, x: recorte_log(tapada(min(1, x * 1.1)), 0, cerca, cerca), []),
+        (2.6, lambda t, x: recorte_log(pared, x, cerca, todo), [(TXT['final'], ARR, .05, 1)]),
     ])
 
 
