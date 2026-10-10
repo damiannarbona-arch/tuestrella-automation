@@ -1,13 +1,15 @@
 """Sustituye las fotos de las polaroids del diseño de ChatGPT por las fotos originales, sin alterarlas.
 A diferencia de Penny, no se redibuja el marco: cada foto se proyecta dentro del hueco detectado (detect.py),
 así se conservan el marco, la sombra y la textura del diseño."""
-import numpy as np
+import sys, numpy as np
 from PIL import Image, ImageDraw, ImageOps
 from detect import quads, refine
 S=2  # trabajamos al doble de resolución para que las fotos originales queden nítidas
 # hueco -> (foto original, foco vertical del recorte 0-1)
 FOTOS={'p1':('orig-sofa.webp',0.25),'p2':('orig-pelota.webp',0.35),'p3':('orig-playa.webp',0.30)}
-base=Image.open('diseno-chatgpt.webp').convert('RGB')
+# uso: python3 componer.py [diseño] [salida]  (p. ej. diseno-sin-fecha.png kira-final-sin-fecha.jpg)
+DISENO,SALIDA=(sys.argv[1:3]+['diseno-chatgpt.webp','kira-final.jpg'][len(sys.argv[1:3]):])
+base=Image.open(DISENO).convert('RGB')
 base=base.resize((base.width*S,base.height*S),Image.LANCZOS)
 def coefs(dst,src):
     """coeficientes de PIL PERSPECTIVE que llevan cada punto de salida (dst) al de entrada (src)"""
@@ -29,5 +31,5 @@ for k,(f,fy) in FOTOS.items():
     ImageDraw.Draw(m).polygon([tuple(p*4) for p in q],fill=255)
     m=m.resize(base.size,Image.LANCZOS)
     base.paste(capa,(0,0),m)
-base.save('kira-final.jpg',quality=95)
+base.save(SALIDA,quality=95)
 print(base.size)

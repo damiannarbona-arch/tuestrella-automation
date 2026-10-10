@@ -1,4 +1,7 @@
-"""Reel v4: como la v3, con rótulos estilo TikTok, gancho A/B (python3 video4.py A|B) y el cierre de Kivoa.
+"""Reel v4: como la v3, con rótulos estilo TikTok, gancho A/B y el cierre de Kivoa.
+Uso: python3 video4.py A|B [--sin-fecha] [--sin-audio]
+  --sin-fecha: usa kira-final-sin-fecha.jpg (Kira viva: sin años en el cuadro)
+  --sin-audio: sin el audio de Dola, para poner la música desde TikTok
 Reel v3 (≈10 s, cortes rápidos): playa → césped (Kira sale corriendo) → sus fotos caen como recuerdos sobre el césped
 → la foto principal se convierte en el retrato y las polaroids vuelan a su hueco → zoom hacia atrás: el cuadro en la pared."""
 import math, os, subprocess, sys, numpy as np
@@ -12,7 +15,8 @@ BORDE=(254,250,242)
 def ease_out_back(t):
     t=min(max(t,0),1); c=1.7; return 1+(c+1)*(t-1)**3+c*(t-1)**2
 # ---------- retrato y pared en alta ----------
-final=Image.open('kira-final.jpg').convert('RGB')           # 2048×3072, diseño ×2
+SIN_FECHA='--sin-fecha' in sys.argv; SIN_AUDIO='--sin-audio' in sys.argv
+final=Image.open('kira-final-sin-fecha.jpg' if SIN_FECHA else 'kira-final.jpg').convert('RGB')           # 2048×3072, diseño ×2
 S=final.width/1024
 slots={k:np.array(refine(q)[0])*S for k,q in quads.items()}  # esquinas de cada hueco en coordenadas de kira-final
 vacio=final.copy(); d=ImageDraw.Draw(vacio)
@@ -81,7 +85,8 @@ DROP=0.32; T3=DROP*len(pol)+0.45   # caen las 4 fotos
 T4=1.9                              # la foto principal se vuelve retrato y las polaroids vuelan a su hueco
 T5=1.4; T6=2.6                      # zoom hacia atrás · cierre de Kivoa
 total=T1+T2+T3+T4+T5+T6
-VAR=(sys.argv[1:] or ['A'])[0].upper()
+VAR=([a for a in sys.argv[1:] if not a.startswith('--')] or ['A'])[0].upper()
+SALIDA=f'kira-reel-v4{VAR}'+('-sin-fecha' if SIN_FECHA else '')+('-sin-audio' if SIN_AUDIO else '')+'.mp4'
 TXT={'A':dict(h1=['¿A dónde va Kira','con tanta prisa? 👀'],h2=['Alguien le ha preparado','una sorpresa…'],fin=['¡A ver su cuadro! 🖼️']),
      'B':dict(h1=['Mándanos 4 fotos','de tu perro…'],h2=['…y mira lo que','hacemos con ellas 👀'],fin=['Su cuadro, listo','para colgar 🖼️'])}[VAR]
 def pop(t): return 0.75+0.25*ease_out_back(t/0.25)
@@ -136,7 +141,10 @@ ff.stdin.close(); ff.wait()
 fc=(f"[1:a]atrim={PLAYA[1]}:{PLAYA[1]+T1},asetpts=PTS-STARTPTS[a];"
     f"[2:a]atrim={CESPED[1]}:{CESPED[1]+CESPED[2]},asetpts=PTS-STARTPTS,atempo={CESPED[3]}[b];"
     f"[a][b]concat=n=2:v=0:a=1,apad,atrim=0:{total},afade=t=out:st={T1+T2-0.2}:d=1.2[out]")
-subprocess.run(['ffmpeg','-y','-v','error','-i',f'video-tmp-{VAR}.mp4','-i',PLAYA[0],'-i',CESPED[0],'-filter_complex',fc,
-    '-map','0:v','-map','[out]','-c:v','copy','-c:a','aac','-b:a','160k','-shortest','-movflags','+faststart',f'kira-reel-v4{VAR}.mp4'],check=True)
+if SIN_AUDIO:
+    subprocess.run(['ffmpeg','-y','-v','error','-i',f'video-tmp-{VAR}.mp4','-c:v','copy','-an','-movflags','+faststart',SALIDA],check=True)
+else:
+    subprocess.run(['ffmpeg','-y','-v','error','-i',f'video-tmp-{VAR}.mp4','-i',PLAYA[0],'-i',CESPED[0],'-filter_complex',fc,
+        '-map','0:v','-map','[out]','-c:v','copy','-c:a','aac','-b:a','160k','-shortest','-movflags','+faststart',SALIDA],check=True)
 import os; os.remove(f'video-tmp-{VAR}.mp4')
 print('ok',round(total,2),'s',[round(x,2) for x in (T1,T2,T3,T4,T5)])
