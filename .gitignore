@@ -3,3 +3,4 @@ traducciones_src.json
 generador/**/*.jpg
 generador/**/*.webp
 generador/**/*.png
+generador/**/dola-*.mp4
