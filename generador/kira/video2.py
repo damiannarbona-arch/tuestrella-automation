@@ -2,13 +2,7 @@
 → la pared con su cuadro entra empujando desde la derecha, en la dirección en la que se va Kira."""
 import subprocess
 from PIL import Image
-from video import W,H,FPS,F_WEB,ease,fade,kenburns,texto,mockup
-def frames(f,ss,t):
-    """decodifica un tramo; el recorte de 1234 px de alto deja fuera la marca de agua de abajo a la derecha"""
-    raw=subprocess.run(['ffmpeg','-v','error','-ss',str(ss),'-t',str(t),'-i',f,'-vf',
-        f'crop=694:1234:13:0,scale={W}:{H}:flags=lanczos,fps={FPS}','-f','rawvideo','-pix_fmt','rgb24','-'],
-        capture_output=True,check=True).stdout
-    n=W*H*3; return [Image.frombytes('RGB',(W,H),raw[i:i+n]) for i in range(0,len(raw)-n+1,n)]
+from video import W,H,FPS,F_WEB,ease,fade,kenburns,texto,mockup,frames
 # (clip, inicio, duración) — el césped arranca justo antes del salto y acaba cuando Kira ya ha salido del plano
 PLAYA=('dola-playa.mp4',1.0,3.5); CESPED=('dola-cesped.mp4',6.0,3.4); T3=4.5; X=0.4; P=0.5
 playa=frames(*PLAYA); cesped=frames(*CESPED); pared=mockup()

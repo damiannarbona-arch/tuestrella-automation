@@ -24,6 +24,13 @@ def texto(fr,s,y,size,alpha=1.0,font=F_TXT):
     out=fr.convert('RGBA'); out.alpha_composite(sh); out.alpha_composite(capa)
     return out.convert('RGB')
 def fade(t,a,b,d=0.35): return ease((t-a)/d)*(1-ease((t-(b-d))/d))
+def frames(f,ss,t,vel=1.0):
+    """decodifica un tramo de un clip de Dola a W×H; el recorte de 1234 px de alto deja fuera la marca de agua
+    de abajo a la derecha. vel>1 lo acelera"""
+    raw=subprocess.run(['ffmpeg','-v','error','-ss',str(ss),'-t',str(t),'-i',f,'-vf',
+        f'crop=694:1234:13:0,scale={W}:{H}:flags=lanczos,setpts=PTS/{vel},fps={FPS}','-f','rawvideo','-pix_fmt','rgb24','-'],
+        capture_output=True,check=True).stdout
+    n=W*H*3; return [Image.frombytes('RGB',(W,H),raw[i:i+n]) for i in range(0,len(raw)-n+1,n)]
 # --- mockup del cuadro en la pared ---
 def mockup():
     pared=Image.new('RGB',(W,H)); px=np.zeros((H,W,3),float)
